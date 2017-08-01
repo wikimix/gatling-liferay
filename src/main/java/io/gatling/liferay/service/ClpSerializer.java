@@ -24,7 +24,12 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ClassLoaderObjectInputStream;
 import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.BaseModel;
+
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.List;
 
 import io.gatling.liferay.model.FormParamClp;
 import io.gatling.liferay.model.LoginClp;
@@ -36,14 +41,6 @@ import io.gatling.liferay.model.SimulationClp;
 import io.gatling.liferay.model.SiteMapClp;
 import io.gatling.liferay.model.UrlRecordClp;
 import io.gatling.liferay.model.UrlSiteMapClp;
-
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-
-import java.lang.reflect.Method;
-
-import java.util.ArrayList;
-import java.util.List;
 
 
 public class ClpSerializer {

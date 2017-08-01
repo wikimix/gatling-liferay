@@ -15,12 +15,11 @@
  */
 package io.gatling.generation.AST;
 
-import io.gatling.generation.AST.process.ProcessAST;
-import io.gatling.generation.service.SourceCodeIdentifierServices;
-import io.gatling.liferay.util.LiferayUtil;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import io.gatling.generation.AST.process.ProcessAST;
+import io.gatling.generation.service.SourceCodeIdentifierServices;
 
 /**
  * A ScenarioAST represents the structure of scenario

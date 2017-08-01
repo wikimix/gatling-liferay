@@ -15,19 +15,6 @@
  */
 package io.gatling.liferay.controller;
 
-import io.gatling.generation.AST.ScenarioAST;
-import io.gatling.generation.AST.SimulationAST;
-import io.gatling.generation.AST.process.ProcessAST;
-import io.gatling.generation.AST.process.RecorderAST;
-import io.gatling.generation.AST.resource.RecordFileAST;
-import io.gatling.generation.mapper.ASTMapper;
-import io.gatling.generation.service.GenerationService;
-import io.gatling.liferay.NoSuchFormParamException;
-import io.gatling.liferay.NoSuchRecordException;
-import io.gatling.liferay.model.Record;
-import io.gatling.liferay.service.RecordLocalServiceUtil;
-import io.gatling.liferay.util.LiferayUtil;
-
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -35,10 +22,10 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.servlet.SessionMessages;
+import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.kernel.util.WebKeys;
-import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portal.util.PortalUtil;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -59,6 +46,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.portlet.bind.annotation.ActionMapping;
 import org.springframework.web.portlet.bind.annotation.RenderMapping;
 import org.springframework.web.portlet.bind.annotation.ResourceMapping;
+
+import io.gatling.generation.AST.ScenarioAST;
+import io.gatling.generation.AST.SimulationAST;
+import io.gatling.generation.AST.process.ProcessAST;
+import io.gatling.generation.AST.process.RecorderAST;
+import io.gatling.generation.AST.resource.RecordFileAST;
+import io.gatling.generation.mapper.ASTMapper;
+import io.gatling.generation.service.GenerationService;
+import io.gatling.liferay.NoSuchFormParamException;
+import io.gatling.liferay.NoSuchRecordException;
+import io.gatling.liferay.model.Record;
+import io.gatling.liferay.service.RecordLocalServiceUtil;
 
 
 /**

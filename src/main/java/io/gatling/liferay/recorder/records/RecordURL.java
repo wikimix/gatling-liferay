@@ -15,8 +15,9 @@
  */
 package io.gatling.liferay.recorder.records;
 
-import io.gatling.liferay.service.UrlRecordLocalServiceUtil;
 import com.liferay.portal.kernel.exception.SystemException;
+
+import io.gatling.liferay.service.UrlRecordLocalServiceUtil;
 
 
 /**

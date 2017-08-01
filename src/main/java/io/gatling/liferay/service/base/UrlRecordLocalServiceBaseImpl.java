@@ -24,13 +24,18 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.Projection;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.model.PersistedModel;
 import com.liferay.portal.kernel.search.Indexable;
 import com.liferay.portal.kernel.search.IndexableType;
+import com.liferay.portal.kernel.service.BaseLocalServiceImpl;
+import com.liferay.portal.kernel.service.PersistedModelLocalServiceRegistryUtil;
+import com.liferay.portal.kernel.service.persistence.UserPersistence;
 import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.model.PersistedModel;
-import com.liferay.portal.service.BaseLocalServiceImpl;
-import com.liferay.portal.service.PersistedModelLocalServiceRegistryUtil;
-import com.liferay.portal.service.persistence.UserPersistence;
+
+import java.io.Serializable;
+import java.util.List;
+
+import javax.sql.DataSource;
 
 import io.gatling.liferay.model.UrlRecord;
 import io.gatling.liferay.service.UrlRecordLocalService;
@@ -44,12 +49,6 @@ import io.gatling.liferay.service.persistence.SimulationPersistence;
 import io.gatling.liferay.service.persistence.SiteMapPersistence;
 import io.gatling.liferay.service.persistence.UrlRecordPersistence;
 import io.gatling.liferay.service.persistence.UrlSiteMapPersistence;
-
-import java.io.Serializable;
-
-import java.util.List;
-
-import javax.sql.DataSource;
 
 /**
  * Provides the base implementation for the url record local service.

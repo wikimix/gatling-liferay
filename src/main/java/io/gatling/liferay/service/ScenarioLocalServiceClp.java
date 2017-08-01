@@ -15,7 +15,7 @@
  */
 package io.gatling.liferay.service;
 
-import com.liferay.portal.service.InvokableLocalService;
+import com.liferay.portal.kernel.service.InvokableLocalService;
 
 /**
  * @author Brian Wing Shun Chan

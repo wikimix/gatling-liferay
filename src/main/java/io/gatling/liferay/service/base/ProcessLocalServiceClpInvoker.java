@@ -15,9 +15,9 @@
  */
 package io.gatling.liferay.service.base;
 
-import io.gatling.liferay.service.ProcessLocalServiceUtil;
-
 import java.util.Arrays;
+
+import io.gatling.liferay.service.ProcessLocalServiceUtil;
 
 /**
  * @author Brian Wing Shun Chan

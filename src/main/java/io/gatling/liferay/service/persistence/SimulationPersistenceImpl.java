@@ -25,6 +25,8 @@ import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.model.CacheModel;
+import com.liferay.portal.kernel.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.InstanceFactory;
 import com.liferay.portal.kernel.util.OrderByComparator;
@@ -33,21 +35,16 @@ import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.UnmodifiableList;
-import com.liferay.portal.model.CacheModel;
-import com.liferay.portal.model.ModelListener;
-import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import io.gatling.liferay.NoSuchSimulationException;
 import io.gatling.liferay.model.Simulation;
 import io.gatling.liferay.model.impl.SimulationImpl;
 import io.gatling.liferay.model.impl.SimulationModelImpl;
-import io.gatling.liferay.service.persistence.SimulationPersistence;
-
-import java.io.Serializable;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 /**
  * The persistence implementation for the simulation service.

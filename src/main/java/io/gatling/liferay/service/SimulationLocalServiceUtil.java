@@ -16,8 +16,11 @@
 package io.gatling.liferay.service;
 
 import com.liferay.portal.kernel.bean.PortletBeanLocatorUtil;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.service.InvokableLocalService;
 import com.liferay.portal.kernel.util.ReferenceRegistry;
-import com.liferay.portal.service.InvokableLocalService;
+
+import io.gatling.liferay.model.Simulation;
 
 /**
  * Provides the local service utility for Simulation. This utility wraps

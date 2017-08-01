@@ -15,7 +15,7 @@
  */
 package io.gatling.liferay.service.persistence;
 
-import com.liferay.portal.service.persistence.BasePersistence;
+import com.liferay.portal.kernel.service.persistence.BasePersistence;
 
 import io.gatling.liferay.model.UrlSiteMap;
 

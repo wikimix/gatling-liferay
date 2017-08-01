@@ -15,9 +15,9 @@
  */
 package io.gatling.liferay.service.base;
 
-import io.gatling.liferay.service.UrlSiteMapLocalServiceUtil;
-
 import java.util.Arrays;
+
+import io.gatling.liferay.service.UrlSiteMapLocalServiceUtil;
 
 /**
  * @author Brian Wing Shun Chan

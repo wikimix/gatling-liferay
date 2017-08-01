@@ -15,6 +15,13 @@
  */
 package io.gatling.liferay.dto.mapper;
 
+import com.liferay.counter.kernel.service.CounterLocalServiceUtil;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import io.gatling.liferay.dto.ProcessDTO;
 import io.gatling.liferay.dto.ScenarioDTO;
 import io.gatling.liferay.model.Process;
@@ -24,12 +31,6 @@ import io.gatling.liferay.service.ProcessLocalServiceUtil;
 import io.gatling.liferay.service.ProcessScenarioLinkLocalServiceUtil;
 import io.gatling.liferay.service.ScenarioLocalServiceUtil;
 import io.gatling.liferay.service.persistence.ProcessScenarioLinkUtil;
-import com.liferay.counter.service.CounterLocalServiceUtil;
-import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.exception.SystemException;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class ScenarioDTOMapper {
 

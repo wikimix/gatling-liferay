@@ -15,6 +15,14 @@
  */
 package io.gatling.liferay.service.impl;
 
+import com.liferay.counter.kernel.service.CounterLocalServiceUtil;
+import com.liferay.portal.kernel.exception.NoSuchModelException;
+import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.model.Layout;
+import com.liferay.portal.kernel.theme.ThemeDisplay;
+
+import java.util.List;
+
 import io.gatling.liferay.NoSuchProcessException;
 import io.gatling.liferay.NoSuchRecordException;
 import io.gatling.liferay.NoSuchSiteMapException;
@@ -27,16 +35,6 @@ import io.gatling.liferay.service.UrlSiteMapLocalServiceUtil;
 import io.gatling.liferay.service.base.SiteMapLocalServiceBaseImpl;
 import io.gatling.liferay.service.persistence.SiteMapUtil;
 import io.gatling.liferay.util.LiferayUtil;
-
-import com.liferay.counter.service.CounterLocalServiceUtil;
-import com.liferay.portal.NoSuchModelException;
-import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.model.Group;
-import com.liferay.portal.model.Layout;
-import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portal.util.PortalUtil;
-
-import java.util.List;
 
 /**
  * The implementation of the site map local service.

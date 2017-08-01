@@ -15,6 +15,10 @@
  */
 package io.gatling.liferay.service.impl;
 
+import com.liferay.counter.kernel.service.CounterLocalServiceUtil;
+import com.liferay.portal.kernel.exception.NoSuchModelException;
+import com.liferay.portal.kernel.exception.SystemException;
+
 import io.gatling.liferay.NoSuchLoginException;
 import io.gatling.liferay.NoSuchProcessException;
 import io.gatling.liferay.NoSuchRecordException;
@@ -23,9 +27,6 @@ import io.gatling.liferay.model.Process;
 import io.gatling.liferay.model.ProcessType;
 import io.gatling.liferay.service.base.LoginLocalServiceBaseImpl;
 import io.gatling.liferay.service.persistence.LoginUtil;
-import com.liferay.counter.service.CounterLocalServiceUtil;
-import com.liferay.portal.NoSuchModelException;
-import com.liferay.portal.kernel.exception.SystemException;
 
 /**
  * The implementation of the login local service.

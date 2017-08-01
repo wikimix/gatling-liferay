@@ -15,14 +15,14 @@
  */
 package io.gatling.liferay.service.impl;
 
-import io.gatling.liferay.model.UrlSiteMap;
-import io.gatling.liferay.service.base.UrlSiteMapLocalServiceBaseImpl;
-import io.gatling.liferay.service.persistence.UrlSiteMapUtil;
-import io.gatling.liferay.util.LiferayUtil;
-import com.liferay.counter.service.CounterLocalServiceUtil;
+import com.liferay.counter.kernel.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.exception.SystemException;
 
 import java.util.List;
+
+import io.gatling.liferay.model.UrlSiteMap;
+import io.gatling.liferay.service.base.UrlSiteMapLocalServiceBaseImpl;
+import io.gatling.liferay.service.persistence.UrlSiteMapUtil;
 
 /**
  * The implementation of the url site map local service.

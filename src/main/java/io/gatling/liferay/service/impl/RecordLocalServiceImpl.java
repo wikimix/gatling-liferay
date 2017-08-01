@@ -15,18 +15,19 @@
  */
 package io.gatling.liferay.service.impl;
 
-import io.gatling.liferay.model.Process;
-import io.gatling.liferay.model.ProcessType;
-import io.gatling.liferay.NoSuchProcessException;
-import io.gatling.liferay.NoSuchRecordException;
-import io.gatling.liferay.model.Record;
-import io.gatling.liferay.service.base.RecordLocalServiceBaseImpl;
-import io.gatling.liferay.validator.RecordValidator;
-import com.liferay.counter.service.CounterLocalServiceUtil;
-import com.liferay.portal.NoSuchModelException;
+import com.liferay.counter.kernel.service.CounterLocalServiceUtil;
+import com.liferay.portal.kernel.exception.NoSuchModelException;
 import com.liferay.portal.kernel.exception.SystemException;
 
 import java.util.List;
+
+import io.gatling.liferay.NoSuchProcessException;
+import io.gatling.liferay.NoSuchRecordException;
+import io.gatling.liferay.model.Process;
+import io.gatling.liferay.model.ProcessType;
+import io.gatling.liferay.model.Record;
+import io.gatling.liferay.service.base.RecordLocalServiceBaseImpl;
+import io.gatling.liferay.validator.RecordValidator;
 
 /**
  * The implementation of the record local service.

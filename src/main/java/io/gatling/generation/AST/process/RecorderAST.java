@@ -15,10 +15,10 @@
  */
 package io.gatling.generation.AST.process;
 
+import java.util.List;
+
 import io.gatling.generation.AST.resource.RecordFileAST;
 import io.gatling.generation.AST.resource.ResourceFileAST;
-
-import java.util.List;
 
 /**
  * RecorderAST represents a process in which a

@@ -15,10 +15,10 @@
  */
 package io.gatling.generation.AST.resource;
 
-import io.gatling.generation.AST.resource.data.RecordDataAST;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import io.gatling.generation.AST.resource.data.RecordDataAST;
 
 /**
  * RecordFileAST contains all the data related to one record

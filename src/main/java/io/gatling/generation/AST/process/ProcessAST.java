@@ -15,9 +15,9 @@
  */
 package io.gatling.generation.AST.process;
 
-import io.gatling.generation.AST.resource.ResourceFileAST;
-
 import java.util.List;
+
+import io.gatling.generation.AST.resource.ResourceFileAST;
 
 /**
  * ProcessAST represents the structure of a process.

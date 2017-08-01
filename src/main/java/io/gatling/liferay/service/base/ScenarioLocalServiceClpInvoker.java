@@ -15,9 +15,9 @@
  */
 package io.gatling.liferay.service.base;
 
-import io.gatling.liferay.service.ScenarioLocalServiceUtil;
-
 import java.util.Arrays;
+
+import io.gatling.liferay.service.ScenarioLocalServiceUtil;
 
 /**
  * @author Brian Wing Shun Chan

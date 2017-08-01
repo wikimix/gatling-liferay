@@ -15,11 +15,12 @@
  */
 package io.gatling.liferay.validator;
 
-import io.gatling.liferay.model.Record;
 import com.liferay.portal.kernel.util.Validator;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import io.gatling.liferay.model.Record;
 
 public class RecordValidator {
 

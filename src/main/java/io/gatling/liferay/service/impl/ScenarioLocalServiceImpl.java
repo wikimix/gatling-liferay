@@ -15,14 +15,15 @@
  */
 package io.gatling.liferay.service.impl;
 
-import com.liferay.counter.service.CounterLocalServiceUtil;
+import com.liferay.counter.kernel.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.PropertyFactoryUtil;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.model.Group;
+
+import java.util.List;
 
 import io.gatling.liferay.NoSuchScenarioException;
 import io.gatling.liferay.model.ProcessScenarioLink;
@@ -33,8 +34,6 @@ import io.gatling.liferay.service.base.ScenarioLocalServiceBaseImpl;
 import io.gatling.liferay.service.persistence.ProcessScenarioLinkUtil;
 import io.gatling.liferay.service.persistence.ScenarioUtil;
 import io.gatling.liferay.util.LiferayUtil;
-
-import java.util.List;
 
 
 /**

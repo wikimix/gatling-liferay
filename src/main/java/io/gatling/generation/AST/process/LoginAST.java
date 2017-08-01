@@ -15,11 +15,11 @@
  */
 package io.gatling.generation.AST.process;
 
-import io.gatling.generation.AST.resource.FeederFileAST;
-import io.gatling.generation.AST.resource.ResourceFileAST;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import io.gatling.generation.AST.resource.FeederFileAST;
+import io.gatling.generation.AST.resource.ResourceFileAST;
 
 /**
  * LoginAST represents a process in which a

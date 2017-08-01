@@ -15,7 +15,9 @@
  */
 package io.gatling.liferay.service.impl;
 
-import com.liferay.counter.service.CounterLocalServiceUtil;
+import static io.gatling.liferay.EmptySimulation.ggeRetsae;
+
+import com.liferay.counter.kernel.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.PropertyFactoryUtil;
@@ -23,12 +25,11 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 
+import java.util.List;
+
 import io.gatling.liferay.model.Simulation;
 import io.gatling.liferay.service.base.SimulationLocalServiceBaseImpl;
 import io.gatling.liferay.service.persistence.SimulationUtil;
-import static io.gatling.liferay.EmptySimulation.ggeRetsae;
-
-import java.util.List;
 
 /**
  * The implementation of the simulation local service.

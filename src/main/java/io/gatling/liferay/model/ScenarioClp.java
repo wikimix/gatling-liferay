@@ -17,20 +17,17 @@ package io.gatling.liferay.model;
 
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.model.impl.BaseModelImpl;
 import com.liferay.portal.kernel.util.ProxyUtil;
 import com.liferay.portal.kernel.util.StringBundler;
-import com.liferay.portal.model.BaseModel;
-import com.liferay.portal.model.impl.BaseModelImpl;
+
+import java.io.Serializable;
+import java.lang.reflect.Method;
+import java.util.HashMap;
+import java.util.Map;
 
 import io.gatling.liferay.service.ClpSerializer;
 import io.gatling.liferay.service.ScenarioLocalServiceUtil;
-
-import java.io.Serializable;
-
-import java.lang.reflect.Method;
-
-import java.util.HashMap;
-import java.util.Map;
 
 
 public class ScenarioClp extends BaseModelImpl<Scenario> implements Scenario {

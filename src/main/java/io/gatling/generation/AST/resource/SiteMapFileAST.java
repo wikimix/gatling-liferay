@@ -15,11 +15,11 @@
  */
 package io.gatling.generation.AST.resource;
 
-import io.gatling.generation.AST.resource.data.SiteMapDataAST;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import io.gatling.generation.AST.resource.data.SiteMapDataAST;
 
 /**
  * The representation of a scala file containing

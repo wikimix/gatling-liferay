@@ -15,16 +15,6 @@
  */
 package io.gatling.liferay.controller;
 
-import io.gatling.liferay.NoSuchRecordException;
-import io.gatling.liferay.NoSuchSiteMapException;
-import io.gatling.liferay.model.ProcessType;
-import io.gatling.liferay.model.SiteMap;
-import io.gatling.liferay.model.UrlSiteMap;
-import io.gatling.liferay.service.ProcessLocalServiceUtil;
-import io.gatling.liferay.service.SiteMapLocalServiceUtil;
-import io.gatling.liferay.service.UrlSiteMapLocalServiceUtil;
-import io.gatling.liferay.service.impl.SiteMapLocalServiceImpl;
-
 import com.liferay.portal.kernel.exception.SystemException;
 
 import java.util.List;
@@ -39,6 +29,16 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.portlet.bind.annotation.ActionMapping;
 import org.springframework.web.portlet.bind.annotation.RenderMapping;
+
+import io.gatling.liferay.NoSuchRecordException;
+import io.gatling.liferay.NoSuchSiteMapException;
+import io.gatling.liferay.model.ProcessType;
+import io.gatling.liferay.model.SiteMap;
+import io.gatling.liferay.model.UrlSiteMap;
+import io.gatling.liferay.service.ProcessLocalServiceUtil;
+import io.gatling.liferay.service.SiteMapLocalServiceUtil;
+import io.gatling.liferay.service.UrlSiteMapLocalServiceUtil;
+import io.gatling.liferay.service.impl.SiteMapLocalServiceImpl;
 
 /**
  * Controller linked to the random process creation view

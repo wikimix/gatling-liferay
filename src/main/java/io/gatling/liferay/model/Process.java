@@ -15,7 +15,7 @@
  */
 package io.gatling.liferay.model;
 
-import com.liferay.portal.model.PersistedModel;
+import com.liferay.portal.kernel.model.PersistedModel;
 
 /**
  * The extended model interface for the Process service. Represents a row in the &quot;StressTool_Process&quot; database table, with each column mapped to a property of this class.

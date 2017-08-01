@@ -15,11 +15,12 @@
  */
 package io.gatling.liferay.recorder.records;
 
-import io.gatling.liferay.model.UrlRecordType;
-import io.gatling.liferay.service.FormParamLocalServiceUtil;
 import com.liferay.portal.kernel.exception.SystemException;
 
 import java.util.Map;
+
+import io.gatling.liferay.model.UrlRecordType;
+import io.gatling.liferay.service.FormParamLocalServiceUtil;
 
 //TODO: Comment Me!
 

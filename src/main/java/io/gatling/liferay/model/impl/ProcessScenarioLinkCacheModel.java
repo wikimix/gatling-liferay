@@ -15,15 +15,15 @@
  */
 package io.gatling.liferay.model.impl;
 
+import com.liferay.portal.kernel.model.CacheModel;
 import com.liferay.portal.kernel.util.StringBundler;
-import com.liferay.portal.model.CacheModel;
-
-import io.gatling.liferay.model.ProcessScenarioLink;
 
 import java.io.Externalizable;
 import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
+
+import io.gatling.liferay.model.ProcessScenarioLink;
 
 /**
  * The cache model class for representing ProcessScenarioLink in entity cache.

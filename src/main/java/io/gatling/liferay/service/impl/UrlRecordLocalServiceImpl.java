@@ -15,15 +15,16 @@
  */
 package io.gatling.liferay.service.impl;
 
+import com.liferay.counter.kernel.service.CounterLocalServiceUtil;
+import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+
 import java.util.List;
 
 import io.gatling.liferay.model.UrlRecord;
 import io.gatling.liferay.service.base.UrlRecordLocalServiceBaseImpl;
 import io.gatling.liferay.validator.UrlRecordValidator;
-import com.liferay.counter.service.CounterLocalServiceUtil;
-import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 
 /**
  * The implementation of the url record local service.

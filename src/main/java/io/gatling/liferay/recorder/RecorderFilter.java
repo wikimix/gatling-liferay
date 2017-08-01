@@ -18,22 +18,14 @@
  */
 package io.gatling.liferay.recorder;
 
-import io.gatling.liferay.model.Process;
-import io.gatling.liferay.model.Record;
-import io.gatling.liferay.recorder.records.GetURL;
-import io.gatling.liferay.recorder.records.PostMultipartURL;
-import io.gatling.liferay.recorder.records.PostURL;
-import io.gatling.liferay.recorder.records.RecordURL;
-import io.gatling.liferay.service.ProcessLocalServiceUtil;
-import io.gatling.liferay.service.RecordLocalServiceUtil;
-import com.liferay.counter.service.CounterLocalServiceUtil;
+import com.liferay.counter.kernel.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.service.PortletLocalServiceUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.SessionParamUtil;
-import com.liferay.portal.service.PortletLocalServiceUtil;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -54,6 +46,15 @@ import javax.servlet.ServletResponse;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+
+import io.gatling.liferay.model.Process;
+import io.gatling.liferay.model.Record;
+import io.gatling.liferay.recorder.records.GetURL;
+import io.gatling.liferay.recorder.records.PostMultipartURL;
+import io.gatling.liferay.recorder.records.PostURL;
+import io.gatling.liferay.recorder.records.RecordURL;
+import io.gatling.liferay.service.ProcessLocalServiceUtil;
+import io.gatling.liferay.service.RecordLocalServiceUtil;
 
 
 

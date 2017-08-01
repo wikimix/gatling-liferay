@@ -15,7 +15,7 @@
  */
 package io.gatling.liferay.model;
 
-import com.liferay.portal.model.PersistedModel;
+import com.liferay.portal.kernel.model.PersistedModel;
 
 /**
  * The extended model interface for the UrlRecord service. Represents a row in the &quot;StressTool_UrlRecord&quot; database table, with each column mapped to a property of this class.

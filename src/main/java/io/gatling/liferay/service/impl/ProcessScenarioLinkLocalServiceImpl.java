@@ -15,13 +15,14 @@
  */
 package io.gatling.liferay.service.impl;
 
-import io.gatling.liferay.model.ProcessScenarioLink;
-import io.gatling.liferay.service.base.ProcessScenarioLinkLocalServiceBaseImpl;
-import io.gatling.liferay.service.persistence.ProcessScenarioLinkUtil;
-import com.liferay.counter.service.CounterLocalServiceUtil;
+import com.liferay.counter.kernel.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.exception.SystemException;
 
 import java.util.List;
+
+import io.gatling.liferay.model.ProcessScenarioLink;
+import io.gatling.liferay.service.base.ProcessScenarioLinkLocalServiceBaseImpl;
+import io.gatling.liferay.service.persistence.ProcessScenarioLinkUtil;
 
 /**
  * The implementation of the process scenario link local service.

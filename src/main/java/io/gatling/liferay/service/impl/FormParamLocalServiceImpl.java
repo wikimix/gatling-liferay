@@ -15,14 +15,15 @@
  */
 package io.gatling.liferay.service.impl;
 
-import io.gatling.liferay.NoSuchFormParamException;
-import io.gatling.liferay.model.FormParam;
-import io.gatling.liferay.service.base.FormParamLocalServiceBaseImpl;
-import com.liferay.counter.service.CounterLocalServiceUtil;
+import com.liferay.counter.kernel.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.exception.SystemException;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import io.gatling.liferay.NoSuchFormParamException;
+import io.gatling.liferay.model.FormParam;
+import io.gatling.liferay.service.base.FormParamLocalServiceBaseImpl;
 
 /**
  * The implementation of the form param local service.

@@ -15,6 +15,12 @@
  */
 package io.gatling.generation.mapper;
 
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import io.gatling.generation.AST.ScenarioAST;
 import io.gatling.generation.AST.SimulationAST;
 import io.gatling.generation.AST.process.LoginAST;
@@ -43,12 +49,6 @@ import io.gatling.liferay.model.SiteMap;
 import io.gatling.liferay.model.UrlRecord;
 import io.gatling.liferay.model.UrlRecordType;
 import io.gatling.liferay.model.UrlSiteMap;
-
-import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.exception.SystemException;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class ASTMapper {
 	

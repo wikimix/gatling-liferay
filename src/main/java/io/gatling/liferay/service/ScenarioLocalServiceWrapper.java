@@ -15,7 +15,10 @@
  */
 package io.gatling.liferay.service;
 
-import com.liferay.portal.service.ServiceWrapper;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.service.ServiceWrapper;
+
+import io.gatling.liferay.model.Scenario;
 
 /**
  * Provides a wrapper for {@link ScenarioLocalService}.

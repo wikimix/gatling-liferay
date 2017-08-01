@@ -15,10 +15,10 @@
  */
 package io.gatling.generation.AST.resource;
 
-import io.gatling.generation.AST.resource.data.FormDataAST;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import io.gatling.generation.AST.resource.data.FormDataAST;
 
 /**
  * This resource inner content represents the data of a form.

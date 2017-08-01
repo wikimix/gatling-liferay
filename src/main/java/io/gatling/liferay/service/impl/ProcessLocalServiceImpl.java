@@ -15,6 +15,13 @@
  */
 package io.gatling.liferay.service.impl;
 
+import com.liferay.counter.kernel.service.CounterLocalServiceUtil;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import io.gatling.liferay.NoSuchProcessException;
 import io.gatling.liferay.NoSuchProcessScenarioLinkException;
 import io.gatling.liferay.model.Process;
@@ -22,14 +29,7 @@ import io.gatling.liferay.model.ProcessScenarioLink;
 import io.gatling.liferay.model.ProcessType;
 import io.gatling.liferay.service.ProcessLocalServiceUtil;
 import io.gatling.liferay.service.base.ProcessLocalServiceBaseImpl;
-import io.gatling.liferay.service.persistence.ProcessPersistence;
 import io.gatling.liferay.service.persistence.ProcessUtil;
-import com.liferay.counter.service.CounterLocalServiceUtil;
-import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.exception.SystemException;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * The implementation of the process local service.

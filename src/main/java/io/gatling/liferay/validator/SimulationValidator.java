@@ -17,13 +17,14 @@ package io.gatling.liferay.validator;
 
 
 
+import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.Validator;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import io.gatling.liferay.model.Simulation;
 import io.gatling.liferay.service.SimulationLocalServiceUtil;
-import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.util.Validator;
 
 public class SimulationValidator {
 

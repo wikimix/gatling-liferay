@@ -15,6 +15,15 @@
  */
 package io.gatling.generation.service;
 
+import com.liferay.portal.kernel.exception.NoSuchModelException;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import io.gatling.generation.AST.ScenarioAST;
 import io.gatling.generation.AST.SimulationAST;
 import io.gatling.generation.AST.process.ProcessAST;
@@ -46,15 +55,6 @@ import io.gatling.liferay.service.SimulationLocalServiceUtil;
 import io.gatling.liferay.service.SiteMapLocalServiceUtil;
 import io.gatling.liferay.service.UrlRecordLocalServiceUtil;
 import io.gatling.liferay.service.UrlSiteMapLocalServiceUtil;
-
-import com.liferay.portal.NoSuchModelException;
-import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class ASTService {
 

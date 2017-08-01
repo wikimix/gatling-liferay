@@ -22,11 +22,6 @@ import com.samskivert.mustache.Escapers;
 import com.samskivert.mustache.Mustache;
 import com.samskivert.mustache.MustacheException;
 
-import io.gatling.generation.AST.ScenarioAST;
-import io.gatling.generation.AST.SimulationAST;
-import io.gatling.generation.AST.process.ProcessAST;
-import io.gatling.generation.AST.resource.ResourceFileAST;
-
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
@@ -38,6 +33,11 @@ import java.util.zip.ZipException;
 import java.util.zip.ZipOutputStream;
 
 import javax.portlet.ResourceRequest;
+
+import io.gatling.generation.AST.ScenarioAST;
+import io.gatling.generation.AST.SimulationAST;
+import io.gatling.generation.AST.process.ProcessAST;
+import io.gatling.generation.AST.resource.ResourceFileAST;
 
 /**
  * This class give access to Simulation Gatling's Source code genreation
