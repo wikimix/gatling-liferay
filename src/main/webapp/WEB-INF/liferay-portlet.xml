@@ -1,4 +1,4 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!--
 
     Copyright 2011-2016 GatlingCorp (http://gatling.io)
@@ -16,29 +16,23 @@
     limitations under the License.
 
 -->
-<!DOCTYPE liferay-portlet-app PUBLIC "-//Liferay//DTD Portlet Application 6.2.0//EN" "http://www.liferay.com/dtd/liferay-portlet-app_6_2_0.dtd">
+<!DOCTYPE liferay-portlet-app PUBLIC "-//Liferay//DTD Portlet Application 7.0.0//EN" "http://www.liferay.com/dtd/liferay-portlet-app_7_0_0.dtd">
 
 <liferay-portlet-app>
-	
-	<portlet>
-		<portlet-name>gatling</portlet-name>
-		<icon>/icon.png</icon>
-		<control-panel-entry-category>
-			configuration
-		</control-panel-entry-category>		
-		<control-panel-entry-weight>1.5</control-panel-entry-weight>
-
-		<!-- avoid double post -->
-		<action-url-redirect>true</action-url-redirect>
-		
-		<!-- js/css -->
-		<header-portlet-css>/css/main.css</header-portlet-css>
-		<header-portlet-css>/css/shepherd-theme-arrows.css</header-portlet-css>
-		<header-portlet-javascript>/js/shepherd.min.js</header-portlet-javascript>
-		<header-portlet-javascript>/js/main.js</header-portlet-javascript>
-		<css-class-wrapper>gatling-portlet</css-class-wrapper>
-		
-		<add-default-resource>true</add-default-resource>
-		
-	</portlet>
+  <portlet>
+    <portlet-name>gatling</portlet-name>
+    <icon>/icon.png</icon>
+    <control-panel-entry-category>configuration</control-panel-entry-category>
+    <control-panel-entry-weight>1.5</control-panel-entry-weight>
+    <!-- avoid double post -->
+    <action-url-redirect>true</action-url-redirect>
+    <!-- js/css -->
+    <header-portlet-css>/css/main.css</header-portlet-css>
+    <header-portlet-css>/css/shepherd-theme-arrows.css</header-portlet-css>
+    <header-portlet-javascript>/js/shepherd.min.js</header-portlet-javascript>
+    <header-portlet-javascript>/js/main.js</header-portlet-javascript>
+    <css-class-wrapper>gatling-portlet</css-class-wrapper>
+    <add-default-resource>true</add-default-resource>
+  </portlet>
 </liferay-portlet-app>
+
