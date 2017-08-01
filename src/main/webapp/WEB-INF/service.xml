@@ -47,7 +47,7 @@
     <column name="process_id" type="long" primary="true" />
     <column name="name" type="String" />
     <column name="type" type="String" />
-    <column name="feederId" type="Long" convert-null="false" />
+    <column name="feederId" type="long" convert-null="false" />
     <finder name="Name" return-type="Process" unique="true">
       <finder-column name="name" />
     </finder>
