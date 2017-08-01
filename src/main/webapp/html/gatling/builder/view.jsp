@@ -110,7 +110,7 @@
 							
 							<div class="scenario-name" >
 								<aui:input label="" name="scenario_${scenario.id}name" value="${scenario.name}" inlineField="true" class="inputName">
-									<aui:validator name="custom" errorMessage="simulation-name-syntaxe">
+									<aui:validator name="required" errorMessage="simulation-name-syntaxe">
 											function (val, fieldNode, ruleValue) {
 												return /^[\w\s$]+$/.test(val);
 											}
