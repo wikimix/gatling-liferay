@@ -36,16 +36,16 @@
 <%@ page import="com.liferay.portal.kernel.util.HtmlUtil" %>
 <%@ page import="com.liferay.portal.kernel.util.ParamUtil" %>
 <%@ page import="com.liferay.portal.kernel.util.WebKeys" %>
-<%@ page import="com.liferay.portal.model.Group"%>
-<%@ page import="com.liferay.portal.theme.ThemeDisplay" %>
-<%@ page import="com.liferay.portal.util.PortalUtil" %>
+<%@ page import="com.liferay.portal.kernel.model.Group"%>
+<%@ page import="com.liferay.portal.kernel.theme.ThemeDisplay" %>
+<%@ page import="com.liferay.portal.kernel.util.PortalUtil" %>
 
 <%@ page import="io.gatling.liferay.model.Scenario"%>
 <%@ page import="io.gatling.liferay.model.Simulation"%>
 <%@ page import="io.gatling.liferay.service.ScenarioLocalServiceUtil"%>
 <%@ page import="io.gatling.liferay.service.SimulationLocalServiceUtil"%>
 <%@ page import="com.liferay.util.portlet.PortletProps" %>
-<%@ page import="com.liferay.portal.service.PortletLocalServiceUtil" %>
+<%@ page import="com.liferay.portal.kernel.service.PortletLocalServiceUtil" %>
 
 <c:set var="css" value="${pageContext.request.contextPath}/css"/>
 <c:set var="js" value="${pageContext.request.contextPath}/js"/>
