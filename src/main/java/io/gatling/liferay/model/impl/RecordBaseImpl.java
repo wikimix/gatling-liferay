@@ -15,7 +15,7 @@
  */
 package io.gatling.liferay.model.impl;
 
-import com.liferay.portal.kernel.exception.SystemException;
+import aQute.bnd.annotation.ProviderType;
 
 import io.gatling.liferay.model.Record;
 import io.gatling.liferay.service.RecordLocalServiceUtil;
@@ -29,21 +29,23 @@ import io.gatling.liferay.service.RecordLocalServiceUtil;
  *
  * @author Brian Wing Shun Chan
  * @see RecordImpl
- * @see io.gatling.liferay.model.Record
+ * @see Record
  * @generated
  */
+@ProviderType
 public abstract class RecordBaseImpl extends RecordModelImpl implements Record {
-    /*
-     * NOTE FOR DEVELOPERS:
-     *
-     * Never modify or reference this class directly. All methods that expect a record model instance should use the {@link Record} interface instead.
-     */
-    @Override
-    public void persist() throws SystemException {
-        if (this.isNew()) {
-            RecordLocalServiceUtil.addRecord(this);
-        } else {
-            RecordLocalServiceUtil.updateRecord(this);
-        }
-    }
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this class directly. All methods that expect a record model instance should use the {@link Record} interface instead.
+	 */
+	@Override
+	public void persist() {
+		if (this.isNew()) {
+			RecordLocalServiceUtil.addRecord(this);
+		}
+		else {
+			RecordLocalServiceUtil.updateRecord(this);
+		}
+	}
 }

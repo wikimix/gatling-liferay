@@ -15,16 +15,19 @@
  */
 package io.gatling.liferay.model.impl;
 
+import aQute.bnd.annotation.ProviderType;
+
 import com.liferay.portal.kernel.model.CacheModel;
+import com.liferay.portal.kernel.util.HashUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
+
+import io.gatling.liferay.model.SiteMap;
 
 import java.io.Externalizable;
 import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
-
-import io.gatling.liferay.model.SiteMap;
 
 /**
  * The cache model class for representing SiteMap in entity cache.
@@ -33,55 +36,82 @@ import io.gatling.liferay.model.SiteMap;
  * @see SiteMap
  * @generated
  */
+@ProviderType
 public class SiteMapCacheModel implements CacheModel<SiteMap>, Externalizable {
-    public long siteMapId;
-    public String name;
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
 
-    @Override
-    public String toString() {
-        StringBundler sb = new StringBundler(5);
+		if (!(obj instanceof SiteMapCacheModel)) {
+			return false;
+		}
 
-        sb.append("{siteMapId=");
-        sb.append(siteMapId);
-        sb.append(", name=");
-        sb.append(name);
-        sb.append("}");
+		SiteMapCacheModel siteMapCacheModel = (SiteMapCacheModel)obj;
 
-        return sb.toString();
-    }
+		if (siteMapId == siteMapCacheModel.siteMapId) {
+			return true;
+		}
 
-    @Override
-    public SiteMap toEntityModel() {
-        SiteMapImpl siteMapImpl = new SiteMapImpl();
+		return false;
+	}
 
-        siteMapImpl.setSiteMapId(siteMapId);
+	@Override
+	public int hashCode() {
+		return HashUtil.hash(0, siteMapId);
+	}
 
-        if (name == null) {
-            siteMapImpl.setName(StringPool.BLANK);
-        } else {
-            siteMapImpl.setName(name);
-        }
+	@Override
+	public String toString() {
+		StringBundler sb = new StringBundler(5);
 
-        siteMapImpl.resetOriginalValues();
+		sb.append("{siteMapId=");
+		sb.append(siteMapId);
+		sb.append(", name=");
+		sb.append(name);
+		sb.append("}");
 
-        return siteMapImpl;
-    }
+		return sb.toString();
+	}
 
-    @Override
-    public void readExternal(ObjectInput objectInput) throws IOException {
-        siteMapId = objectInput.readLong();
-        name = objectInput.readUTF();
-    }
+	@Override
+	public SiteMap toEntityModel() {
+		SiteMapImpl siteMapImpl = new SiteMapImpl();
 
-    @Override
-    public void writeExternal(ObjectOutput objectOutput)
-        throws IOException {
-        objectOutput.writeLong(siteMapId);
+		siteMapImpl.setSiteMapId(siteMapId);
 
-        if (name == null) {
-            objectOutput.writeUTF(StringPool.BLANK);
-        } else {
-            objectOutput.writeUTF(name);
-        }
-    }
+		if (name == null) {
+			siteMapImpl.setName(StringPool.BLANK);
+		}
+		else {
+			siteMapImpl.setName(name);
+		}
+
+		siteMapImpl.resetOriginalValues();
+
+		return siteMapImpl;
+	}
+
+	@Override
+	public void readExternal(ObjectInput objectInput) throws IOException {
+		siteMapId = objectInput.readLong();
+		name = objectInput.readUTF();
+	}
+
+	@Override
+	public void writeExternal(ObjectOutput objectOutput)
+		throws IOException {
+		objectOutput.writeLong(siteMapId);
+
+		if (name == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(name);
+		}
+	}
+
+	public long siteMapId;
+	public String name;
 }

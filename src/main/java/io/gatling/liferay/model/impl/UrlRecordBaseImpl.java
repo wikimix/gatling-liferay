@@ -15,7 +15,7 @@
  */
 package io.gatling.liferay.model.impl;
 
-import com.liferay.portal.kernel.exception.SystemException;
+import aQute.bnd.annotation.ProviderType;
 
 import io.gatling.liferay.model.UrlRecord;
 import io.gatling.liferay.service.UrlRecordLocalServiceUtil;
@@ -29,22 +29,24 @@ import io.gatling.liferay.service.UrlRecordLocalServiceUtil;
  *
  * @author Brian Wing Shun Chan
  * @see UrlRecordImpl
- * @see io.gatling.liferay.model.UrlRecord
+ * @see UrlRecord
  * @generated
  */
+@ProviderType
 public abstract class UrlRecordBaseImpl extends UrlRecordModelImpl
-    implements UrlRecord {
-    /*
-     * NOTE FOR DEVELOPERS:
-     *
-     * Never modify or reference this class directly. All methods that expect a url record model instance should use the {@link UrlRecord} interface instead.
-     */
-    @Override
-    public void persist() throws SystemException {
-        if (this.isNew()) {
-            UrlRecordLocalServiceUtil.addUrlRecord(this);
-        } else {
-            UrlRecordLocalServiceUtil.updateUrlRecord(this);
-        }
-    }
+	implements UrlRecord {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this class directly. All methods that expect a url record model instance should use the {@link UrlRecord} interface instead.
+	 */
+	@Override
+	public void persist() {
+		if (this.isNew()) {
+			UrlRecordLocalServiceUtil.addUrlRecord(this);
+		}
+		else {
+			UrlRecordLocalServiceUtil.updateUrlRecord(this);
+		}
+	}
 }

@@ -15,7 +15,7 @@
  */
 package io.gatling.liferay.model.impl;
 
-import com.liferay.portal.kernel.exception.SystemException;
+import aQute.bnd.annotation.ProviderType;
 
 import io.gatling.liferay.model.UrlSiteMap;
 import io.gatling.liferay.service.UrlSiteMapLocalServiceUtil;
@@ -29,22 +29,24 @@ import io.gatling.liferay.service.UrlSiteMapLocalServiceUtil;
  *
  * @author Brian Wing Shun Chan
  * @see UrlSiteMapImpl
- * @see io.gatling.liferay.model.UrlSiteMap
+ * @see UrlSiteMap
  * @generated
  */
+@ProviderType
 public abstract class UrlSiteMapBaseImpl extends UrlSiteMapModelImpl
-    implements UrlSiteMap {
-    /*
-     * NOTE FOR DEVELOPERS:
-     *
-     * Never modify or reference this class directly. All methods that expect a url site map model instance should use the {@link UrlSiteMap} interface instead.
-     */
-    @Override
-    public void persist() throws SystemException {
-        if (this.isNew()) {
-            UrlSiteMapLocalServiceUtil.addUrlSiteMap(this);
-        } else {
-            UrlSiteMapLocalServiceUtil.updateUrlSiteMap(this);
-        }
-    }
+	implements UrlSiteMap {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this class directly. All methods that expect a url site map model instance should use the {@link UrlSiteMap} interface instead.
+	 */
+	@Override
+	public void persist() {
+		if (this.isNew()) {
+			UrlSiteMapLocalServiceUtil.addUrlSiteMap(this);
+		}
+		else {
+			UrlSiteMapLocalServiceUtil.updateUrlSiteMap(this);
+		}
+	}
 }

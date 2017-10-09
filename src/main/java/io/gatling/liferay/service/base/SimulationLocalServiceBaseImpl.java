@@ -15,27 +15,31 @@
  */
 package io.gatling.liferay.service.base;
 
+import aQute.bnd.annotation.ProviderType;
+
 import com.liferay.portal.kernel.bean.BeanReference;
-import com.liferay.portal.kernel.bean.IdentifiableBean;
+import com.liferay.portal.kernel.dao.db.DB;
+import com.liferay.portal.kernel.dao.db.DBManagerUtil;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdate;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DefaultActionableDynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.IndexableActionableDynamicQuery;
 import com.liferay.portal.kernel.dao.orm.Projection;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.model.PersistedModel;
+import com.liferay.portal.kernel.module.framework.service.IdentifiableOSGiService;
 import com.liferay.portal.kernel.search.Indexable;
 import com.liferay.portal.kernel.search.IndexableType;
 import com.liferay.portal.kernel.service.BaseLocalServiceImpl;
 import com.liferay.portal.kernel.service.PersistedModelLocalServiceRegistryUtil;
+import com.liferay.portal.kernel.service.persistence.ClassNamePersistence;
 import com.liferay.portal.kernel.service.persistence.UserPersistence;
 import com.liferay.portal.kernel.util.OrderByComparator;
-
-import java.io.Serializable;
-import java.util.List;
-
-import javax.sql.DataSource;
+import com.liferay.portal.kernel.util.PortalUtil;
 
 import io.gatling.liferay.model.Simulation;
 import io.gatling.liferay.service.SimulationLocalService;
@@ -50,6 +54,12 @@ import io.gatling.liferay.service.persistence.SiteMapPersistence;
 import io.gatling.liferay.service.persistence.UrlRecordPersistence;
 import io.gatling.liferay.service.persistence.UrlSiteMapPersistence;
 
+import java.io.Serializable;
+
+import java.util.List;
+
+import javax.sql.DataSource;
+
 /**
  * Provides the base implementation for the simulation local service.
  *
@@ -62,833 +72,874 @@ import io.gatling.liferay.service.persistence.UrlSiteMapPersistence;
  * @see io.gatling.liferay.service.SimulationLocalServiceUtil
  * @generated
  */
+@ProviderType
 public abstract class SimulationLocalServiceBaseImpl
-    extends BaseLocalServiceImpl implements SimulationLocalService,
-        IdentifiableBean {
-    @BeanReference(type = io.gatling.liferay.service.FormParamLocalService.class)
-    protected io.gatling.liferay.service.FormParamLocalService formParamLocalService;
-    @BeanReference(type = FormParamPersistence.class)
-    protected FormParamPersistence formParamPersistence;
-    @BeanReference(type = io.gatling.liferay.service.LoginLocalService.class)
-    protected io.gatling.liferay.service.LoginLocalService loginLocalService;
-    @BeanReference(type = LoginPersistence.class)
-    protected LoginPersistence loginPersistence;
-    @BeanReference(type = io.gatling.liferay.service.ProcessLocalService.class)
-    protected io.gatling.liferay.service.ProcessLocalService processLocalService;
-    @BeanReference(type = ProcessPersistence.class)
-    protected ProcessPersistence processPersistence;
-    @BeanReference(type = io.gatling.liferay.service.ProcessScenarioLinkLocalService.class)
-    protected io.gatling.liferay.service.ProcessScenarioLinkLocalService processScenarioLinkLocalService;
-    @BeanReference(type = ProcessScenarioLinkPersistence.class)
-    protected ProcessScenarioLinkPersistence processScenarioLinkPersistence;
-    @BeanReference(type = io.gatling.liferay.service.RecordLocalService.class)
-    protected io.gatling.liferay.service.RecordLocalService recordLocalService;
-    @BeanReference(type = RecordPersistence.class)
-    protected RecordPersistence recordPersistence;
-    @BeanReference(type = io.gatling.liferay.service.ScenarioLocalService.class)
-    protected io.gatling.liferay.service.ScenarioLocalService scenarioLocalService;
-    @BeanReference(type = ScenarioPersistence.class)
-    protected ScenarioPersistence scenarioPersistence;
-    @BeanReference(type = io.gatling.liferay.service.SimulationLocalService.class)
-    protected io.gatling.liferay.service.SimulationLocalService simulationLocalService;
-    @BeanReference(type = SimulationPersistence.class)
-    protected SimulationPersistence simulationPersistence;
-    @BeanReference(type = io.gatling.liferay.service.SiteMapLocalService.class)
-    protected io.gatling.liferay.service.SiteMapLocalService siteMapLocalService;
-    @BeanReference(type = SiteMapPersistence.class)
-    protected SiteMapPersistence siteMapPersistence;
-    @BeanReference(type = io.gatling.liferay.service.UrlRecordLocalService.class)
-    protected io.gatling.liferay.service.UrlRecordLocalService urlRecordLocalService;
-    @BeanReference(type = UrlRecordPersistence.class)
-    protected UrlRecordPersistence urlRecordPersistence;
-    @BeanReference(type = io.gatling.liferay.service.UrlSiteMapLocalService.class)
-    protected io.gatling.liferay.service.UrlSiteMapLocalService urlSiteMapLocalService;
-    @BeanReference(type = UrlSiteMapPersistence.class)
-    protected UrlSiteMapPersistence urlSiteMapPersistence;
-    @BeanReference(type = com.liferay.counter.service.CounterLocalService.class)
-    protected com.liferay.counter.service.CounterLocalService counterLocalService;
-    @BeanReference(type = com.liferay.portal.service.ResourceLocalService.class)
-    protected com.liferay.portal.service.ResourceLocalService resourceLocalService;
-    @BeanReference(type = com.liferay.portal.service.UserLocalService.class)
-    protected com.liferay.portal.service.UserLocalService userLocalService;
-    @BeanReference(type = com.liferay.portal.service.UserService.class)
-    protected com.liferay.portal.service.UserService userService;
-    @BeanReference(type = UserPersistence.class)
-    protected UserPersistence userPersistence;
-    private String _beanIdentifier;
-    private ClassLoader _classLoader;
-    private SimulationLocalServiceClpInvoker _clpInvoker = new SimulationLocalServiceClpInvoker();
-
-    /*
-     * NOTE FOR DEVELOPERS:
-     *
-     * Never modify or reference this class directly. Always use {@link io.gatling.liferay.service.SimulationLocalServiceUtil} to access the simulation local service.
-     */
-
-    /**
-     * Adds the simulation to the database. Also notifies the appropriate model listeners.
-     *
-     * @param simulation the simulation
-     * @return the simulation that was added
-     * @throws SystemException if a system exception occurred
-     */
-    @Indexable(type = IndexableType.REINDEX)
-    @Override
-    public Simulation addSimulation(Simulation simulation)
-        throws SystemException {
-        simulation.setNew(true);
-
-        return simulationPersistence.update(simulation);
-    }
-
-    /**
-     * Creates a new simulation with the primary key. Does not add the simulation to the database.
-     *
-     * @param simulation_id the primary key for the new simulation
-     * @return the new simulation
-     */
-    @Override
-    public Simulation createSimulation(long simulation_id) {
-        return simulationPersistence.create(simulation_id);
-    }
-
-    /**
-     * Deletes the simulation with the primary key from the database. Also notifies the appropriate model listeners.
-     *
-     * @param simulation_id the primary key of the simulation
-     * @return the simulation that was removed
-     * @throws PortalException if a simulation with the primary key could not be found
-     * @throws SystemException if a system exception occurred
-     */
-    @Indexable(type = IndexableType.DELETE)
-    @Override
-    public Simulation deleteSimulation(long simulation_id)
-        throws PortalException, SystemException {
-        return simulationPersistence.remove(simulation_id);
-    }
-
-    /**
-     * Deletes the simulation from the database. Also notifies the appropriate model listeners.
-     *
-     * @param simulation the simulation
-     * @return the simulation that was removed
-     * @throws SystemException if a system exception occurred
-     */
-    @Indexable(type = IndexableType.DELETE)
-    @Override
-    public Simulation deleteSimulation(Simulation simulation)
-        throws SystemException {
-        return simulationPersistence.remove(simulation);
-    }
-
-    @Override
-    public DynamicQuery dynamicQuery() {
-        Class<?> clazz = getClass();
-
-        return DynamicQueryFactoryUtil.forClass(Simulation.class,
-            clazz.getClassLoader());
-    }
-
-    /**
-     * Performs a dynamic query on the database and returns the matching rows.
-     *
-     * @param dynamicQuery the dynamic query
-     * @return the matching rows
-     * @throws SystemException if a system exception occurred
-     */
-    @Override
-    @SuppressWarnings("rawtypes")
-    public List dynamicQuery(DynamicQuery dynamicQuery)
-        throws SystemException {
-        return simulationPersistence.findWithDynamicQuery(dynamicQuery);
-    }
-
-    /**
-     * Performs a dynamic query on the database and returns a range of the matching rows.
-     *
-     * <p>
-     * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link io.gatling.liferay.model.impl.SimulationModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-     * </p>
-     *
-     * @param dynamicQuery the dynamic query
-     * @param start the lower bound of the range of model instances
-     * @param end the upper bound of the range of model instances (not inclusive)
-     * @return the range of matching rows
-     * @throws SystemException if a system exception occurred
-     */
-    @Override
-    @SuppressWarnings("rawtypes")
-    public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end)
-        throws SystemException {
-        return simulationPersistence.findWithDynamicQuery(dynamicQuery, start,
-            end);
-    }
-
-    /**
-     * Performs a dynamic query on the database and returns an ordered range of the matching rows.
-     *
-     * <p>
-     * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link io.gatling.liferay.model.impl.SimulationModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-     * </p>
-     *
-     * @param dynamicQuery the dynamic query
-     * @param start the lower bound of the range of model instances
-     * @param end the upper bound of the range of model instances (not inclusive)
-     * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-     * @return the ordered range of matching rows
-     * @throws SystemException if a system exception occurred
-     */
-    @Override
-    @SuppressWarnings("rawtypes")
-    public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end,
-        OrderByComparator orderByComparator) throws SystemException {
-        return simulationPersistence.findWithDynamicQuery(dynamicQuery, start,
-            end, orderByComparator);
-    }
-
-    /**
-     * Returns the number of rows that match the dynamic query.
-     *
-     * @param dynamicQuery the dynamic query
-     * @return the number of rows that match the dynamic query
-     * @throws SystemException if a system exception occurred
-     */
-    @Override
-    public long dynamicQueryCount(DynamicQuery dynamicQuery)
-        throws SystemException {
-        return simulationPersistence.countWithDynamicQuery(dynamicQuery);
-    }
-
-    /**
-     * Returns the number of rows that match the dynamic query.
-     *
-     * @param dynamicQuery the dynamic query
-     * @param projection the projection to apply to the query
-     * @return the number of rows that match the dynamic query
-     * @throws SystemException if a system exception occurred
-     */
-    @Override
-    public long dynamicQueryCount(DynamicQuery dynamicQuery,
-        Projection projection) throws SystemException {
-        return simulationPersistence.countWithDynamicQuery(dynamicQuery,
-            projection);
-    }
-
-    @Override
-    public Simulation fetchSimulation(long simulation_id)
-        throws SystemException {
-        return simulationPersistence.fetchByPrimaryKey(simulation_id);
-    }
-
-    /**
-     * Returns the simulation with the primary key.
-     *
-     * @param simulation_id the primary key of the simulation
-     * @return the simulation
-     * @throws PortalException if a simulation with the primary key could not be found
-     * @throws SystemException if a system exception occurred
-     */
-    @Override
-    public Simulation getSimulation(long simulation_id)
-        throws PortalException, SystemException {
-        return simulationPersistence.findByPrimaryKey(simulation_id);
-    }
-
-    @Override
-    public PersistedModel getPersistedModel(Serializable primaryKeyObj)
-        throws PortalException, SystemException {
-        return simulationPersistence.findByPrimaryKey(primaryKeyObj);
-    }
-
-    /**
-     * Returns a range of all the simulations.
-     *
-     * <p>
-     * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link io.gatling.liferay.model.impl.SimulationModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-     * </p>
-     *
-     * @param start the lower bound of the range of simulations
-     * @param end the upper bound of the range of simulations (not inclusive)
-     * @return the range of simulations
-     * @throws SystemException if a system exception occurred
-     */
-    @Override
-    public List<Simulation> getSimulations(int start, int end)
-        throws SystemException {
-        return simulationPersistence.findAll(start, end);
-    }
-
-    /**
-     * Returns the number of simulations.
-     *
-     * @return the number of simulations
-     * @throws SystemException if a system exception occurred
-     */
-    @Override
-    public int getSimulationsCount() throws SystemException {
-        return simulationPersistence.countAll();
-    }
-
-    /**
-     * Updates the simulation in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.
-     *
-     * @param simulation the simulation
-     * @return the simulation that was updated
-     * @throws SystemException if a system exception occurred
-     */
-    @Indexable(type = IndexableType.REINDEX)
-    @Override
-    public Simulation updateSimulation(Simulation simulation)
-        throws SystemException {
-        return simulationPersistence.update(simulation);
-    }
-
-    /**
-     * Returns the form param local service.
-     *
-     * @return the form param local service
-     */
-    public io.gatling.liferay.service.FormParamLocalService getFormParamLocalService() {
-        return formParamLocalService;
-    }
-
-    /**
-     * Sets the form param local service.
-     *
-     * @param formParamLocalService the form param local service
-     */
-    public void setFormParamLocalService(
-        io.gatling.liferay.service.FormParamLocalService formParamLocalService) {
-        this.formParamLocalService = formParamLocalService;
-    }
-
-    /**
-     * Returns the form param persistence.
-     *
-     * @return the form param persistence
-     */
-    public FormParamPersistence getFormParamPersistence() {
-        return formParamPersistence;
-    }
-
-    /**
-     * Sets the form param persistence.
-     *
-     * @param formParamPersistence the form param persistence
-     */
-    public void setFormParamPersistence(
-        FormParamPersistence formParamPersistence) {
-        this.formParamPersistence = formParamPersistence;
-    }
-
-    /**
-     * Returns the login local service.
-     *
-     * @return the login local service
-     */
-    public io.gatling.liferay.service.LoginLocalService getLoginLocalService() {
-        return loginLocalService;
-    }
-
-    /**
-     * Sets the login local service.
-     *
-     * @param loginLocalService the login local service
-     */
-    public void setLoginLocalService(
-        io.gatling.liferay.service.LoginLocalService loginLocalService) {
-        this.loginLocalService = loginLocalService;
-    }
-
-    /**
-     * Returns the login persistence.
-     *
-     * @return the login persistence
-     */
-    public LoginPersistence getLoginPersistence() {
-        return loginPersistence;
-    }
-
-    /**
-     * Sets the login persistence.
-     *
-     * @param loginPersistence the login persistence
-     */
-    public void setLoginPersistence(LoginPersistence loginPersistence) {
-        this.loginPersistence = loginPersistence;
-    }
-
-    /**
-     * Returns the process local service.
-     *
-     * @return the process local service
-     */
-    public io.gatling.liferay.service.ProcessLocalService getProcessLocalService() {
-        return processLocalService;
-    }
-
-    /**
-     * Sets the process local service.
-     *
-     * @param processLocalService the process local service
-     */
-    public void setProcessLocalService(
-        io.gatling.liferay.service.ProcessLocalService processLocalService) {
-        this.processLocalService = processLocalService;
-    }
-
-    /**
-     * Returns the process persistence.
-     *
-     * @return the process persistence
-     */
-    public ProcessPersistence getProcessPersistence() {
-        return processPersistence;
-    }
-
-    /**
-     * Sets the process persistence.
-     *
-     * @param processPersistence the process persistence
-     */
-    public void setProcessPersistence(ProcessPersistence processPersistence) {
-        this.processPersistence = processPersistence;
-    }
-
-    /**
-     * Returns the process scenario link local service.
-     *
-     * @return the process scenario link local service
-     */
-    public io.gatling.liferay.service.ProcessScenarioLinkLocalService getProcessScenarioLinkLocalService() {
-        return processScenarioLinkLocalService;
-    }
-
-    /**
-     * Sets the process scenario link local service.
-     *
-     * @param processScenarioLinkLocalService the process scenario link local service
-     */
-    public void setProcessScenarioLinkLocalService(
-        io.gatling.liferay.service.ProcessScenarioLinkLocalService processScenarioLinkLocalService) {
-        this.processScenarioLinkLocalService = processScenarioLinkLocalService;
-    }
-
-    /**
-     * Returns the process scenario link persistence.
-     *
-     * @return the process scenario link persistence
-     */
-    public ProcessScenarioLinkPersistence getProcessScenarioLinkPersistence() {
-        return processScenarioLinkPersistence;
-    }
-
-    /**
-     * Sets the process scenario link persistence.
-     *
-     * @param processScenarioLinkPersistence the process scenario link persistence
-     */
-    public void setProcessScenarioLinkPersistence(
-        ProcessScenarioLinkPersistence processScenarioLinkPersistence) {
-        this.processScenarioLinkPersistence = processScenarioLinkPersistence;
-    }
-
-    /**
-     * Returns the record local service.
-     *
-     * @return the record local service
-     */
-    public io.gatling.liferay.service.RecordLocalService getRecordLocalService() {
-        return recordLocalService;
-    }
-
-    /**
-     * Sets the record local service.
-     *
-     * @param recordLocalService the record local service
-     */
-    public void setRecordLocalService(
-        io.gatling.liferay.service.RecordLocalService recordLocalService) {
-        this.recordLocalService = recordLocalService;
-    }
-
-    /**
-     * Returns the record persistence.
-     *
-     * @return the record persistence
-     */
-    public RecordPersistence getRecordPersistence() {
-        return recordPersistence;
-    }
-
-    /**
-     * Sets the record persistence.
-     *
-     * @param recordPersistence the record persistence
-     */
-    public void setRecordPersistence(RecordPersistence recordPersistence) {
-        this.recordPersistence = recordPersistence;
-    }
-
-    /**
-     * Returns the scenario local service.
-     *
-     * @return the scenario local service
-     */
-    public io.gatling.liferay.service.ScenarioLocalService getScenarioLocalService() {
-        return scenarioLocalService;
-    }
-
-    /**
-     * Sets the scenario local service.
-     *
-     * @param scenarioLocalService the scenario local service
-     */
-    public void setScenarioLocalService(
-        io.gatling.liferay.service.ScenarioLocalService scenarioLocalService) {
-        this.scenarioLocalService = scenarioLocalService;
-    }
-
-    /**
-     * Returns the scenario persistence.
-     *
-     * @return the scenario persistence
-     */
-    public ScenarioPersistence getScenarioPersistence() {
-        return scenarioPersistence;
-    }
-
-    /**
-     * Sets the scenario persistence.
-     *
-     * @param scenarioPersistence the scenario persistence
-     */
-    public void setScenarioPersistence(ScenarioPersistence scenarioPersistence) {
-        this.scenarioPersistence = scenarioPersistence;
-    }
-
-    /**
-     * Returns the simulation local service.
-     *
-     * @return the simulation local service
-     */
-    public io.gatling.liferay.service.SimulationLocalService getSimulationLocalService() {
-        return simulationLocalService;
-    }
-
-    /**
-     * Sets the simulation local service.
-     *
-     * @param simulationLocalService the simulation local service
-     */
-    public void setSimulationLocalService(
-        io.gatling.liferay.service.SimulationLocalService simulationLocalService) {
-        this.simulationLocalService = simulationLocalService;
-    }
-
-    /**
-     * Returns the simulation persistence.
-     *
-     * @return the simulation persistence
-     */
-    public SimulationPersistence getSimulationPersistence() {
-        return simulationPersistence;
-    }
-
-    /**
-     * Sets the simulation persistence.
-     *
-     * @param simulationPersistence the simulation persistence
-     */
-    public void setSimulationPersistence(
-        SimulationPersistence simulationPersistence) {
-        this.simulationPersistence = simulationPersistence;
-    }
-
-    /**
-     * Returns the site map local service.
-     *
-     * @return the site map local service
-     */
-    public io.gatling.liferay.service.SiteMapLocalService getSiteMapLocalService() {
-        return siteMapLocalService;
-    }
-
-    /**
-     * Sets the site map local service.
-     *
-     * @param siteMapLocalService the site map local service
-     */
-    public void setSiteMapLocalService(
-        io.gatling.liferay.service.SiteMapLocalService siteMapLocalService) {
-        this.siteMapLocalService = siteMapLocalService;
-    }
-
-    /**
-     * Returns the site map persistence.
-     *
-     * @return the site map persistence
-     */
-    public SiteMapPersistence getSiteMapPersistence() {
-        return siteMapPersistence;
-    }
-
-    /**
-     * Sets the site map persistence.
-     *
-     * @param siteMapPersistence the site map persistence
-     */
-    public void setSiteMapPersistence(SiteMapPersistence siteMapPersistence) {
-        this.siteMapPersistence = siteMapPersistence;
-    }
-
-    /**
-     * Returns the url record local service.
-     *
-     * @return the url record local service
-     */
-    public io.gatling.liferay.service.UrlRecordLocalService getUrlRecordLocalService() {
-        return urlRecordLocalService;
-    }
-
-    /**
-     * Sets the url record local service.
-     *
-     * @param urlRecordLocalService the url record local service
-     */
-    public void setUrlRecordLocalService(
-        io.gatling.liferay.service.UrlRecordLocalService urlRecordLocalService) {
-        this.urlRecordLocalService = urlRecordLocalService;
-    }
-
-    /**
-     * Returns the url record persistence.
-     *
-     * @return the url record persistence
-     */
-    public UrlRecordPersistence getUrlRecordPersistence() {
-        return urlRecordPersistence;
-    }
-
-    /**
-     * Sets the url record persistence.
-     *
-     * @param urlRecordPersistence the url record persistence
-     */
-    public void setUrlRecordPersistence(
-        UrlRecordPersistence urlRecordPersistence) {
-        this.urlRecordPersistence = urlRecordPersistence;
-    }
-
-    /**
-     * Returns the url site map local service.
-     *
-     * @return the url site map local service
-     */
-    public io.gatling.liferay.service.UrlSiteMapLocalService getUrlSiteMapLocalService() {
-        return urlSiteMapLocalService;
-    }
-
-    /**
-     * Sets the url site map local service.
-     *
-     * @param urlSiteMapLocalService the url site map local service
-     */
-    public void setUrlSiteMapLocalService(
-        io.gatling.liferay.service.UrlSiteMapLocalService urlSiteMapLocalService) {
-        this.urlSiteMapLocalService = urlSiteMapLocalService;
-    }
-
-    /**
-     * Returns the url site map persistence.
-     *
-     * @return the url site map persistence
-     */
-    public UrlSiteMapPersistence getUrlSiteMapPersistence() {
-        return urlSiteMapPersistence;
-    }
-
-    /**
-     * Sets the url site map persistence.
-     *
-     * @param urlSiteMapPersistence the url site map persistence
-     */
-    public void setUrlSiteMapPersistence(
-        UrlSiteMapPersistence urlSiteMapPersistence) {
-        this.urlSiteMapPersistence = urlSiteMapPersistence;
-    }
-
-    /**
-     * Returns the counter local service.
-     *
-     * @return the counter local service
-     */
-    public com.liferay.counter.service.CounterLocalService getCounterLocalService() {
-        return counterLocalService;
-    }
-
-    /**
-     * Sets the counter local service.
-     *
-     * @param counterLocalService the counter local service
-     */
-    public void setCounterLocalService(
-        com.liferay.counter.service.CounterLocalService counterLocalService) {
-        this.counterLocalService = counterLocalService;
-    }
-
-    /**
-     * Returns the resource local service.
-     *
-     * @return the resource local service
-     */
-    public com.liferay.portal.service.ResourceLocalService getResourceLocalService() {
-        return resourceLocalService;
-    }
-
-    /**
-     * Sets the resource local service.
-     *
-     * @param resourceLocalService the resource local service
-     */
-    public void setResourceLocalService(
-        com.liferay.portal.service.ResourceLocalService resourceLocalService) {
-        this.resourceLocalService = resourceLocalService;
-    }
-
-    /**
-     * Returns the user local service.
-     *
-     * @return the user local service
-     */
-    public com.liferay.portal.service.UserLocalService getUserLocalService() {
-        return userLocalService;
-    }
-
-    /**
-     * Sets the user local service.
-     *
-     * @param userLocalService the user local service
-     */
-    public void setUserLocalService(
-        com.liferay.portal.service.UserLocalService userLocalService) {
-        this.userLocalService = userLocalService;
-    }
-
-    /**
-     * Returns the user remote service.
-     *
-     * @return the user remote service
-     */
-    public com.liferay.portal.service.UserService getUserService() {
-        return userService;
-    }
-
-    /**
-     * Sets the user remote service.
-     *
-     * @param userService the user remote service
-     */
-    public void setUserService(
-        com.liferay.portal.service.UserService userService) {
-        this.userService = userService;
-    }
-
-    /**
-     * Returns the user persistence.
-     *
-     * @return the user persistence
-     */
-    public UserPersistence getUserPersistence() {
-        return userPersistence;
-    }
-
-    /**
-     * Sets the user persistence.
-     *
-     * @param userPersistence the user persistence
-     */
-    public void setUserPersistence(UserPersistence userPersistence) {
-        this.userPersistence = userPersistence;
-    }
-
-    public void afterPropertiesSet() {
-        Class<?> clazz = getClass();
-
-        _classLoader = clazz.getClassLoader();
-
-        PersistedModelLocalServiceRegistryUtil.register("io.gatling.liferay.model.Simulation",
-            simulationLocalService);
-    }
-
-    public void destroy() {
-        PersistedModelLocalServiceRegistryUtil.unregister(
-            "io.gatling.liferay.model.Simulation");
-    }
-
-    /**
-     * Returns the Spring bean ID for this bean.
-     *
-     * @return the Spring bean ID for this bean
-     */
-    @Override
-    public String getBeanIdentifier() {
-        return _beanIdentifier;
-    }
-
-    /**
-     * Sets the Spring bean ID for this bean.
-     *
-     * @param beanIdentifier the Spring bean ID for this bean
-     */
-    @Override
-    public void setBeanIdentifier(String beanIdentifier) {
-        _beanIdentifier = beanIdentifier;
-    }
-
-    @Override
-    public Object invokeMethod(String name, String[] parameterTypes,
-        Object[] arguments) throws Throwable {
-        Thread currentThread = Thread.currentThread();
-
-        ClassLoader contextClassLoader = currentThread.getContextClassLoader();
-
-        if (contextClassLoader != _classLoader) {
-            currentThread.setContextClassLoader(_classLoader);
-        }
-
-        try {
-            return _clpInvoker.invokeMethod(name, parameterTypes, arguments);
-        } finally {
-            if (contextClassLoader != _classLoader) {
-                currentThread.setContextClassLoader(contextClassLoader);
-            }
-        }
-    }
-
-    protected Class<?> getModelClass() {
-        return Simulation.class;
-    }
-
-    protected String getModelClassName() {
-        return Simulation.class.getName();
-    }
-
-    /**
-     * Performs an SQL query.
-     *
-     * @param sql the sql query
-     */
-    protected void runSQL(String sql) throws SystemException {
-        try {
-            DataSource dataSource = simulationPersistence.getDataSource();
-
-            SqlUpdate sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(dataSource,
-                    sql, new int[0]);
-
-            sqlUpdate.update();
-        } catch (Exception e) {
-            throw new SystemException(e);
-        }
-    }
+	extends BaseLocalServiceImpl implements SimulationLocalService,
+		IdentifiableOSGiService {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this class directly. Always use {@link io.gatling.liferay.service.SimulationLocalServiceUtil} to access the simulation local service.
+	 */
+
+	/**
+	 * Adds the simulation to the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param simulation the simulation
+	 * @return the simulation that was added
+	 */
+	@Indexable(type = IndexableType.REINDEX)
+	@Override
+	public Simulation addSimulation(Simulation simulation) {
+		simulation.setNew(true);
+
+		return simulationPersistence.update(simulation);
+	}
+
+	/**
+	 * Creates a new simulation with the primary key. Does not add the simulation to the database.
+	 *
+	 * @param simulation_id the primary key for the new simulation
+	 * @return the new simulation
+	 */
+	@Override
+	public Simulation createSimulation(long simulation_id) {
+		return simulationPersistence.create(simulation_id);
+	}
+
+	/**
+	 * Deletes the simulation with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param simulation_id the primary key of the simulation
+	 * @return the simulation that was removed
+	 * @throws PortalException if a simulation with the primary key could not be found
+	 */
+	@Indexable(type = IndexableType.DELETE)
+	@Override
+	public Simulation deleteSimulation(long simulation_id)
+		throws PortalException {
+		return simulationPersistence.remove(simulation_id);
+	}
+
+	/**
+	 * Deletes the simulation from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param simulation the simulation
+	 * @return the simulation that was removed
+	 */
+	@Indexable(type = IndexableType.DELETE)
+	@Override
+	public Simulation deleteSimulation(Simulation simulation) {
+		return simulationPersistence.remove(simulation);
+	}
+
+	@Override
+	public DynamicQuery dynamicQuery() {
+		Class<?> clazz = getClass();
+
+		return DynamicQueryFactoryUtil.forClass(Simulation.class,
+			clazz.getClassLoader());
+	}
+
+	/**
+	 * Performs a dynamic query on the database and returns the matching rows.
+	 *
+	 * @param dynamicQuery the dynamic query
+	 * @return the matching rows
+	 */
+	@Override
+	public <T> List<T> dynamicQuery(DynamicQuery dynamicQuery) {
+		return simulationPersistence.findWithDynamicQuery(dynamicQuery);
+	}
+
+	/**
+	 * Performs a dynamic query on the database and returns a range of the matching rows.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link io.gatling.liferay.model.impl.SimulationModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param dynamicQuery the dynamic query
+	 * @param start the lower bound of the range of model instances
+	 * @param end the upper bound of the range of model instances (not inclusive)
+	 * @return the range of matching rows
+	 */
+	@Override
+	public <T> List<T> dynamicQuery(DynamicQuery dynamicQuery, int start,
+		int end) {
+		return simulationPersistence.findWithDynamicQuery(dynamicQuery, start,
+			end);
+	}
+
+	/**
+	 * Performs a dynamic query on the database and returns an ordered range of the matching rows.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link io.gatling.liferay.model.impl.SimulationModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param dynamicQuery the dynamic query
+	 * @param start the lower bound of the range of model instances
+	 * @param end the upper bound of the range of model instances (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching rows
+	 */
+	@Override
+	public <T> List<T> dynamicQuery(DynamicQuery dynamicQuery, int start,
+		int end, OrderByComparator<T> orderByComparator) {
+		return simulationPersistence.findWithDynamicQuery(dynamicQuery, start,
+			end, orderByComparator);
+	}
+
+	/**
+	 * Returns the number of rows matching the dynamic query.
+	 *
+	 * @param dynamicQuery the dynamic query
+	 * @return the number of rows matching the dynamic query
+	 */
+	@Override
+	public long dynamicQueryCount(DynamicQuery dynamicQuery) {
+		return simulationPersistence.countWithDynamicQuery(dynamicQuery);
+	}
+
+	/**
+	 * Returns the number of rows matching the dynamic query.
+	 *
+	 * @param dynamicQuery the dynamic query
+	 * @param projection the projection to apply to the query
+	 * @return the number of rows matching the dynamic query
+	 */
+	@Override
+	public long dynamicQueryCount(DynamicQuery dynamicQuery,
+		Projection projection) {
+		return simulationPersistence.countWithDynamicQuery(dynamicQuery,
+			projection);
+	}
+
+	@Override
+	public Simulation fetchSimulation(long simulation_id) {
+		return simulationPersistence.fetchByPrimaryKey(simulation_id);
+	}
+
+	/**
+	 * Returns the simulation with the primary key.
+	 *
+	 * @param simulation_id the primary key of the simulation
+	 * @return the simulation
+	 * @throws PortalException if a simulation with the primary key could not be found
+	 */
+	@Override
+	public Simulation getSimulation(long simulation_id)
+		throws PortalException {
+		return simulationPersistence.findByPrimaryKey(simulation_id);
+	}
+
+	@Override
+	public ActionableDynamicQuery getActionableDynamicQuery() {
+		ActionableDynamicQuery actionableDynamicQuery = new DefaultActionableDynamicQuery();
+
+		actionableDynamicQuery.setBaseLocalService(simulationLocalService);
+		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(Simulation.class);
+
+		actionableDynamicQuery.setPrimaryKeyPropertyName("simulation_id");
+
+		return actionableDynamicQuery;
+	}
+
+	@Override
+	public IndexableActionableDynamicQuery getIndexableActionableDynamicQuery() {
+		IndexableActionableDynamicQuery indexableActionableDynamicQuery = new IndexableActionableDynamicQuery();
+
+		indexableActionableDynamicQuery.setBaseLocalService(simulationLocalService);
+		indexableActionableDynamicQuery.setClassLoader(getClassLoader());
+		indexableActionableDynamicQuery.setModelClass(Simulation.class);
+
+		indexableActionableDynamicQuery.setPrimaryKeyPropertyName(
+			"simulation_id");
+
+		return indexableActionableDynamicQuery;
+	}
+
+	protected void initActionableDynamicQuery(
+		ActionableDynamicQuery actionableDynamicQuery) {
+		actionableDynamicQuery.setBaseLocalService(simulationLocalService);
+		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(Simulation.class);
+
+		actionableDynamicQuery.setPrimaryKeyPropertyName("simulation_id");
+	}
+
+	/**
+	 * @throws PortalException
+	 */
+	@Override
+	public PersistedModel deletePersistedModel(PersistedModel persistedModel)
+		throws PortalException {
+		return simulationLocalService.deleteSimulation((Simulation)persistedModel);
+	}
+
+	@Override
+	public PersistedModel getPersistedModel(Serializable primaryKeyObj)
+		throws PortalException {
+		return simulationPersistence.findByPrimaryKey(primaryKeyObj);
+	}
+
+	/**
+	 * Returns a range of all the simulations.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link io.gatling.liferay.model.impl.SimulationModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param start the lower bound of the range of simulations
+	 * @param end the upper bound of the range of simulations (not inclusive)
+	 * @return the range of simulations
+	 */
+	@Override
+	public List<Simulation> getSimulations(int start, int end) {
+		return simulationPersistence.findAll(start, end);
+	}
+
+	/**
+	 * Returns the number of simulations.
+	 *
+	 * @return the number of simulations
+	 */
+	@Override
+	public int getSimulationsCount() {
+		return simulationPersistence.countAll();
+	}
+
+	/**
+	 * Updates the simulation in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.
+	 *
+	 * @param simulation the simulation
+	 * @return the simulation that was updated
+	 */
+	@Indexable(type = IndexableType.REINDEX)
+	@Override
+	public Simulation updateSimulation(Simulation simulation) {
+		return simulationPersistence.update(simulation);
+	}
+
+	/**
+	 * Returns the form param local service.
+	 *
+	 * @return the form param local service
+	 */
+	public io.gatling.liferay.service.FormParamLocalService getFormParamLocalService() {
+		return formParamLocalService;
+	}
+
+	/**
+	 * Sets the form param local service.
+	 *
+	 * @param formParamLocalService the form param local service
+	 */
+	public void setFormParamLocalService(
+		io.gatling.liferay.service.FormParamLocalService formParamLocalService) {
+		this.formParamLocalService = formParamLocalService;
+	}
+
+	/**
+	 * Returns the form param persistence.
+	 *
+	 * @return the form param persistence
+	 */
+	public FormParamPersistence getFormParamPersistence() {
+		return formParamPersistence;
+	}
+
+	/**
+	 * Sets the form param persistence.
+	 *
+	 * @param formParamPersistence the form param persistence
+	 */
+	public void setFormParamPersistence(
+		FormParamPersistence formParamPersistence) {
+		this.formParamPersistence = formParamPersistence;
+	}
+
+	/**
+	 * Returns the login local service.
+	 *
+	 * @return the login local service
+	 */
+	public io.gatling.liferay.service.LoginLocalService getLoginLocalService() {
+		return loginLocalService;
+	}
+
+	/**
+	 * Sets the login local service.
+	 *
+	 * @param loginLocalService the login local service
+	 */
+	public void setLoginLocalService(
+		io.gatling.liferay.service.LoginLocalService loginLocalService) {
+		this.loginLocalService = loginLocalService;
+	}
+
+	/**
+	 * Returns the login persistence.
+	 *
+	 * @return the login persistence
+	 */
+	public LoginPersistence getLoginPersistence() {
+		return loginPersistence;
+	}
+
+	/**
+	 * Sets the login persistence.
+	 *
+	 * @param loginPersistence the login persistence
+	 */
+	public void setLoginPersistence(LoginPersistence loginPersistence) {
+		this.loginPersistence = loginPersistence;
+	}
+
+	/**
+	 * Returns the process local service.
+	 *
+	 * @return the process local service
+	 */
+	public io.gatling.liferay.service.ProcessLocalService getProcessLocalService() {
+		return processLocalService;
+	}
+
+	/**
+	 * Sets the process local service.
+	 *
+	 * @param processLocalService the process local service
+	 */
+	public void setProcessLocalService(
+		io.gatling.liferay.service.ProcessLocalService processLocalService) {
+		this.processLocalService = processLocalService;
+	}
+
+	/**
+	 * Returns the process persistence.
+	 *
+	 * @return the process persistence
+	 */
+	public ProcessPersistence getProcessPersistence() {
+		return processPersistence;
+	}
+
+	/**
+	 * Sets the process persistence.
+	 *
+	 * @param processPersistence the process persistence
+	 */
+	public void setProcessPersistence(ProcessPersistence processPersistence) {
+		this.processPersistence = processPersistence;
+	}
+
+	/**
+	 * Returns the process scenario link local service.
+	 *
+	 * @return the process scenario link local service
+	 */
+	public io.gatling.liferay.service.ProcessScenarioLinkLocalService getProcessScenarioLinkLocalService() {
+		return processScenarioLinkLocalService;
+	}
+
+	/**
+	 * Sets the process scenario link local service.
+	 *
+	 * @param processScenarioLinkLocalService the process scenario link local service
+	 */
+	public void setProcessScenarioLinkLocalService(
+		io.gatling.liferay.service.ProcessScenarioLinkLocalService processScenarioLinkLocalService) {
+		this.processScenarioLinkLocalService = processScenarioLinkLocalService;
+	}
+
+	/**
+	 * Returns the process scenario link persistence.
+	 *
+	 * @return the process scenario link persistence
+	 */
+	public ProcessScenarioLinkPersistence getProcessScenarioLinkPersistence() {
+		return processScenarioLinkPersistence;
+	}
+
+	/**
+	 * Sets the process scenario link persistence.
+	 *
+	 * @param processScenarioLinkPersistence the process scenario link persistence
+	 */
+	public void setProcessScenarioLinkPersistence(
+		ProcessScenarioLinkPersistence processScenarioLinkPersistence) {
+		this.processScenarioLinkPersistence = processScenarioLinkPersistence;
+	}
+
+	/**
+	 * Returns the record local service.
+	 *
+	 * @return the record local service
+	 */
+	public io.gatling.liferay.service.RecordLocalService getRecordLocalService() {
+		return recordLocalService;
+	}
+
+	/**
+	 * Sets the record local service.
+	 *
+	 * @param recordLocalService the record local service
+	 */
+	public void setRecordLocalService(
+		io.gatling.liferay.service.RecordLocalService recordLocalService) {
+		this.recordLocalService = recordLocalService;
+	}
+
+	/**
+	 * Returns the record persistence.
+	 *
+	 * @return the record persistence
+	 */
+	public RecordPersistence getRecordPersistence() {
+		return recordPersistence;
+	}
+
+	/**
+	 * Sets the record persistence.
+	 *
+	 * @param recordPersistence the record persistence
+	 */
+	public void setRecordPersistence(RecordPersistence recordPersistence) {
+		this.recordPersistence = recordPersistence;
+	}
+
+	/**
+	 * Returns the scenario local service.
+	 *
+	 * @return the scenario local service
+	 */
+	public io.gatling.liferay.service.ScenarioLocalService getScenarioLocalService() {
+		return scenarioLocalService;
+	}
+
+	/**
+	 * Sets the scenario local service.
+	 *
+	 * @param scenarioLocalService the scenario local service
+	 */
+	public void setScenarioLocalService(
+		io.gatling.liferay.service.ScenarioLocalService scenarioLocalService) {
+		this.scenarioLocalService = scenarioLocalService;
+	}
+
+	/**
+	 * Returns the scenario persistence.
+	 *
+	 * @return the scenario persistence
+	 */
+	public ScenarioPersistence getScenarioPersistence() {
+		return scenarioPersistence;
+	}
+
+	/**
+	 * Sets the scenario persistence.
+	 *
+	 * @param scenarioPersistence the scenario persistence
+	 */
+	public void setScenarioPersistence(ScenarioPersistence scenarioPersistence) {
+		this.scenarioPersistence = scenarioPersistence;
+	}
+
+	/**
+	 * Returns the simulation local service.
+	 *
+	 * @return the simulation local service
+	 */
+	public SimulationLocalService getSimulationLocalService() {
+		return simulationLocalService;
+	}
+
+	/**
+	 * Sets the simulation local service.
+	 *
+	 * @param simulationLocalService the simulation local service
+	 */
+	public void setSimulationLocalService(
+		SimulationLocalService simulationLocalService) {
+		this.simulationLocalService = simulationLocalService;
+	}
+
+	/**
+	 * Returns the simulation persistence.
+	 *
+	 * @return the simulation persistence
+	 */
+	public SimulationPersistence getSimulationPersistence() {
+		return simulationPersistence;
+	}
+
+	/**
+	 * Sets the simulation persistence.
+	 *
+	 * @param simulationPersistence the simulation persistence
+	 */
+	public void setSimulationPersistence(
+		SimulationPersistence simulationPersistence) {
+		this.simulationPersistence = simulationPersistence;
+	}
+
+	/**
+	 * Returns the site map local service.
+	 *
+	 * @return the site map local service
+	 */
+	public io.gatling.liferay.service.SiteMapLocalService getSiteMapLocalService() {
+		return siteMapLocalService;
+	}
+
+	/**
+	 * Sets the site map local service.
+	 *
+	 * @param siteMapLocalService the site map local service
+	 */
+	public void setSiteMapLocalService(
+		io.gatling.liferay.service.SiteMapLocalService siteMapLocalService) {
+		this.siteMapLocalService = siteMapLocalService;
+	}
+
+	/**
+	 * Returns the site map persistence.
+	 *
+	 * @return the site map persistence
+	 */
+	public SiteMapPersistence getSiteMapPersistence() {
+		return siteMapPersistence;
+	}
+
+	/**
+	 * Sets the site map persistence.
+	 *
+	 * @param siteMapPersistence the site map persistence
+	 */
+	public void setSiteMapPersistence(SiteMapPersistence siteMapPersistence) {
+		this.siteMapPersistence = siteMapPersistence;
+	}
+
+	/**
+	 * Returns the url record local service.
+	 *
+	 * @return the url record local service
+	 */
+	public io.gatling.liferay.service.UrlRecordLocalService getUrlRecordLocalService() {
+		return urlRecordLocalService;
+	}
+
+	/**
+	 * Sets the url record local service.
+	 *
+	 * @param urlRecordLocalService the url record local service
+	 */
+	public void setUrlRecordLocalService(
+		io.gatling.liferay.service.UrlRecordLocalService urlRecordLocalService) {
+		this.urlRecordLocalService = urlRecordLocalService;
+	}
+
+	/**
+	 * Returns the url record persistence.
+	 *
+	 * @return the url record persistence
+	 */
+	public UrlRecordPersistence getUrlRecordPersistence() {
+		return urlRecordPersistence;
+	}
+
+	/**
+	 * Sets the url record persistence.
+	 *
+	 * @param urlRecordPersistence the url record persistence
+	 */
+	public void setUrlRecordPersistence(
+		UrlRecordPersistence urlRecordPersistence) {
+		this.urlRecordPersistence = urlRecordPersistence;
+	}
+
+	/**
+	 * Returns the url site map local service.
+	 *
+	 * @return the url site map local service
+	 */
+	public io.gatling.liferay.service.UrlSiteMapLocalService getUrlSiteMapLocalService() {
+		return urlSiteMapLocalService;
+	}
+
+	/**
+	 * Sets the url site map local service.
+	 *
+	 * @param urlSiteMapLocalService the url site map local service
+	 */
+	public void setUrlSiteMapLocalService(
+		io.gatling.liferay.service.UrlSiteMapLocalService urlSiteMapLocalService) {
+		this.urlSiteMapLocalService = urlSiteMapLocalService;
+	}
+
+	/**
+	 * Returns the url site map persistence.
+	 *
+	 * @return the url site map persistence
+	 */
+	public UrlSiteMapPersistence getUrlSiteMapPersistence() {
+		return urlSiteMapPersistence;
+	}
+
+	/**
+	 * Sets the url site map persistence.
+	 *
+	 * @param urlSiteMapPersistence the url site map persistence
+	 */
+	public void setUrlSiteMapPersistence(
+		UrlSiteMapPersistence urlSiteMapPersistence) {
+		this.urlSiteMapPersistence = urlSiteMapPersistence;
+	}
+
+	/**
+	 * Returns the counter local service.
+	 *
+	 * @return the counter local service
+	 */
+	public com.liferay.counter.kernel.service.CounterLocalService getCounterLocalService() {
+		return counterLocalService;
+	}
+
+	/**
+	 * Sets the counter local service.
+	 *
+	 * @param counterLocalService the counter local service
+	 */
+	public void setCounterLocalService(
+		com.liferay.counter.kernel.service.CounterLocalService counterLocalService) {
+		this.counterLocalService = counterLocalService;
+	}
+
+	/**
+	 * Returns the class name local service.
+	 *
+	 * @return the class name local service
+	 */
+	public com.liferay.portal.kernel.service.ClassNameLocalService getClassNameLocalService() {
+		return classNameLocalService;
+	}
+
+	/**
+	 * Sets the class name local service.
+	 *
+	 * @param classNameLocalService the class name local service
+	 */
+	public void setClassNameLocalService(
+		com.liferay.portal.kernel.service.ClassNameLocalService classNameLocalService) {
+		this.classNameLocalService = classNameLocalService;
+	}
+
+	/**
+	 * Returns the class name persistence.
+	 *
+	 * @return the class name persistence
+	 */
+	public ClassNamePersistence getClassNamePersistence() {
+		return classNamePersistence;
+	}
+
+	/**
+	 * Sets the class name persistence.
+	 *
+	 * @param classNamePersistence the class name persistence
+	 */
+	public void setClassNamePersistence(
+		ClassNamePersistence classNamePersistence) {
+		this.classNamePersistence = classNamePersistence;
+	}
+
+	/**
+	 * Returns the resource local service.
+	 *
+	 * @return the resource local service
+	 */
+	public com.liferay.portal.kernel.service.ResourceLocalService getResourceLocalService() {
+		return resourceLocalService;
+	}
+
+	/**
+	 * Sets the resource local service.
+	 *
+	 * @param resourceLocalService the resource local service
+	 */
+	public void setResourceLocalService(
+		com.liferay.portal.kernel.service.ResourceLocalService resourceLocalService) {
+		this.resourceLocalService = resourceLocalService;
+	}
+
+	/**
+	 * Returns the user local service.
+	 *
+	 * @return the user local service
+	 */
+	public com.liferay.portal.kernel.service.UserLocalService getUserLocalService() {
+		return userLocalService;
+	}
+
+	/**
+	 * Sets the user local service.
+	 *
+	 * @param userLocalService the user local service
+	 */
+	public void setUserLocalService(
+		com.liferay.portal.kernel.service.UserLocalService userLocalService) {
+		this.userLocalService = userLocalService;
+	}
+
+	/**
+	 * Returns the user persistence.
+	 *
+	 * @return the user persistence
+	 */
+	public UserPersistence getUserPersistence() {
+		return userPersistence;
+	}
+
+	/**
+	 * Sets the user persistence.
+	 *
+	 * @param userPersistence the user persistence
+	 */
+	public void setUserPersistence(UserPersistence userPersistence) {
+		this.userPersistence = userPersistence;
+	}
+
+	public void afterPropertiesSet() {
+		Class<?> clazz = getClass();
+
+		_classLoader = clazz.getClassLoader();
+
+		PersistedModelLocalServiceRegistryUtil.register("io.gatling.liferay.model.Simulation",
+			simulationLocalService);
+	}
+
+	public void destroy() {
+		PersistedModelLocalServiceRegistryUtil.unregister(
+			"io.gatling.liferay.model.Simulation");
+	}
+
+	/**
+	 * Returns the OSGi service identifier.
+	 *
+	 * @return the OSGi service identifier
+	 */
+	@Override
+	public String getOSGiServiceIdentifier() {
+		return SimulationLocalService.class.getName();
+	}
+
+	@Override
+	public Object invokeMethod(String name, String[] parameterTypes,
+		Object[] arguments) throws Throwable {
+		Thread currentThread = Thread.currentThread();
+
+		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
+
+		if (contextClassLoader != _classLoader) {
+			currentThread.setContextClassLoader(_classLoader);
+		}
+
+		try {
+			return _clpInvoker.invokeMethod(name, parameterTypes, arguments);
+		}
+		finally {
+			if (contextClassLoader != _classLoader) {
+				currentThread.setContextClassLoader(contextClassLoader);
+			}
+		}
+	}
+
+	protected Class<?> getModelClass() {
+		return Simulation.class;
+	}
+
+	protected String getModelClassName() {
+		return Simulation.class.getName();
+	}
+
+	/**
+	 * Performs a SQL query.
+	 *
+	 * @param sql the sql query
+	 */
+	protected void runSQL(String sql) {
+		try {
+			DataSource dataSource = simulationPersistence.getDataSource();
+
+			DB db = DBManagerUtil.getDB();
+
+			sql = db.buildSQL(sql);
+			sql = PortalUtil.transformSQL(sql);
+
+			SqlUpdate sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(dataSource,
+					sql);
+
+			sqlUpdate.update();
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+	}
+
+	@BeanReference(type = io.gatling.liferay.service.FormParamLocalService.class)
+	protected io.gatling.liferay.service.FormParamLocalService formParamLocalService;
+	@BeanReference(type = FormParamPersistence.class)
+	protected FormParamPersistence formParamPersistence;
+	@BeanReference(type = io.gatling.liferay.service.LoginLocalService.class)
+	protected io.gatling.liferay.service.LoginLocalService loginLocalService;
+	@BeanReference(type = LoginPersistence.class)
+	protected LoginPersistence loginPersistence;
+	@BeanReference(type = io.gatling.liferay.service.ProcessLocalService.class)
+	protected io.gatling.liferay.service.ProcessLocalService processLocalService;
+	@BeanReference(type = ProcessPersistence.class)
+	protected ProcessPersistence processPersistence;
+	@BeanReference(type = io.gatling.liferay.service.ProcessScenarioLinkLocalService.class)
+	protected io.gatling.liferay.service.ProcessScenarioLinkLocalService processScenarioLinkLocalService;
+	@BeanReference(type = ProcessScenarioLinkPersistence.class)
+	protected ProcessScenarioLinkPersistence processScenarioLinkPersistence;
+	@BeanReference(type = io.gatling.liferay.service.RecordLocalService.class)
+	protected io.gatling.liferay.service.RecordLocalService recordLocalService;
+	@BeanReference(type = RecordPersistence.class)
+	protected RecordPersistence recordPersistence;
+	@BeanReference(type = io.gatling.liferay.service.ScenarioLocalService.class)
+	protected io.gatling.liferay.service.ScenarioLocalService scenarioLocalService;
+	@BeanReference(type = ScenarioPersistence.class)
+	protected ScenarioPersistence scenarioPersistence;
+	@BeanReference(type = SimulationLocalService.class)
+	protected SimulationLocalService simulationLocalService;
+	@BeanReference(type = SimulationPersistence.class)
+	protected SimulationPersistence simulationPersistence;
+	@BeanReference(type = io.gatling.liferay.service.SiteMapLocalService.class)
+	protected io.gatling.liferay.service.SiteMapLocalService siteMapLocalService;
+	@BeanReference(type = SiteMapPersistence.class)
+	protected SiteMapPersistence siteMapPersistence;
+	@BeanReference(type = io.gatling.liferay.service.UrlRecordLocalService.class)
+	protected io.gatling.liferay.service.UrlRecordLocalService urlRecordLocalService;
+	@BeanReference(type = UrlRecordPersistence.class)
+	protected UrlRecordPersistence urlRecordPersistence;
+	@BeanReference(type = io.gatling.liferay.service.UrlSiteMapLocalService.class)
+	protected io.gatling.liferay.service.UrlSiteMapLocalService urlSiteMapLocalService;
+	@BeanReference(type = UrlSiteMapPersistence.class)
+	protected UrlSiteMapPersistence urlSiteMapPersistence;
+	@BeanReference(type = com.liferay.counter.kernel.service.CounterLocalService.class)
+	protected com.liferay.counter.kernel.service.CounterLocalService counterLocalService;
+	@BeanReference(type = com.liferay.portal.kernel.service.ClassNameLocalService.class)
+	protected com.liferay.portal.kernel.service.ClassNameLocalService classNameLocalService;
+	@BeanReference(type = ClassNamePersistence.class)
+	protected ClassNamePersistence classNamePersistence;
+	@BeanReference(type = com.liferay.portal.kernel.service.ResourceLocalService.class)
+	protected com.liferay.portal.kernel.service.ResourceLocalService resourceLocalService;
+	@BeanReference(type = com.liferay.portal.kernel.service.UserLocalService.class)
+	protected com.liferay.portal.kernel.service.UserLocalService userLocalService;
+	@BeanReference(type = UserPersistence.class)
+	protected UserPersistence userPersistence;
+	private ClassLoader _classLoader;
+	private SimulationLocalServiceClpInvoker _clpInvoker = new SimulationLocalServiceClpInvoker();
 }

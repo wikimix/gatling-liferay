@@ -15,16 +15,19 @@
  */
 package io.gatling.liferay.model.impl;
 
+import aQute.bnd.annotation.ProviderType;
+
 import com.liferay.portal.kernel.model.CacheModel;
+import com.liferay.portal.kernel.util.HashUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
+
+import io.gatling.liferay.model.FormParam;
 
 import java.io.Externalizable;
 import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
-
-import io.gatling.liferay.model.FormParam;
 
 /**
  * The cache model class for representing FormParam in entity cache.
@@ -33,62 +36,91 @@ import io.gatling.liferay.model.FormParam;
  * @see FormParam
  * @generated
  */
+@ProviderType
 public class FormParamCacheModel implements CacheModel<FormParam>,
-    Externalizable {
-    public long formParamId;
-    public long urlRecordId;
-    public String data;
+	Externalizable {
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
 
-    @Override
-    public String toString() {
-        StringBundler sb = new StringBundler(7);
+		if (!(obj instanceof FormParamCacheModel)) {
+			return false;
+		}
 
-        sb.append("{formParamId=");
-        sb.append(formParamId);
-        sb.append(", urlRecordId=");
-        sb.append(urlRecordId);
-        sb.append(", data=");
-        sb.append(data);
-        sb.append("}");
+		FormParamCacheModel formParamCacheModel = (FormParamCacheModel)obj;
 
-        return sb.toString();
-    }
+		if (formParamId == formParamCacheModel.formParamId) {
+			return true;
+		}
 
-    @Override
-    public FormParam toEntityModel() {
-        FormParamImpl formParamImpl = new FormParamImpl();
+		return false;
+	}
 
-        formParamImpl.setFormParamId(formParamId);
-        formParamImpl.setUrlRecordId(urlRecordId);
+	@Override
+	public int hashCode() {
+		return HashUtil.hash(0, formParamId);
+	}
 
-        if (data == null) {
-            formParamImpl.setData(StringPool.BLANK);
-        } else {
-            formParamImpl.setData(data);
-        }
+	@Override
+	public String toString() {
+		StringBundler sb = new StringBundler(7);
 
-        formParamImpl.resetOriginalValues();
+		sb.append("{formParamId=");
+		sb.append(formParamId);
+		sb.append(", urlRecordId=");
+		sb.append(urlRecordId);
+		sb.append(", data=");
+		sb.append(data);
+		sb.append("}");
 
-        return formParamImpl;
-    }
+		return sb.toString();
+	}
 
-    @Override
-    public void readExternal(ObjectInput objectInput) throws IOException {
-        formParamId = objectInput.readLong();
-        urlRecordId = objectInput.readLong();
-        data = objectInput.readUTF();
-    }
+	@Override
+	public FormParam toEntityModel() {
+		FormParamImpl formParamImpl = new FormParamImpl();
 
-    @Override
-    public void writeExternal(ObjectOutput objectOutput)
-        throws IOException {
-        objectOutput.writeLong(formParamId);
-        objectOutput.writeLong(urlRecordId);
+		formParamImpl.setFormParamId(formParamId);
+		formParamImpl.setUrlRecordId(urlRecordId);
 
-        if (data == null) {
-            objectOutput.writeUTF(StringPool.BLANK);
-        } else {
-            objectOutput.writeUTF(data);
-        }
-    }
+		if (data == null) {
+			formParamImpl.setData(StringPool.BLANK);
+		}
+		else {
+			formParamImpl.setData(data);
+		}
+
+		formParamImpl.resetOriginalValues();
+
+		return formParamImpl;
+	}
+
+	@Override
+	public void readExternal(ObjectInput objectInput) throws IOException {
+		formParamId = objectInput.readLong();
+
+		urlRecordId = objectInput.readLong();
+		data = objectInput.readUTF();
+	}
+
+	@Override
+	public void writeExternal(ObjectOutput objectOutput)
+		throws IOException {
+		objectOutput.writeLong(formParamId);
+
+		objectOutput.writeLong(urlRecordId);
+
+		if (data == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(data);
+		}
+	}
+
+	public long formParamId;
+	public long urlRecordId;
+	public String data;
 }

@@ -15,15 +15,18 @@
  */
 package io.gatling.liferay.model.impl;
 
+import aQute.bnd.annotation.ProviderType;
+
 import com.liferay.portal.kernel.model.CacheModel;
+import com.liferay.portal.kernel.util.HashUtil;
 import com.liferay.portal.kernel.util.StringBundler;
+
+import io.gatling.liferay.model.ProcessScenarioLink;
 
 import java.io.Externalizable;
 import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
-
-import io.gatling.liferay.model.ProcessScenarioLink;
 
 /**
  * The cache model class for representing ProcessScenarioLink in entity cache.
@@ -32,64 +35,97 @@ import io.gatling.liferay.model.ProcessScenarioLink;
  * @see ProcessScenarioLink
  * @generated
  */
+@ProviderType
 public class ProcessScenarioLinkCacheModel implements CacheModel<ProcessScenarioLink>,
-    Externalizable {
-    public long psl_id;
-    public long process_id;
-    public long scenario_id;
-    public int order;
-    public int pause;
+	Externalizable {
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
 
-    @Override
-    public String toString() {
-        StringBundler sb = new StringBundler(11);
+		if (!(obj instanceof ProcessScenarioLinkCacheModel)) {
+			return false;
+		}
 
-        sb.append("{psl_id=");
-        sb.append(psl_id);
-        sb.append(", process_id=");
-        sb.append(process_id);
-        sb.append(", scenario_id=");
-        sb.append(scenario_id);
-        sb.append(", order=");
-        sb.append(order);
-        sb.append(", pause=");
-        sb.append(pause);
-        sb.append("}");
+		ProcessScenarioLinkCacheModel processScenarioLinkCacheModel = (ProcessScenarioLinkCacheModel)obj;
 
-        return sb.toString();
-    }
+		if (psl_id == processScenarioLinkCacheModel.psl_id) {
+			return true;
+		}
 
-    @Override
-    public ProcessScenarioLink toEntityModel() {
-        ProcessScenarioLinkImpl processScenarioLinkImpl = new ProcessScenarioLinkImpl();
+		return false;
+	}
 
-        processScenarioLinkImpl.setPsl_id(psl_id);
-        processScenarioLinkImpl.setProcess_id(process_id);
-        processScenarioLinkImpl.setScenario_id(scenario_id);
-        processScenarioLinkImpl.setOrder(order);
-        processScenarioLinkImpl.setPause(pause);
+	@Override
+	public int hashCode() {
+		return HashUtil.hash(0, psl_id);
+	}
 
-        processScenarioLinkImpl.resetOriginalValues();
+	@Override
+	public String toString() {
+		StringBundler sb = new StringBundler(11);
 
-        return processScenarioLinkImpl;
-    }
+		sb.append("{psl_id=");
+		sb.append(psl_id);
+		sb.append(", process_id=");
+		sb.append(process_id);
+		sb.append(", scenario_id=");
+		sb.append(scenario_id);
+		sb.append(", order=");
+		sb.append(order);
+		sb.append(", pause=");
+		sb.append(pause);
+		sb.append("}");
 
-    @Override
-    public void readExternal(ObjectInput objectInput) throws IOException {
-        psl_id = objectInput.readLong();
-        process_id = objectInput.readLong();
-        scenario_id = objectInput.readLong();
-        order = objectInput.readInt();
-        pause = objectInput.readInt();
-    }
+		return sb.toString();
+	}
 
-    @Override
-    public void writeExternal(ObjectOutput objectOutput)
-        throws IOException {
-        objectOutput.writeLong(psl_id);
-        objectOutput.writeLong(process_id);
-        objectOutput.writeLong(scenario_id);
-        objectOutput.writeInt(order);
-        objectOutput.writeInt(pause);
-    }
+	@Override
+	public ProcessScenarioLink toEntityModel() {
+		ProcessScenarioLinkImpl processScenarioLinkImpl = new ProcessScenarioLinkImpl();
+
+		processScenarioLinkImpl.setPsl_id(psl_id);
+		processScenarioLinkImpl.setProcess_id(process_id);
+		processScenarioLinkImpl.setScenario_id(scenario_id);
+		processScenarioLinkImpl.setOrder(order);
+		processScenarioLinkImpl.setPause(pause);
+
+		processScenarioLinkImpl.resetOriginalValues();
+
+		return processScenarioLinkImpl;
+	}
+
+	@Override
+	public void readExternal(ObjectInput objectInput) throws IOException {
+		psl_id = objectInput.readLong();
+
+		process_id = objectInput.readLong();
+
+		scenario_id = objectInput.readLong();
+
+		order = objectInput.readInt();
+
+		pause = objectInput.readInt();
+	}
+
+	@Override
+	public void writeExternal(ObjectOutput objectOutput)
+		throws IOException {
+		objectOutput.writeLong(psl_id);
+
+		objectOutput.writeLong(process_id);
+
+		objectOutput.writeLong(scenario_id);
+
+		objectOutput.writeInt(order);
+
+		objectOutput.writeInt(pause);
+	}
+
+	public long psl_id;
+	public long process_id;
+	public long scenario_id;
+	public int order;
+	public int pause;
 }

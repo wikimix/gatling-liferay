@@ -15,7 +15,7 @@
  */
 package io.gatling.liferay.model.impl;
 
-import com.liferay.portal.kernel.exception.SystemException;
+import aQute.bnd.annotation.ProviderType;
 
 import io.gatling.liferay.model.Simulation;
 import io.gatling.liferay.service.SimulationLocalServiceUtil;
@@ -29,22 +29,24 @@ import io.gatling.liferay.service.SimulationLocalServiceUtil;
  *
  * @author Brian Wing Shun Chan
  * @see SimulationImpl
- * @see io.gatling.liferay.model.Simulation
+ * @see Simulation
  * @generated
  */
+@ProviderType
 public abstract class SimulationBaseImpl extends SimulationModelImpl
-    implements Simulation {
-    /*
-     * NOTE FOR DEVELOPERS:
-     *
-     * Never modify or reference this class directly. All methods that expect a simulation model instance should use the {@link Simulation} interface instead.
-     */
-    @Override
-    public void persist() throws SystemException {
-        if (this.isNew()) {
-            SimulationLocalServiceUtil.addSimulation(this);
-        } else {
-            SimulationLocalServiceUtil.updateSimulation(this);
-        }
-    }
+	implements Simulation {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this class directly. All methods that expect a simulation model instance should use the {@link Simulation} interface instead.
+	 */
+	@Override
+	public void persist() {
+		if (this.isNew()) {
+			SimulationLocalServiceUtil.addSimulation(this);
+		}
+		else {
+			SimulationLocalServiceUtil.updateSimulation(this);
+		}
+	}
 }

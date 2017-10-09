@@ -15,16 +15,19 @@
  */
 package io.gatling.liferay.model.impl;
 
+import aQute.bnd.annotation.ProviderType;
+
 import com.liferay.portal.kernel.model.CacheModel;
+import com.liferay.portal.kernel.util.HashUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
+
+import io.gatling.liferay.model.UrlSiteMap;
 
 import java.io.Externalizable;
 import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
-
-import io.gatling.liferay.model.UrlSiteMap;
 
 /**
  * The cache model class for representing UrlSiteMap in entity cache.
@@ -33,102 +36,136 @@ import io.gatling.liferay.model.UrlSiteMap;
  * @see UrlSiteMap
  * @generated
  */
+@ProviderType
 public class UrlSiteMapCacheModel implements CacheModel<UrlSiteMap>,
-    Externalizable {
-    public long urlSiteMapId;
-    public long siteMapId;
-    public String group;
-    public String friendlyUrl;
-    public String url;
-    public int weight;
+	Externalizable {
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
 
-    @Override
-    public String toString() {
-        StringBundler sb = new StringBundler(13);
+		if (!(obj instanceof UrlSiteMapCacheModel)) {
+			return false;
+		}
 
-        sb.append("{urlSiteMapId=");
-        sb.append(urlSiteMapId);
-        sb.append(", siteMapId=");
-        sb.append(siteMapId);
-        sb.append(", group=");
-        sb.append(group);
-        sb.append(", friendlyUrl=");
-        sb.append(friendlyUrl);
-        sb.append(", url=");
-        sb.append(url);
-        sb.append(", weight=");
-        sb.append(weight);
-        sb.append("}");
+		UrlSiteMapCacheModel urlSiteMapCacheModel = (UrlSiteMapCacheModel)obj;
 
-        return sb.toString();
-    }
+		if (urlSiteMapId == urlSiteMapCacheModel.urlSiteMapId) {
+			return true;
+		}
 
-    @Override
-    public UrlSiteMap toEntityModel() {
-        UrlSiteMapImpl urlSiteMapImpl = new UrlSiteMapImpl();
+		return false;
+	}
 
-        urlSiteMapImpl.setUrlSiteMapId(urlSiteMapId);
-        urlSiteMapImpl.setSiteMapId(siteMapId);
+	@Override
+	public int hashCode() {
+		return HashUtil.hash(0, urlSiteMapId);
+	}
 
-        if (group == null) {
-            urlSiteMapImpl.setGroup(StringPool.BLANK);
-        } else {
-            urlSiteMapImpl.setGroup(group);
-        }
+	@Override
+	public String toString() {
+		StringBundler sb = new StringBundler(13);
 
-        if (friendlyUrl == null) {
-            urlSiteMapImpl.setFriendlyUrl(StringPool.BLANK);
-        } else {
-            urlSiteMapImpl.setFriendlyUrl(friendlyUrl);
-        }
+		sb.append("{urlSiteMapId=");
+		sb.append(urlSiteMapId);
+		sb.append(", siteMapId=");
+		sb.append(siteMapId);
+		sb.append(", group=");
+		sb.append(group);
+		sb.append(", friendlyUrl=");
+		sb.append(friendlyUrl);
+		sb.append(", url=");
+		sb.append(url);
+		sb.append(", weight=");
+		sb.append(weight);
+		sb.append("}");
 
-        if (url == null) {
-            urlSiteMapImpl.setUrl(StringPool.BLANK);
-        } else {
-            urlSiteMapImpl.setUrl(url);
-        }
+		return sb.toString();
+	}
 
-        urlSiteMapImpl.setWeight(weight);
+	@Override
+	public UrlSiteMap toEntityModel() {
+		UrlSiteMapImpl urlSiteMapImpl = new UrlSiteMapImpl();
 
-        urlSiteMapImpl.resetOriginalValues();
+		urlSiteMapImpl.setUrlSiteMapId(urlSiteMapId);
+		urlSiteMapImpl.setSiteMapId(siteMapId);
 
-        return urlSiteMapImpl;
-    }
+		if (group == null) {
+			urlSiteMapImpl.setGroup(StringPool.BLANK);
+		}
+		else {
+			urlSiteMapImpl.setGroup(group);
+		}
 
-    @Override
-    public void readExternal(ObjectInput objectInput) throws IOException {
-        urlSiteMapId = objectInput.readLong();
-        siteMapId = objectInput.readLong();
-        group = objectInput.readUTF();
-        friendlyUrl = objectInput.readUTF();
-        url = objectInput.readUTF();
-        weight = objectInput.readInt();
-    }
+		if (friendlyUrl == null) {
+			urlSiteMapImpl.setFriendlyUrl(StringPool.BLANK);
+		}
+		else {
+			urlSiteMapImpl.setFriendlyUrl(friendlyUrl);
+		}
 
-    @Override
-    public void writeExternal(ObjectOutput objectOutput)
-        throws IOException {
-        objectOutput.writeLong(urlSiteMapId);
-        objectOutput.writeLong(siteMapId);
+		if (url == null) {
+			urlSiteMapImpl.setUrl(StringPool.BLANK);
+		}
+		else {
+			urlSiteMapImpl.setUrl(url);
+		}
 
-        if (group == null) {
-            objectOutput.writeUTF(StringPool.BLANK);
-        } else {
-            objectOutput.writeUTF(group);
-        }
+		urlSiteMapImpl.setWeight(weight);
 
-        if (friendlyUrl == null) {
-            objectOutput.writeUTF(StringPool.BLANK);
-        } else {
-            objectOutput.writeUTF(friendlyUrl);
-        }
+		urlSiteMapImpl.resetOriginalValues();
 
-        if (url == null) {
-            objectOutput.writeUTF(StringPool.BLANK);
-        } else {
-            objectOutput.writeUTF(url);
-        }
+		return urlSiteMapImpl;
+	}
 
-        objectOutput.writeInt(weight);
-    }
+	@Override
+	public void readExternal(ObjectInput objectInput) throws IOException {
+		urlSiteMapId = objectInput.readLong();
+
+		siteMapId = objectInput.readLong();
+		group = objectInput.readUTF();
+		friendlyUrl = objectInput.readUTF();
+		url = objectInput.readUTF();
+
+		weight = objectInput.readInt();
+	}
+
+	@Override
+	public void writeExternal(ObjectOutput objectOutput)
+		throws IOException {
+		objectOutput.writeLong(urlSiteMapId);
+
+		objectOutput.writeLong(siteMapId);
+
+		if (group == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(group);
+		}
+
+		if (friendlyUrl == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(friendlyUrl);
+		}
+
+		if (url == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(url);
+		}
+
+		objectOutput.writeInt(weight);
+	}
+
+	public long urlSiteMapId;
+	public long siteMapId;
+	public String group;
+	public String friendlyUrl;
+	public String url;
+	public int weight;
 }

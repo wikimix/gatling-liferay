@@ -15,7 +15,7 @@
  */
 package io.gatling.liferay.model.impl;
 
-import com.liferay.portal.kernel.exception.SystemException;
+import aQute.bnd.annotation.ProviderType;
 
 import io.gatling.liferay.model.Scenario;
 import io.gatling.liferay.service.ScenarioLocalServiceUtil;
@@ -29,22 +29,24 @@ import io.gatling.liferay.service.ScenarioLocalServiceUtil;
  *
  * @author Brian Wing Shun Chan
  * @see ScenarioImpl
- * @see io.gatling.liferay.model.Scenario
+ * @see Scenario
  * @generated
  */
+@ProviderType
 public abstract class ScenarioBaseImpl extends ScenarioModelImpl
-    implements Scenario {
-    /*
-     * NOTE FOR DEVELOPERS:
-     *
-     * Never modify or reference this class directly. All methods that expect a scenario model instance should use the {@link Scenario} interface instead.
-     */
-    @Override
-    public void persist() throws SystemException {
-        if (this.isNew()) {
-            ScenarioLocalServiceUtil.addScenario(this);
-        } else {
-            ScenarioLocalServiceUtil.updateScenario(this);
-        }
-    }
+	implements Scenario {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this class directly. All methods that expect a scenario model instance should use the {@link Scenario} interface instead.
+	 */
+	@Override
+	public void persist() {
+		if (this.isNew()) {
+			ScenarioLocalServiceUtil.addScenario(this);
+		}
+		else {
+			ScenarioLocalServiceUtil.updateScenario(this);
+		}
+	}
 }

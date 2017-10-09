@@ -15,16 +15,19 @@
  */
 package io.gatling.liferay.model.impl;
 
+import aQute.bnd.annotation.ProviderType;
+
 import com.liferay.portal.kernel.model.CacheModel;
+import com.liferay.portal.kernel.util.HashUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
+
+import io.gatling.liferay.model.Login;
 
 import java.io.Externalizable;
 import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
-
-import io.gatling.liferay.model.Login;
 
 /**
  * The cache model class for representing Login in entity cache.
@@ -33,71 +36,100 @@ import io.gatling.liferay.model.Login;
  * @see Login
  * @generated
  */
+@ProviderType
 public class LoginCacheModel implements CacheModel<Login>, Externalizable {
-    public long userId;
-    public String name;
-    public String data;
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
 
-    @Override
-    public String toString() {
-        StringBundler sb = new StringBundler(7);
+		if (!(obj instanceof LoginCacheModel)) {
+			return false;
+		}
 
-        sb.append("{userId=");
-        sb.append(userId);
-        sb.append(", name=");
-        sb.append(name);
-        sb.append(", data=");
-        sb.append(data);
-        sb.append("}");
+		LoginCacheModel loginCacheModel = (LoginCacheModel)obj;
 
-        return sb.toString();
-    }
+		if (userId == loginCacheModel.userId) {
+			return true;
+		}
 
-    @Override
-    public Login toEntityModel() {
-        LoginImpl loginImpl = new LoginImpl();
+		return false;
+	}
 
-        loginImpl.setUserId(userId);
+	@Override
+	public int hashCode() {
+		return HashUtil.hash(0, userId);
+	}
 
-        if (name == null) {
-            loginImpl.setName(StringPool.BLANK);
-        } else {
-            loginImpl.setName(name);
-        }
+	@Override
+	public String toString() {
+		StringBundler sb = new StringBundler(7);
 
-        if (data == null) {
-            loginImpl.setData(StringPool.BLANK);
-        } else {
-            loginImpl.setData(data);
-        }
+		sb.append("{userId=");
+		sb.append(userId);
+		sb.append(", name=");
+		sb.append(name);
+		sb.append(", data=");
+		sb.append(data);
+		sb.append("}");
 
-        loginImpl.resetOriginalValues();
+		return sb.toString();
+	}
 
-        return loginImpl;
-    }
+	@Override
+	public Login toEntityModel() {
+		LoginImpl loginImpl = new LoginImpl();
 
-    @Override
-    public void readExternal(ObjectInput objectInput) throws IOException {
-        userId = objectInput.readLong();
-        name = objectInput.readUTF();
-        data = objectInput.readUTF();
-    }
+		loginImpl.setUserId(userId);
 
-    @Override
-    public void writeExternal(ObjectOutput objectOutput)
-        throws IOException {
-        objectOutput.writeLong(userId);
+		if (name == null) {
+			loginImpl.setName(StringPool.BLANK);
+		}
+		else {
+			loginImpl.setName(name);
+		}
 
-        if (name == null) {
-            objectOutput.writeUTF(StringPool.BLANK);
-        } else {
-            objectOutput.writeUTF(name);
-        }
+		if (data == null) {
+			loginImpl.setData(StringPool.BLANK);
+		}
+		else {
+			loginImpl.setData(data);
+		}
 
-        if (data == null) {
-            objectOutput.writeUTF(StringPool.BLANK);
-        } else {
-            objectOutput.writeUTF(data);
-        }
-    }
+		loginImpl.resetOriginalValues();
+
+		return loginImpl;
+	}
+
+	@Override
+	public void readExternal(ObjectInput objectInput) throws IOException {
+		userId = objectInput.readLong();
+		name = objectInput.readUTF();
+		data = objectInput.readUTF();
+	}
+
+	@Override
+	public void writeExternal(ObjectOutput objectOutput)
+		throws IOException {
+		objectOutput.writeLong(userId);
+
+		if (name == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(name);
+		}
+
+		if (data == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(data);
+		}
+	}
+
+	public long userId;
+	public String name;
+	public String data;
 }

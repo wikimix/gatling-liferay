@@ -15,7 +15,7 @@
  */
 package io.gatling.liferay.model.impl;
 
-import com.liferay.portal.kernel.exception.SystemException;
+import aQute.bnd.annotation.ProviderType;
 
 import io.gatling.liferay.model.Process;
 import io.gatling.liferay.service.ProcessLocalServiceUtil;
@@ -29,22 +29,24 @@ import io.gatling.liferay.service.ProcessLocalServiceUtil;
  *
  * @author Brian Wing Shun Chan
  * @see ProcessImpl
- * @see io.gatling.liferay.model.Process
+ * @see Process
  * @generated
  */
+@ProviderType
 public abstract class ProcessBaseImpl extends ProcessModelImpl
-    implements Process {
-    /*
-     * NOTE FOR DEVELOPERS:
-     *
-     * Never modify or reference this class directly. All methods that expect a process model instance should use the {@link Process} interface instead.
-     */
-    @Override
-    public void persist() throws SystemException {
-        if (this.isNew()) {
-            ProcessLocalServiceUtil.addProcess(this);
-        } else {
-            ProcessLocalServiceUtil.updateProcess(this);
-        }
-    }
+	implements Process {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this class directly. All methods that expect a process model instance should use the {@link Process} interface instead.
+	 */
+	@Override
+	public void persist() {
+		if (this.isNew()) {
+			ProcessLocalServiceUtil.addProcess(this);
+		}
+		else {
+			ProcessLocalServiceUtil.updateProcess(this);
+		}
+	}
 }

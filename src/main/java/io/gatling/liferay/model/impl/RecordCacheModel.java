@@ -15,16 +15,19 @@
  */
 package io.gatling.liferay.model.impl;
 
+import aQute.bnd.annotation.ProviderType;
+
 import com.liferay.portal.kernel.model.CacheModel;
+import com.liferay.portal.kernel.util.HashUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
+
+import io.gatling.liferay.model.Record;
 
 import java.io.Externalizable;
 import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
-
-import io.gatling.liferay.model.Record;
 
 /**
  * The cache model class for representing Record in entity cache.
@@ -33,87 +36,118 @@ import io.gatling.liferay.model.Record;
  * @see Record
  * @generated
  */
+@ProviderType
 public class RecordCacheModel implements CacheModel<Record>, Externalizable {
-    public long recordId;
-    public String portletId;
-    public String versionPortlet;
-    public String name;
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
 
-    @Override
-    public String toString() {
-        StringBundler sb = new StringBundler(9);
+		if (!(obj instanceof RecordCacheModel)) {
+			return false;
+		}
 
-        sb.append("{recordId=");
-        sb.append(recordId);
-        sb.append(", portletId=");
-        sb.append(portletId);
-        sb.append(", versionPortlet=");
-        sb.append(versionPortlet);
-        sb.append(", name=");
-        sb.append(name);
-        sb.append("}");
+		RecordCacheModel recordCacheModel = (RecordCacheModel)obj;
 
-        return sb.toString();
-    }
+		if (recordId == recordCacheModel.recordId) {
+			return true;
+		}
 
-    @Override
-    public Record toEntityModel() {
-        RecordImpl recordImpl = new RecordImpl();
+		return false;
+	}
 
-        recordImpl.setRecordId(recordId);
+	@Override
+	public int hashCode() {
+		return HashUtil.hash(0, recordId);
+	}
 
-        if (portletId == null) {
-            recordImpl.setPortletId(StringPool.BLANK);
-        } else {
-            recordImpl.setPortletId(portletId);
-        }
+	@Override
+	public String toString() {
+		StringBundler sb = new StringBundler(9);
 
-        if (versionPortlet == null) {
-            recordImpl.setVersionPortlet(StringPool.BLANK);
-        } else {
-            recordImpl.setVersionPortlet(versionPortlet);
-        }
+		sb.append("{recordId=");
+		sb.append(recordId);
+		sb.append(", portletId=");
+		sb.append(portletId);
+		sb.append(", versionPortlet=");
+		sb.append(versionPortlet);
+		sb.append(", name=");
+		sb.append(name);
+		sb.append("}");
 
-        if (name == null) {
-            recordImpl.setName(StringPool.BLANK);
-        } else {
-            recordImpl.setName(name);
-        }
+		return sb.toString();
+	}
 
-        recordImpl.resetOriginalValues();
+	@Override
+	public Record toEntityModel() {
+		RecordImpl recordImpl = new RecordImpl();
 
-        return recordImpl;
-    }
+		recordImpl.setRecordId(recordId);
 
-    @Override
-    public void readExternal(ObjectInput objectInput) throws IOException {
-        recordId = objectInput.readLong();
-        portletId = objectInput.readUTF();
-        versionPortlet = objectInput.readUTF();
-        name = objectInput.readUTF();
-    }
+		if (portletId == null) {
+			recordImpl.setPortletId(StringPool.BLANK);
+		}
+		else {
+			recordImpl.setPortletId(portletId);
+		}
 
-    @Override
-    public void writeExternal(ObjectOutput objectOutput)
-        throws IOException {
-        objectOutput.writeLong(recordId);
+		if (versionPortlet == null) {
+			recordImpl.setVersionPortlet(StringPool.BLANK);
+		}
+		else {
+			recordImpl.setVersionPortlet(versionPortlet);
+		}
 
-        if (portletId == null) {
-            objectOutput.writeUTF(StringPool.BLANK);
-        } else {
-            objectOutput.writeUTF(portletId);
-        }
+		if (name == null) {
+			recordImpl.setName(StringPool.BLANK);
+		}
+		else {
+			recordImpl.setName(name);
+		}
 
-        if (versionPortlet == null) {
-            objectOutput.writeUTF(StringPool.BLANK);
-        } else {
-            objectOutput.writeUTF(versionPortlet);
-        }
+		recordImpl.resetOriginalValues();
 
-        if (name == null) {
-            objectOutput.writeUTF(StringPool.BLANK);
-        } else {
-            objectOutput.writeUTF(name);
-        }
-    }
+		return recordImpl;
+	}
+
+	@Override
+	public void readExternal(ObjectInput objectInput) throws IOException {
+		recordId = objectInput.readLong();
+		portletId = objectInput.readUTF();
+		versionPortlet = objectInput.readUTF();
+		name = objectInput.readUTF();
+	}
+
+	@Override
+	public void writeExternal(ObjectOutput objectOutput)
+		throws IOException {
+		objectOutput.writeLong(recordId);
+
+		if (portletId == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(portletId);
+		}
+
+		if (versionPortlet == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(versionPortlet);
+		}
+
+		if (name == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(name);
+		}
+	}
+
+	public long recordId;
+	public String portletId;
+	public String versionPortlet;
+	public String name;
 }

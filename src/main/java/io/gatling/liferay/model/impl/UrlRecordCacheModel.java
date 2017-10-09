@@ -15,16 +15,19 @@
  */
 package io.gatling.liferay.model.impl;
 
+import aQute.bnd.annotation.ProviderType;
+
 import com.liferay.portal.kernel.model.CacheModel;
+import com.liferay.portal.kernel.util.HashUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
+
+import io.gatling.liferay.model.UrlRecord;
 
 import java.io.Externalizable;
 import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
-
-import io.gatling.liferay.model.UrlRecord;
 
 /**
  * The cache model class for representing UrlRecord in entity cache.
@@ -33,92 +36,126 @@ import io.gatling.liferay.model.UrlRecord;
  * @see UrlRecord
  * @generated
  */
+@ProviderType
 public class UrlRecordCacheModel implements CacheModel<UrlRecord>,
-    Externalizable {
-    public long urlRecordId;
-    public long recordId;
-    public String url;
-    public String type;
-    public int order;
-    public int pauseTime;
+	Externalizable {
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
 
-    @Override
-    public String toString() {
-        StringBundler sb = new StringBundler(13);
+		if (!(obj instanceof UrlRecordCacheModel)) {
+			return false;
+		}
 
-        sb.append("{urlRecordId=");
-        sb.append(urlRecordId);
-        sb.append(", recordId=");
-        sb.append(recordId);
-        sb.append(", url=");
-        sb.append(url);
-        sb.append(", type=");
-        sb.append(type);
-        sb.append(", order=");
-        sb.append(order);
-        sb.append(", pauseTime=");
-        sb.append(pauseTime);
-        sb.append("}");
+		UrlRecordCacheModel urlRecordCacheModel = (UrlRecordCacheModel)obj;
 
-        return sb.toString();
-    }
+		if (urlRecordId == urlRecordCacheModel.urlRecordId) {
+			return true;
+		}
 
-    @Override
-    public UrlRecord toEntityModel() {
-        UrlRecordImpl urlRecordImpl = new UrlRecordImpl();
+		return false;
+	}
 
-        urlRecordImpl.setUrlRecordId(urlRecordId);
-        urlRecordImpl.setRecordId(recordId);
+	@Override
+	public int hashCode() {
+		return HashUtil.hash(0, urlRecordId);
+	}
 
-        if (url == null) {
-            urlRecordImpl.setUrl(StringPool.BLANK);
-        } else {
-            urlRecordImpl.setUrl(url);
-        }
+	@Override
+	public String toString() {
+		StringBundler sb = new StringBundler(13);
 
-        if (type == null) {
-            urlRecordImpl.setType(StringPool.BLANK);
-        } else {
-            urlRecordImpl.setType(type);
-        }
+		sb.append("{urlRecordId=");
+		sb.append(urlRecordId);
+		sb.append(", recordId=");
+		sb.append(recordId);
+		sb.append(", url=");
+		sb.append(url);
+		sb.append(", type=");
+		sb.append(type);
+		sb.append(", order=");
+		sb.append(order);
+		sb.append(", pauseTime=");
+		sb.append(pauseTime);
+		sb.append("}");
 
-        urlRecordImpl.setOrder(order);
-        urlRecordImpl.setPauseTime(pauseTime);
+		return sb.toString();
+	}
 
-        urlRecordImpl.resetOriginalValues();
+	@Override
+	public UrlRecord toEntityModel() {
+		UrlRecordImpl urlRecordImpl = new UrlRecordImpl();
 
-        return urlRecordImpl;
-    }
+		urlRecordImpl.setUrlRecordId(urlRecordId);
+		urlRecordImpl.setRecordId(recordId);
 
-    @Override
-    public void readExternal(ObjectInput objectInput) throws IOException {
-        urlRecordId = objectInput.readLong();
-        recordId = objectInput.readLong();
-        url = objectInput.readUTF();
-        type = objectInput.readUTF();
-        order = objectInput.readInt();
-        pauseTime = objectInput.readInt();
-    }
+		if (url == null) {
+			urlRecordImpl.setUrl(StringPool.BLANK);
+		}
+		else {
+			urlRecordImpl.setUrl(url);
+		}
 
-    @Override
-    public void writeExternal(ObjectOutput objectOutput)
-        throws IOException {
-        objectOutput.writeLong(urlRecordId);
-        objectOutput.writeLong(recordId);
+		if (type == null) {
+			urlRecordImpl.setType(StringPool.BLANK);
+		}
+		else {
+			urlRecordImpl.setType(type);
+		}
 
-        if (url == null) {
-            objectOutput.writeUTF(StringPool.BLANK);
-        } else {
-            objectOutput.writeUTF(url);
-        }
+		urlRecordImpl.setOrder(order);
+		urlRecordImpl.setPauseTime(pauseTime);
 
-        if (type == null) {
-            objectOutput.writeUTF(StringPool.BLANK);
-        } else {
-            objectOutput.writeUTF(type);
-        }
+		urlRecordImpl.resetOriginalValues();
 
-        objectOutput.writeInt(order);
-        objectOutput.writeInt(pauseTime);
-    }
+		return urlRecordImpl;
+	}
+
+	@Override
+	public void readExternal(ObjectInput objectInput) throws IOException {
+		urlRecordId = objectInput.readLong();
+
+		recordId = objectInput.readLong();
+		url = objectInput.readUTF();
+		type = objectInput.readUTF();
+
+		order = objectInput.readInt();
+
+		pauseTime = objectInput.readInt();
+	}
+
+	@Override
+	public void writeExternal(ObjectOutput objectOutput)
+		throws IOException {
+		objectOutput.writeLong(urlRecordId);
+
+		objectOutput.writeLong(recordId);
+
+		if (url == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(url);
+		}
+
+		if (type == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(type);
+		}
+
+		objectOutput.writeInt(order);
+
+		objectOutput.writeInt(pauseTime);
+	}
+
+	public long urlRecordId;
+	public long recordId;
+	public String url;
+	public String type;
+	public int order;
+	public int pauseTime;
 }

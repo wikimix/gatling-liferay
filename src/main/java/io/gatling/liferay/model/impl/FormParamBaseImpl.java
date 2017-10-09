@@ -15,7 +15,7 @@
  */
 package io.gatling.liferay.model.impl;
 
-import com.liferay.portal.kernel.exception.SystemException;
+import aQute.bnd.annotation.ProviderType;
 
 import io.gatling.liferay.model.FormParam;
 import io.gatling.liferay.service.FormParamLocalServiceUtil;
@@ -29,22 +29,24 @@ import io.gatling.liferay.service.FormParamLocalServiceUtil;
  *
  * @author Brian Wing Shun Chan
  * @see FormParamImpl
- * @see io.gatling.liferay.model.FormParam
+ * @see FormParam
  * @generated
  */
+@ProviderType
 public abstract class FormParamBaseImpl extends FormParamModelImpl
-    implements FormParam {
-    /*
-     * NOTE FOR DEVELOPERS:
-     *
-     * Never modify or reference this class directly. All methods that expect a form param model instance should use the {@link FormParam} interface instead.
-     */
-    @Override
-    public void persist() throws SystemException {
-        if (this.isNew()) {
-            FormParamLocalServiceUtil.addFormParam(this);
-        } else {
-            FormParamLocalServiceUtil.updateFormParam(this);
-        }
-    }
+	implements FormParam {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this class directly. All methods that expect a form param model instance should use the {@link FormParam} interface instead.
+	 */
+	@Override
+	public void persist() {
+		if (this.isNew()) {
+			FormParamLocalServiceUtil.addFormParam(this);
+		}
+		else {
+			FormParamLocalServiceUtil.updateFormParam(this);
+		}
+	}
 }

@@ -15,7 +15,7 @@
  */
 package io.gatling.liferay.model.impl;
 
-import com.liferay.portal.kernel.exception.SystemException;
+import aQute.bnd.annotation.ProviderType;
 
 import io.gatling.liferay.model.ProcessScenarioLink;
 import io.gatling.liferay.service.ProcessScenarioLinkLocalServiceUtil;
@@ -29,22 +29,24 @@ import io.gatling.liferay.service.ProcessScenarioLinkLocalServiceUtil;
  *
  * @author Brian Wing Shun Chan
  * @see ProcessScenarioLinkImpl
- * @see io.gatling.liferay.model.ProcessScenarioLink
+ * @see ProcessScenarioLink
  * @generated
  */
+@ProviderType
 public abstract class ProcessScenarioLinkBaseImpl
-    extends ProcessScenarioLinkModelImpl implements ProcessScenarioLink {
-    /*
-     * NOTE FOR DEVELOPERS:
-     *
-     * Never modify or reference this class directly. All methods that expect a process scenario link model instance should use the {@link ProcessScenarioLink} interface instead.
-     */
-    @Override
-    public void persist() throws SystemException {
-        if (this.isNew()) {
-            ProcessScenarioLinkLocalServiceUtil.addProcessScenarioLink(this);
-        } else {
-            ProcessScenarioLinkLocalServiceUtil.updateProcessScenarioLink(this);
-        }
-    }
+	extends ProcessScenarioLinkModelImpl implements ProcessScenarioLink {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this class directly. All methods that expect a process scenario link model instance should use the {@link ProcessScenarioLink} interface instead.
+	 */
+	@Override
+	public void persist() {
+		if (this.isNew()) {
+			ProcessScenarioLinkLocalServiceUtil.addProcessScenarioLink(this);
+		}
+		else {
+			ProcessScenarioLinkLocalServiceUtil.updateProcessScenarioLink(this);
+		}
+	}
 }

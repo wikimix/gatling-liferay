@@ -15,7 +15,7 @@
  */
 package io.gatling.liferay.model.impl;
 
-import com.liferay.portal.kernel.exception.SystemException;
+import aQute.bnd.annotation.ProviderType;
 
 import io.gatling.liferay.model.SiteMap;
 import io.gatling.liferay.service.SiteMapLocalServiceUtil;
@@ -29,22 +29,24 @@ import io.gatling.liferay.service.SiteMapLocalServiceUtil;
  *
  * @author Brian Wing Shun Chan
  * @see SiteMapImpl
- * @see io.gatling.liferay.model.SiteMap
+ * @see SiteMap
  * @generated
  */
+@ProviderType
 public abstract class SiteMapBaseImpl extends SiteMapModelImpl
-    implements SiteMap {
-    /*
-     * NOTE FOR DEVELOPERS:
-     *
-     * Never modify or reference this class directly. All methods that expect a site map model instance should use the {@link SiteMap} interface instead.
-     */
-    @Override
-    public void persist() throws SystemException {
-        if (this.isNew()) {
-            SiteMapLocalServiceUtil.addSiteMap(this);
-        } else {
-            SiteMapLocalServiceUtil.updateSiteMap(this);
-        }
-    }
+	implements SiteMap {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this class directly. All methods that expect a site map model instance should use the {@link SiteMap} interface instead.
+	 */
+	@Override
+	public void persist() {
+		if (this.isNew()) {
+			SiteMapLocalServiceUtil.addSiteMap(this);
+		}
+		else {
+			SiteMapLocalServiceUtil.updateSiteMap(this);
+		}
+	}
 }

@@ -15,7 +15,7 @@
  */
 package io.gatling.liferay.model.impl;
 
-import com.liferay.portal.kernel.exception.SystemException;
+import aQute.bnd.annotation.ProviderType;
 
 import io.gatling.liferay.model.Login;
 import io.gatling.liferay.service.LoginLocalServiceUtil;
@@ -29,21 +29,23 @@ import io.gatling.liferay.service.LoginLocalServiceUtil;
  *
  * @author Brian Wing Shun Chan
  * @see LoginImpl
- * @see io.gatling.liferay.model.Login
+ * @see Login
  * @generated
  */
+@ProviderType
 public abstract class LoginBaseImpl extends LoginModelImpl implements Login {
-    /*
-     * NOTE FOR DEVELOPERS:
-     *
-     * Never modify or reference this class directly. All methods that expect a login model instance should use the {@link Login} interface instead.
-     */
-    @Override
-    public void persist() throws SystemException {
-        if (this.isNew()) {
-            LoginLocalServiceUtil.addLogin(this);
-        } else {
-            LoginLocalServiceUtil.updateLogin(this);
-        }
-    }
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this class directly. All methods that expect a login model instance should use the {@link Login} interface instead.
+	 */
+	@Override
+	public void persist() {
+		if (this.isNew()) {
+			LoginLocalServiceUtil.addLogin(this);
+		}
+		else {
+			LoginLocalServiceUtil.updateLogin(this);
+		}
+	}
 }

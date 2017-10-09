@@ -15,16 +15,19 @@
  */
 package io.gatling.liferay.model.impl;
 
+import aQute.bnd.annotation.ProviderType;
+
 import com.liferay.portal.kernel.model.CacheModel;
+import com.liferay.portal.kernel.util.HashUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
+
+import io.gatling.liferay.model.Simulation;
 
 import java.io.Externalizable;
 import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
-
-import io.gatling.liferay.model.Simulation;
 
 /**
  * The cache model class for representing Simulation in entity cache.
@@ -33,80 +36,110 @@ import io.gatling.liferay.model.Simulation;
  * @see Simulation
  * @generated
  */
+@ProviderType
 public class SimulationCacheModel implements CacheModel<Simulation>,
-    Externalizable {
-    public long simulation_id;
-    public String name;
-    public String feederContent;
-    public boolean isFeederAFile;
+	Externalizable {
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
 
-    @Override
-    public String toString() {
-        StringBundler sb = new StringBundler(9);
+		if (!(obj instanceof SimulationCacheModel)) {
+			return false;
+		}
 
-        sb.append("{simulation_id=");
-        sb.append(simulation_id);
-        sb.append(", name=");
-        sb.append(name);
-        sb.append(", feederContent=");
-        sb.append(feederContent);
-        sb.append(", isFeederAFile=");
-        sb.append(isFeederAFile);
-        sb.append("}");
+		SimulationCacheModel simulationCacheModel = (SimulationCacheModel)obj;
 
-        return sb.toString();
-    }
+		if (simulation_id == simulationCacheModel.simulation_id) {
+			return true;
+		}
 
-    @Override
-    public Simulation toEntityModel() {
-        SimulationImpl simulationImpl = new SimulationImpl();
+		return false;
+	}
 
-        simulationImpl.setSimulation_id(simulation_id);
+	@Override
+	public int hashCode() {
+		return HashUtil.hash(0, simulation_id);
+	}
 
-        if (name == null) {
-            simulationImpl.setName(StringPool.BLANK);
-        } else {
-            simulationImpl.setName(name);
-        }
+	@Override
+	public String toString() {
+		StringBundler sb = new StringBundler(9);
 
-        if (feederContent == null) {
-            simulationImpl.setFeederContent(StringPool.BLANK);
-        } else {
-            simulationImpl.setFeederContent(feederContent);
-        }
+		sb.append("{simulation_id=");
+		sb.append(simulation_id);
+		sb.append(", name=");
+		sb.append(name);
+		sb.append(", feederContent=");
+		sb.append(feederContent);
+		sb.append(", isFeederAFile=");
+		sb.append(isFeederAFile);
+		sb.append("}");
 
-        simulationImpl.setIsFeederAFile(isFeederAFile);
+		return sb.toString();
+	}
 
-        simulationImpl.resetOriginalValues();
+	@Override
+	public Simulation toEntityModel() {
+		SimulationImpl simulationImpl = new SimulationImpl();
 
-        return simulationImpl;
-    }
+		simulationImpl.setSimulation_id(simulation_id);
 
-    @Override
-    public void readExternal(ObjectInput objectInput) throws IOException {
-        simulation_id = objectInput.readLong();
-        name = objectInput.readUTF();
-        feederContent = objectInput.readUTF();
-        isFeederAFile = objectInput.readBoolean();
-    }
+		if (name == null) {
+			simulationImpl.setName(StringPool.BLANK);
+		}
+		else {
+			simulationImpl.setName(name);
+		}
 
-    @Override
-    public void writeExternal(ObjectOutput objectOutput)
-        throws IOException {
-        objectOutput.writeLong(simulation_id);
+		if (feederContent == null) {
+			simulationImpl.setFeederContent(StringPool.BLANK);
+		}
+		else {
+			simulationImpl.setFeederContent(feederContent);
+		}
 
-        if (name == null) {
-            objectOutput.writeUTF(StringPool.BLANK);
-        } else {
-            objectOutput.writeUTF(name);
-        }
+		simulationImpl.setIsFeederAFile(isFeederAFile);
 
-        if (feederContent == null) {
-            objectOutput.writeUTF(StringPool.BLANK);
-        } else {
-            objectOutput.writeUTF(feederContent);
-        }
+		simulationImpl.resetOriginalValues();
 
-        objectOutput.writeBoolean(isFeederAFile);
-    }
+		return simulationImpl;
+	}
+
+	@Override
+	public void readExternal(ObjectInput objectInput) throws IOException {
+		simulation_id = objectInput.readLong();
+		name = objectInput.readUTF();
+		feederContent = objectInput.readUTF();
+
+		isFeederAFile = objectInput.readBoolean();
+	}
+
+	@Override
+	public void writeExternal(ObjectOutput objectOutput)
+		throws IOException {
+		objectOutput.writeLong(simulation_id);
+
+		if (name == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(name);
+		}
+
+		if (feederContent == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(feederContent);
+		}
+
+		objectOutput.writeBoolean(isFeederAFile);
+	}
+
+	public long simulation_id;
+	public String name;
+	public String feederContent;
+	public boolean isFeederAFile;
 }

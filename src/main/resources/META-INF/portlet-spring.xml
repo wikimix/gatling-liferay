@@ -1,4 +1,5 @@
 <?xml version="1.0"?>
+
 <!--
 
     Copyright 2011-2016 GatlingCorp (http://gatling.io)
@@ -16,25 +17,25 @@
     limitations under the License.
 
 -->
-<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" default-destroy-method="destroy" default-init-method="afterPropertiesSet" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
-	<bean id="io.gatling.liferay.service.FormParamLocalService" class="io.gatling.liferay.service.impl.FormParamLocalServiceImpl" />
-	<bean id="io.gatling.liferay.service.persistence.FormParamPersistence" class="io.gatling.liferay.service.persistence.FormParamPersistenceImpl" parent="basePersistence" />
-	<bean id="io.gatling.liferay.service.LoginLocalService" class="io.gatling.liferay.service.impl.LoginLocalServiceImpl" />
-	<bean id="io.gatling.liferay.service.persistence.LoginPersistence" class="io.gatling.liferay.service.persistence.LoginPersistenceImpl" parent="basePersistence" />
-	<bean id="io.gatling.liferay.service.ProcessLocalService" class="io.gatling.liferay.service.impl.ProcessLocalServiceImpl" />
-	<bean id="io.gatling.liferay.service.persistence.ProcessPersistence" class="io.gatling.liferay.service.persistence.ProcessPersistenceImpl" parent="basePersistence" />
-	<bean id="io.gatling.liferay.service.ProcessScenarioLinkLocalService" class="io.gatling.liferay.service.impl.ProcessScenarioLinkLocalServiceImpl" />
-	<bean id="io.gatling.liferay.service.persistence.ProcessScenarioLinkPersistence" class="io.gatling.liferay.service.persistence.ProcessScenarioLinkPersistenceImpl" parent="basePersistence" />
-	<bean id="io.gatling.liferay.service.RecordLocalService" class="io.gatling.liferay.service.impl.RecordLocalServiceImpl" />
-	<bean id="io.gatling.liferay.service.persistence.RecordPersistence" class="io.gatling.liferay.service.persistence.RecordPersistenceImpl" parent="basePersistence" />
-	<bean id="io.gatling.liferay.service.ScenarioLocalService" class="io.gatling.liferay.service.impl.ScenarioLocalServiceImpl" />
-	<bean id="io.gatling.liferay.service.persistence.ScenarioPersistence" class="io.gatling.liferay.service.persistence.ScenarioPersistenceImpl" parent="basePersistence" />
-	<bean id="io.gatling.liferay.service.SimulationLocalService" class="io.gatling.liferay.service.impl.SimulationLocalServiceImpl" />
-	<bean id="io.gatling.liferay.service.persistence.SimulationPersistence" class="io.gatling.liferay.service.persistence.SimulationPersistenceImpl" parent="basePersistence" />
-	<bean id="io.gatling.liferay.service.SiteMapLocalService" class="io.gatling.liferay.service.impl.SiteMapLocalServiceImpl" />
-	<bean id="io.gatling.liferay.service.persistence.SiteMapPersistence" class="io.gatling.liferay.service.persistence.SiteMapPersistenceImpl" parent="basePersistence" />
-	<bean id="io.gatling.liferay.service.UrlRecordLocalService" class="io.gatling.liferay.service.impl.UrlRecordLocalServiceImpl" />
-	<bean id="io.gatling.liferay.service.persistence.UrlRecordPersistence" class="io.gatling.liferay.service.persistence.UrlRecordPersistenceImpl" parent="basePersistence" />
-	<bean id="io.gatling.liferay.service.UrlSiteMapLocalService" class="io.gatling.liferay.service.impl.UrlSiteMapLocalServiceImpl" />
-	<bean id="io.gatling.liferay.service.persistence.UrlSiteMapPersistence" class="io.gatling.liferay.service.persistence.UrlSiteMapPersistenceImpl" parent="basePersistence" />
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" default-destroy-method="destroy" default-init-method="afterPropertiesSet" xsi:schemaLocation=" http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<bean class="io.gatling.liferay.service.impl.FormParamLocalServiceImpl" id="io.gatling.liferay.service.FormParamLocalService" />
+	<bean class="io.gatling.liferay.service.persistence.impl.FormParamPersistenceImpl" id="io.gatling.liferay.service.persistence.FormParamPersistence" parent="basePersistence" />
+	<bean class="io.gatling.liferay.service.impl.LoginLocalServiceImpl" id="io.gatling.liferay.service.LoginLocalService" />
+	<bean class="io.gatling.liferay.service.persistence.impl.LoginPersistenceImpl" id="io.gatling.liferay.service.persistence.LoginPersistence" parent="basePersistence" />
+	<bean class="io.gatling.liferay.service.impl.ProcessLocalServiceImpl" id="io.gatling.liferay.service.ProcessLocalService" />
+	<bean class="io.gatling.liferay.service.persistence.impl.ProcessPersistenceImpl" id="io.gatling.liferay.service.persistence.ProcessPersistence" parent="basePersistence" />
+	<bean class="io.gatling.liferay.service.impl.ProcessScenarioLinkLocalServiceImpl" id="io.gatling.liferay.service.ProcessScenarioLinkLocalService" />
+	<bean class="io.gatling.liferay.service.persistence.impl.ProcessScenarioLinkPersistenceImpl" id="io.gatling.liferay.service.persistence.ProcessScenarioLinkPersistence" parent="basePersistence" />
+	<bean class="io.gatling.liferay.service.impl.RecordLocalServiceImpl" id="io.gatling.liferay.service.RecordLocalService" />
+	<bean class="io.gatling.liferay.service.persistence.impl.RecordPersistenceImpl" id="io.gatling.liferay.service.persistence.RecordPersistence" parent="basePersistence" />
+	<bean class="io.gatling.liferay.service.impl.ScenarioLocalServiceImpl" id="io.gatling.liferay.service.ScenarioLocalService" />
+	<bean class="io.gatling.liferay.service.persistence.impl.ScenarioPersistenceImpl" id="io.gatling.liferay.service.persistence.ScenarioPersistence" parent="basePersistence" />
+	<bean class="io.gatling.liferay.service.impl.SimulationLocalServiceImpl" id="io.gatling.liferay.service.SimulationLocalService" />
+	<bean class="io.gatling.liferay.service.persistence.impl.SimulationPersistenceImpl" id="io.gatling.liferay.service.persistence.SimulationPersistence" parent="basePersistence" />
+	<bean class="io.gatling.liferay.service.impl.SiteMapLocalServiceImpl" id="io.gatling.liferay.service.SiteMapLocalService" />
+	<bean class="io.gatling.liferay.service.persistence.impl.SiteMapPersistenceImpl" id="io.gatling.liferay.service.persistence.SiteMapPersistence" parent="basePersistence" />
+	<bean class="io.gatling.liferay.service.impl.UrlRecordLocalServiceImpl" id="io.gatling.liferay.service.UrlRecordLocalService" />
+	<bean class="io.gatling.liferay.service.persistence.impl.UrlRecordPersistenceImpl" id="io.gatling.liferay.service.persistence.UrlRecordPersistence" parent="basePersistence" />
+	<bean class="io.gatling.liferay.service.impl.UrlSiteMapLocalServiceImpl" id="io.gatling.liferay.service.UrlSiteMapLocalService" />
+	<bean class="io.gatling.liferay.service.persistence.impl.UrlSiteMapPersistenceImpl" id="io.gatling.liferay.service.persistence.UrlSiteMapPersistence" parent="basePersistence" />
 </beans>
