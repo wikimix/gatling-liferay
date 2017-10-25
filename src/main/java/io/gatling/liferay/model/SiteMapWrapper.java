@@ -168,25 +168,25 @@ public class SiteMapWrapper implements SiteMap, ModelWrapper<SiteMap> {
     }
 
     @Override
-    public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {
+    public com.liferay.expando.kernel.model.ExpandoBridge getExpandoBridge() {
         return _siteMap.getExpandoBridge();
     }
 
     @Override
     public void setExpandoBridgeAttributes(
-        com.liferay.portal.model.BaseModel<?> baseModel) {
+        com.liferay.portal.kernel.model.BaseModel<?> baseModel) {
         _siteMap.setExpandoBridgeAttributes(baseModel);
     }
 
     @Override
     public void setExpandoBridgeAttributes(
-        com.liferay.portlet.expando.model.ExpandoBridge expandoBridge) {
+        com.liferay.expando.kernel.model.ExpandoBridge expandoBridge) {
         _siteMap.setExpandoBridgeAttributes(expandoBridge);
     }
 
     @Override
     public void setExpandoBridgeAttributes(
-        com.liferay.portal.service.ServiceContext serviceContext) {
+        com.liferay.portal.kernel.service.ServiceContext serviceContext) {
         _siteMap.setExpandoBridgeAttributes(serviceContext);
     }
 
@@ -206,7 +206,7 @@ public class SiteMapWrapper implements SiteMap, ModelWrapper<SiteMap> {
     }
 
     @Override
-    public com.liferay.portal.model.CacheModel<io.gatling.liferay.model.SiteMap> toCacheModel() {
+    public com.liferay.portal.kernel.model.CacheModel<io.gatling.liferay.model.SiteMap> toCacheModel() {
         return _siteMap.toCacheModel();
     }
 
@@ -271,4 +271,16 @@ public class SiteMapWrapper implements SiteMap, ModelWrapper<SiteMap> {
     public void resetOriginalValues() {
         _siteMap.resetOriginalValues();
     }
+
+	@Override
+	public boolean isEntityCacheEnabled() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isFinderCacheEnabled() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

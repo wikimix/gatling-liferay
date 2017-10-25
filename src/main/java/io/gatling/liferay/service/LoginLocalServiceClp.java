@@ -15,6 +15,8 @@
  */
 package io.gatling.liferay.service;
 
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.model.PersistedModel;
 import com.liferay.portal.kernel.service.InvokableLocalService;
 
 /**
@@ -517,7 +519,7 @@ public class LoginLocalServiceClp implements LoginLocalService {
     }
 
     @Override
-    public com.liferay.portal.model.PersistedModel getPersistedModel(
+    public com.liferay.portal.kernel.model.PersistedModel getPersistedModel(
         java.io.Serializable primaryKeyObj)
         throws com.liferay.portal.kernel.exception.PortalException,
             com.liferay.portal.kernel.exception.SystemException {
@@ -546,7 +548,7 @@ public class LoginLocalServiceClp implements LoginLocalService {
             }
         }
 
-        return (com.liferay.portal.model.PersistedModel) ClpSerializer.translateOutput(returnObj);
+        return (com.liferay.portal.kernel.model.PersistedModel) ClpSerializer.translateOutput(returnObj);
     }
 
     @Override
@@ -703,7 +705,7 @@ public class LoginLocalServiceClp implements LoginLocalService {
 
     @Override
     public io.gatling.liferay.model.Login findByProcessId(long processId)
-        throws com.liferay.portal.NoSuchModelException,
+        throws com.liferay.portal.kernel.exception.NoSuchModelException,
             com.liferay.portal.kernel.exception.SystemException,
             io.gatling.liferay.NoSuchProcessException {
         Object returnObj = null;
@@ -714,8 +716,8 @@ public class LoginLocalServiceClp implements LoginLocalService {
         } catch (Throwable t) {
             t = ClpSerializer.translateThrowable(t);
 
-            if (t instanceof com.liferay.portal.NoSuchModelException) {
-                throw (com.liferay.portal.NoSuchModelException) t;
+            if (t instanceof com.liferay.portal.kernel.exception.NoSuchModelException) {
+                throw (com.liferay.portal.kernel.exception.NoSuchModelException) t;
             }
 
             if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
@@ -773,4 +775,10 @@ public class LoginLocalServiceClp implements LoginLocalService {
 
         return (io.gatling.liferay.model.Login) ClpSerializer.translateOutput(returnObj);
     }
+
+	@Override
+	public PersistedModel deletePersistedModel(PersistedModel persistedModel) throws PortalException {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

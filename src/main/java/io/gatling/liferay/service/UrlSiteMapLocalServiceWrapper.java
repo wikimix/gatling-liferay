@@ -16,6 +16,7 @@
 package io.gatling.liferay.service;
 
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.model.PersistedModel;
 import com.liferay.portal.kernel.service.ServiceWrapper;
 
 /**
@@ -210,7 +211,7 @@ public class UrlSiteMapLocalServiceWrapper implements UrlSiteMapLocalService,
     }
 
     @Override
-    public com.liferay.portal.model.PersistedModel getPersistedModel(
+    public com.liferay.portal.kernel.model.PersistedModel getPersistedModel(
         java.io.Serializable primaryKeyObj)
         throws com.liferay.portal.kernel.exception.PortalException,
             com.liferay.portal.kernel.exception.SystemException {
@@ -330,4 +331,10 @@ public class UrlSiteMapLocalServiceWrapper implements UrlSiteMapLocalService,
     public void setWrappedService(UrlSiteMapLocalService urlSiteMapLocalService) {
         _urlSiteMapLocalService = urlSiteMapLocalService;
     }
+
+	@Override
+	public PersistedModel deletePersistedModel(PersistedModel persistedModel) throws PortalException {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

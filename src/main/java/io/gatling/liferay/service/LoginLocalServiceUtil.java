@@ -202,7 +202,7 @@ public class LoginLocalServiceUtil {
         return getService().getLogin(userId);
     }
 
-    public static com.liferay.portal.model.PersistedModel getPersistedModel(
+    public static com.liferay.portal.kernel.model.PersistedModel getPersistedModel(
         java.io.Serializable primaryKeyObj)
         throws com.liferay.portal.kernel.exception.PortalException,
             com.liferay.portal.kernel.exception.SystemException {
@@ -281,7 +281,7 @@ public class LoginLocalServiceUtil {
     }
 
     public static io.gatling.liferay.model.Login findByProcessId(long processId)
-        throws com.liferay.portal.NoSuchModelException,
+        throws com.liferay.portal.kernel.exception.NoSuchModelException,
             com.liferay.portal.kernel.exception.SystemException,
             io.gatling.liferay.NoSuchProcessException {
         return getService().findByProcessId(processId);

@@ -217,25 +217,25 @@ public class LoginWrapper implements Login, ModelWrapper<Login> {
     }
 
     @Override
-    public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {
+    public com.liferay.expando.kernel.model.ExpandoBridge getExpandoBridge() {
         return _login.getExpandoBridge();
     }
 
     @Override
     public void setExpandoBridgeAttributes(
-        com.liferay.portal.model.BaseModel<?> baseModel) {
+        com.liferay.portal.kernel.model.BaseModel<?> baseModel) {
         _login.setExpandoBridgeAttributes(baseModel);
     }
 
     @Override
     public void setExpandoBridgeAttributes(
-        com.liferay.portlet.expando.model.ExpandoBridge expandoBridge) {
+    	com.liferay.expando.kernel.model.ExpandoBridge expandoBridge) {
         _login.setExpandoBridgeAttributes(expandoBridge);
     }
 
     @Override
     public void setExpandoBridgeAttributes(
-        com.liferay.portal.service.ServiceContext serviceContext) {
+        com.liferay.portal.kernel.service.ServiceContext serviceContext) {
         _login.setExpandoBridgeAttributes(serviceContext);
     }
 
@@ -255,7 +255,7 @@ public class LoginWrapper implements Login, ModelWrapper<Login> {
     }
 
     @Override
-    public com.liferay.portal.model.CacheModel<io.gatling.liferay.model.Login> toCacheModel() {
+    public com.liferay.portal.kernel.model.CacheModel<io.gatling.liferay.model.Login> toCacheModel() {
         return _login.toCacheModel();
     }
 
@@ -320,4 +320,16 @@ public class LoginWrapper implements Login, ModelWrapper<Login> {
     public void resetOriginalValues() {
         _login.resetOriginalValues();
     }
+
+	@Override
+	public boolean isEntityCacheEnabled() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isFinderCacheEnabled() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

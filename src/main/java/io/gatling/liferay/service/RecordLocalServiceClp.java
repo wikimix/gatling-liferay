@@ -15,6 +15,8 @@
  */
 package io.gatling.liferay.service;
 
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.model.PersistedModel;
 import com.liferay.portal.kernel.service.InvokableLocalService;
 
 /**
@@ -537,7 +539,7 @@ public class RecordLocalServiceClp implements RecordLocalService {
     }
 
     @Override
-    public com.liferay.portal.model.PersistedModel getPersistedModel(
+    public com.liferay.portal.kernel.model.PersistedModel getPersistedModel(
         java.io.Serializable primaryKeyObj)
         throws com.liferay.portal.kernel.exception.PortalException,
             com.liferay.portal.kernel.exception.SystemException {
@@ -566,7 +568,7 @@ public class RecordLocalServiceClp implements RecordLocalService {
             }
         }
 
-        return (com.liferay.portal.model.PersistedModel) ClpSerializer.translateOutput(returnObj);
+        return (com.liferay.portal.kernel.model.PersistedModel) ClpSerializer.translateOutput(returnObj);
     }
 
     @Override
@@ -698,9 +700,9 @@ public class RecordLocalServiceClp implements RecordLocalService {
 
     @Override
     public io.gatling.liferay.model.Record findByProcessId(long processId)
-        throws com.liferay.portal.NoSuchModelException,
+        throws com.liferay.portal.kernel.exception.NoSuchModelException,
             com.liferay.portal.kernel.exception.SystemException,
-            io.gatling.liferay.NoSuchProcessException {
+            NoSuchProcessException {
         Object returnObj = null;
 
         try {
@@ -709,16 +711,16 @@ public class RecordLocalServiceClp implements RecordLocalService {
         } catch (Throwable t) {
             t = ClpSerializer.translateThrowable(t);
 
-            if (t instanceof com.liferay.portal.NoSuchModelException) {
-                throw (com.liferay.portal.NoSuchModelException) t;
+            if (t instanceof com.liferay.portal.kernel.exception.NoSuchModelException) {
+                throw (com.liferay.portal.kernel.exception.NoSuchModelException) t;
             }
 
             if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
                 throw (com.liferay.portal.kernel.exception.SystemException) t;
             }
 
-            if (t instanceof io.gatling.liferay.NoSuchProcessException) {
-                throw (io.gatling.liferay.NoSuchProcessException) t;
+            if (t instanceof NoSuchProcessException) {
+                throw (NoSuchProcessException) t;
             }
 
             if (t instanceof RuntimeException) {
@@ -821,7 +823,7 @@ public class RecordLocalServiceClp implements RecordLocalService {
 
     @Override
     public void update(long recordId, java.lang.String name)
-        throws com.liferay.portal.NoSuchModelException,
+        throws com.liferay.portal.kernel.exception.NoSuchModelException,
             com.liferay.portal.kernel.exception.SystemException {
         try {
             _invokableLocalService.invokeMethod(_methodName23,
@@ -830,8 +832,8 @@ public class RecordLocalServiceClp implements RecordLocalService {
         } catch (Throwable t) {
             t = ClpSerializer.translateThrowable(t);
 
-            if (t instanceof com.liferay.portal.NoSuchModelException) {
-                throw (com.liferay.portal.NoSuchModelException) t;
+            if (t instanceof com.liferay.portal.kernel.exception.NoSuchModelException) {
+                throw (com.liferay.portal.kernel.exception.NoSuchModelException) t;
             }
 
             if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
@@ -880,4 +882,10 @@ public class RecordLocalServiceClp implements RecordLocalService {
 
         return (io.gatling.liferay.model.Record) ClpSerializer.translateOutput(returnObj);
     }
+
+	@Override
+	public PersistedModel deletePersistedModel(PersistedModel persistedModel) throws PortalException {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

@@ -195,25 +195,25 @@ public class FormParamWrapper implements FormParam, ModelWrapper<FormParam> {
     }
 
     @Override
-    public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {
+    public com.liferay.expando.kernel.model.ExpandoBridge getExpandoBridge() {
         return _formParam.getExpandoBridge();
     }
 
     @Override
     public void setExpandoBridgeAttributes(
-        com.liferay.portal.model.BaseModel<?> baseModel) {
+    	com.liferay.portal.kernel.model.BaseModel<?> baseModel) {
         _formParam.setExpandoBridgeAttributes(baseModel);
     }
 
     @Override
     public void setExpandoBridgeAttributes(
-        com.liferay.portlet.expando.model.ExpandoBridge expandoBridge) {
+    		com.liferay.expando.kernel.model.ExpandoBridge expandoBridge) {
         _formParam.setExpandoBridgeAttributes(expandoBridge);
     }
 
     @Override
     public void setExpandoBridgeAttributes(
-        com.liferay.portal.service.ServiceContext serviceContext) {
+        com.liferay.portal.kernel.service.ServiceContext serviceContext) {
         _formParam.setExpandoBridgeAttributes(serviceContext);
     }
 
@@ -233,7 +233,7 @@ public class FormParamWrapper implements FormParam, ModelWrapper<FormParam> {
     }
 
     @Override
-    public com.liferay.portal.model.CacheModel<io.gatling.liferay.model.FormParam> toCacheModel() {
+    public com.liferay.portal.kernel.model.CacheModel<io.gatling.liferay.model.FormParam> toCacheModel() {
         return _formParam.toCacheModel();
     }
 
@@ -298,4 +298,16 @@ public class FormParamWrapper implements FormParam, ModelWrapper<FormParam> {
     public void resetOriginalValues() {
         _formParam.resetOriginalValues();
     }
+
+	@Override
+	public boolean isEntityCacheEnabled() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isFinderCacheEnabled() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

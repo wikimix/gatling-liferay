@@ -1,6 +1,4 @@
 <?xml version="1.0"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-
 <!--
 
     Copyright 2011-2016 GatlingCorp (http://gatling.io)
@@ -18,6 +16,8 @@
     limitations under the License.
 
 -->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
 <hibernate-mapping auto-import="false" default-lazy="false">
 	<import class="io.gatling.liferay.model.FormParam" />
 	<import class="io.gatling.liferay.model.Login" />

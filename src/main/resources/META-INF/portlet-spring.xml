@@ -1,5 +1,4 @@
 <?xml version="1.0"?>
-
 <!--
 
     Copyright 2011-2016 GatlingCorp (http://gatling.io)
@@ -17,6 +16,7 @@
     limitations under the License.
 
 -->
+
 <beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" default-destroy-method="destroy" default-init-method="afterPropertiesSet" xsi:schemaLocation=" http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 	<bean class="io.gatling.liferay.service.impl.FormParamLocalServiceImpl" id="io.gatling.liferay.service.FormParamLocalService" />
 	<bean class="io.gatling.liferay.service.persistence.impl.FormParamPersistenceImpl" id="io.gatling.liferay.service.persistence.FormParamPersistence" parent="basePersistence" />

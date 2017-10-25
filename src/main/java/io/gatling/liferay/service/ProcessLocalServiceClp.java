@@ -15,6 +15,8 @@
  */
 package io.gatling.liferay.service;
 
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.model.PersistedModel;
 import com.liferay.portal.kernel.service.InvokableLocalService;
 
 /**
@@ -537,7 +539,7 @@ public class ProcessLocalServiceClp implements ProcessLocalService {
     }
 
     @Override
-    public com.liferay.portal.model.PersistedModel getPersistedModel(
+    public com.liferay.portal.kernel.model.PersistedModel getPersistedModel(
         java.io.Serializable primaryKeyObj)
         throws com.liferay.portal.kernel.exception.PortalException,
             com.liferay.portal.kernel.exception.SystemException {
@@ -566,7 +568,7 @@ public class ProcessLocalServiceClp implements ProcessLocalService {
             }
         }
 
-        return (com.liferay.portal.model.PersistedModel) ClpSerializer.translateOutput(returnObj);
+        return (com.liferay.portal.kernel.model.PersistedModel) ClpSerializer.translateOutput(returnObj);
     }
 
     @Override
@@ -868,4 +870,10 @@ public class ProcessLocalServiceClp implements ProcessLocalService {
 
         return (io.gatling.liferay.model.Process) ClpSerializer.translateOutput(returnObj);
     }
+
+	@Override
+	public PersistedModel deletePersistedModel(PersistedModel persistedModel) throws PortalException {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

@@ -222,25 +222,25 @@ public class RecordWrapper implements Record, ModelWrapper<Record> {
     }
 
     @Override
-    public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {
+    public com.liferay.expando.kernel.model.ExpandoBridge getExpandoBridge() {
         return _record.getExpandoBridge();
     }
 
     @Override
     public void setExpandoBridgeAttributes(
-        com.liferay.portal.model.BaseModel<?> baseModel) {
+        com.liferay.portal.kernel.model.BaseModel<?> baseModel) {
         _record.setExpandoBridgeAttributes(baseModel);
     }
 
     @Override
     public void setExpandoBridgeAttributes(
-        com.liferay.portlet.expando.model.ExpandoBridge expandoBridge) {
+    	com.liferay.expando.kernel.model.ExpandoBridge expandoBridge) {
         _record.setExpandoBridgeAttributes(expandoBridge);
     }
 
     @Override
     public void setExpandoBridgeAttributes(
-        com.liferay.portal.service.ServiceContext serviceContext) {
+        com.liferay.portal.kernel.service.ServiceContext serviceContext) {
         _record.setExpandoBridgeAttributes(serviceContext);
     }
 
@@ -260,7 +260,7 @@ public class RecordWrapper implements Record, ModelWrapper<Record> {
     }
 
     @Override
-    public com.liferay.portal.model.CacheModel<io.gatling.liferay.model.Record> toCacheModel() {
+    public com.liferay.portal.kernel.model.CacheModel<io.gatling.liferay.model.Record> toCacheModel() {
         return _record.toCacheModel();
     }
 
@@ -325,4 +325,16 @@ public class RecordWrapper implements Record, ModelWrapper<Record> {
     public void resetOriginalValues() {
         _record.resetOriginalValues();
     }
+
+	@Override
+	public boolean isEntityCacheEnabled() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isFinderCacheEnabled() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

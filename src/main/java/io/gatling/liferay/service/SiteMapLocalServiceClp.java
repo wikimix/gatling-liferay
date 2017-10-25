@@ -15,6 +15,8 @@
  */
 package io.gatling.liferay.service;
 
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.model.PersistedModel;
 import com.liferay.portal.kernel.service.InvokableLocalService;
 
 /**
@@ -527,7 +529,7 @@ public class SiteMapLocalServiceClp implements SiteMapLocalService {
     }
 
     @Override
-    public com.liferay.portal.model.PersistedModel getPersistedModel(
+    public com.liferay.portal.kernel.model.PersistedModel getPersistedModel(
         java.io.Serializable primaryKeyObj)
         throws com.liferay.portal.kernel.exception.PortalException,
             com.liferay.portal.kernel.exception.SystemException {
@@ -556,7 +558,7 @@ public class SiteMapLocalServiceClp implements SiteMapLocalService {
             }
         }
 
-        return (com.liferay.portal.model.PersistedModel) ClpSerializer.translateOutput(returnObj);
+        return (com.liferay.portal.kernel.model.PersistedModel) ClpSerializer.translateOutput(returnObj);
     }
 
     @Override
@@ -688,7 +690,7 @@ public class SiteMapLocalServiceClp implements SiteMapLocalService {
 
     @Override
     public io.gatling.liferay.model.SiteMap siteMapCreation(
-        com.liferay.portal.theme.ThemeDisplay themeDisplay,
+        com.liferay.portal.kernel.theme.ThemeDisplay themeDisplay,
         java.lang.String portalUrl)
         throws com.liferay.portal.kernel.exception.SystemException {
         Object returnObj = null;
@@ -748,7 +750,7 @@ public class SiteMapLocalServiceClp implements SiteMapLocalService {
 
     @Override
     public io.gatling.liferay.model.SiteMap findByProcessId(long processId)
-        throws com.liferay.portal.NoSuchModelException,
+        throws com.liferay.portal.kernel.exception.NoSuchModelException,
             com.liferay.portal.kernel.exception.SystemException,
             io.gatling.liferay.NoSuchProcessException {
         Object returnObj = null;
@@ -759,8 +761,8 @@ public class SiteMapLocalServiceClp implements SiteMapLocalService {
         } catch (Throwable t) {
             t = ClpSerializer.translateThrowable(t);
 
-            if (t instanceof com.liferay.portal.NoSuchModelException) {
-                throw (com.liferay.portal.NoSuchModelException) t;
+            if (t instanceof com.liferay.portal.kernel.exception.NoSuchModelException) {
+                throw (com.liferay.portal.kernel.exception.NoSuchModelException) t;
             }
 
             if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
@@ -818,4 +820,10 @@ public class SiteMapLocalServiceClp implements SiteMapLocalService {
 
         return (io.gatling.liferay.model.SiteMap) ClpSerializer.translateOutput(returnObj);
     }
+
+	@Override
+	public PersistedModel deletePersistedModel(PersistedModel persistedModel) throws PortalException {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

@@ -16,6 +16,7 @@
 package io.gatling.liferay.service;
 
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.model.PersistedModel;
 import com.liferay.portal.kernel.service.ServiceWrapper;
 
 /**
@@ -205,7 +206,7 @@ public class LoginLocalServiceWrapper implements LoginLocalService,
     }
 
     @Override
-    public com.liferay.portal.model.PersistedModel getPersistedModel(
+    public com.liferay.portal.kernel.model.PersistedModel getPersistedModel(
         java.io.Serializable primaryKeyObj)
         throws com.liferay.portal.kernel.exception.PortalException,
             com.liferay.portal.kernel.exception.SystemException {
@@ -291,7 +292,7 @@ public class LoginLocalServiceWrapper implements LoginLocalService,
 
     @Override
     public io.gatling.liferay.model.Login findByProcessId(long processId)
-        throws com.liferay.portal.NoSuchModelException,
+        throws com.liferay.portal.kernel.exception.NoSuchModelException,
             com.liferay.portal.kernel.exception.SystemException,
             io.gatling.liferay.NoSuchProcessException {
         return _loginLocalService.findByProcessId(processId);
@@ -328,4 +329,10 @@ public class LoginLocalServiceWrapper implements LoginLocalService,
     public void setWrappedService(LoginLocalService loginLocalService) {
         _loginLocalService = loginLocalService;
     }
+
+	@Override
+	public PersistedModel deletePersistedModel(PersistedModel persistedModel) throws PortalException {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

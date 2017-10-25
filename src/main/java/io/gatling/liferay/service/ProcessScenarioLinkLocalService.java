@@ -192,7 +192,7 @@ public interface ProcessScenarioLinkLocalService extends BaseLocalService,
 
     @Override
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-    public com.liferay.portal.model.PersistedModel getPersistedModel(
+    public com.liferay.portal.kernel.model.PersistedModel getPersistedModel(
         java.io.Serializable primaryKeyObj)
         throws com.liferay.portal.kernel.exception.PortalException,
             com.liferay.portal.kernel.exception.SystemException;

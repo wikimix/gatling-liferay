@@ -205,7 +205,7 @@ public class ProcessScenarioLinkLocalServiceUtil {
         return getService().getProcessScenarioLink(psl_id);
     }
 
-    public static com.liferay.portal.model.PersistedModel getPersistedModel(
+    public static com.liferay.portal.kernel.model.PersistedModel getPersistedModel(
         java.io.Serializable primaryKeyObj)
         throws com.liferay.portal.kernel.exception.PortalException,
             com.liferay.portal.kernel.exception.SystemException {

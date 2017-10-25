@@ -17,6 +17,7 @@ package io.gatling.liferay.service.persistence;
 
 import com.liferay.portal.kernel.service.persistence.BasePersistence;
 
+import io.gatling.liferay.exception.NoSuchRecordException;
 import io.gatling.liferay.model.Record;
 
 /**
@@ -186,7 +187,7 @@ public interface RecordPersistence extends BasePersistence<Record> {
     */
     public io.gatling.liferay.model.Record findByName(java.lang.String name)
         throws com.liferay.portal.kernel.exception.SystemException,
-            io.gatling.liferay.NoSuchRecordException;
+            io.gatling.liferay.NoSuchRecordException, NoSuchRecordException;
 
     /**
     * Returns the record where name = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.

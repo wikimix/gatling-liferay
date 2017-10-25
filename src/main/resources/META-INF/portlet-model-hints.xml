@@ -1,5 +1,4 @@
 <?xml version="1.0"?>
-
 <!--
 
     Copyright 2011-2016 GatlingCorp (http://gatling.io)
@@ -17,6 +16,7 @@
     limitations under the License.
 
 -->
+
 <model-hints>
 	<model name="io.gatling.liferay.model.FormParam">
 		<field name="formParamId" type="long" />

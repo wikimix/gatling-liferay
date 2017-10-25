@@ -16,6 +16,7 @@
 package io.gatling.liferay.service;
 
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.model.PersistedModel;
 import com.liferay.portal.kernel.service.ServiceWrapper;
 
 /**
@@ -206,7 +207,7 @@ public class FormParamLocalServiceWrapper implements FormParamLocalService,
     }
 
     @Override
-    public com.liferay.portal.model.PersistedModel getPersistedModel(
+    public com.liferay.portal.kernel.model.PersistedModel getPersistedModel(
         java.io.Serializable primaryKeyObj)
         throws com.liferay.portal.kernel.exception.PortalException,
             com.liferay.portal.kernel.exception.SystemException {
@@ -324,4 +325,10 @@ public class FormParamLocalServiceWrapper implements FormParamLocalService,
     public void setWrappedService(FormParamLocalService formParamLocalService) {
         _formParamLocalService = formParamLocalService;
     }
+
+	@Override
+	public PersistedModel deletePersistedModel(PersistedModel persistedModel) throws PortalException {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

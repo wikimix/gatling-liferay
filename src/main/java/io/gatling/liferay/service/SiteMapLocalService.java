@@ -189,7 +189,7 @@ public interface SiteMapLocalService extends BaseLocalService,
 
     @Override
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-    public com.liferay.portal.model.PersistedModel getPersistedModel(
+    public com.liferay.portal.kernel.model.PersistedModel getPersistedModel(
         java.io.Serializable primaryKeyObj)
         throws com.liferay.portal.kernel.exception.PortalException,
             com.liferay.portal.kernel.exception.SystemException;
@@ -253,7 +253,7 @@ public interface SiteMapLocalService extends BaseLocalService,
         throws java.lang.Throwable;
 
     public io.gatling.liferay.model.SiteMap siteMapCreation(
-        com.liferay.portal.theme.ThemeDisplay themeDisplay,
+        com.liferay.portal.kernel.theme.ThemeDisplay themeDisplay,
         java.lang.String portalUrl)
         throws com.liferay.portal.kernel.exception.SystemException;
 
@@ -261,7 +261,7 @@ public interface SiteMapLocalService extends BaseLocalService,
         throws com.liferay.portal.kernel.exception.SystemException;
 
     public io.gatling.liferay.model.SiteMap findByProcessId(long processId)
-        throws com.liferay.portal.NoSuchModelException,
+        throws com.liferay.portal.kernel.exception.NoSuchModelException,
             com.liferay.portal.kernel.exception.SystemException,
             io.gatling.liferay.NoSuchProcessException;
 
