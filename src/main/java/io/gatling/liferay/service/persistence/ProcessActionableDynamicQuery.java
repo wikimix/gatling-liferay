@@ -15,7 +15,7 @@
  */
 package io.gatling.liferay.service.persistence;
 
-import com.liferay.portal.kernel.dao.orm.BaseActionableDynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DefaultActionableDynamicQuery;
 import com.liferay.portal.kernel.exception.SystemException;
 
 import io.gatling.liferay.model.Process;
@@ -26,7 +26,7 @@ import io.gatling.liferay.service.ProcessLocalServiceUtil;
  * @generated
  */
 public abstract class ProcessActionableDynamicQuery
-    extends BaseActionableDynamicQuery {
+    extends DefaultActionableDynamicQuery {
     public ProcessActionableDynamicQuery() throws SystemException {
         setBaseLocalService(ProcessLocalServiceUtil.getService());
         setClass(Process.class);

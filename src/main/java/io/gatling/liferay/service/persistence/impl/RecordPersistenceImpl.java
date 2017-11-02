@@ -26,7 +26,6 @@ import com.liferay.portal.kernel.dao.orm.Query;
 import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.Session;
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.service.persistence.impl.BasePersistenceImpl;
@@ -1562,50 +1561,4 @@ public class RecordPersistenceImpl extends BasePersistenceImpl<Record>
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No Record exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No Record exists with the key {";
 	private static final Log _log = LogFactoryUtil.getLog(RecordPersistenceImpl.class);
-
-	@Override
-	public List<Record> findByPortletId(String portletId, int start, int end, OrderByComparator orderByComparator)
-			throws SystemException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Record findByPortletId_First(String portletId, OrderByComparator orderByComparator)
-			throws SystemException, io.gatling.liferay.NoSuchRecordException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Record fetchByPortletId_First(String portletId, OrderByComparator orderByComparator) throws SystemException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Record findByPortletId_Last(String portletId, OrderByComparator orderByComparator)
-			throws SystemException, io.gatling.liferay.NoSuchRecordException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Record fetchByPortletId_Last(String portletId, OrderByComparator orderByComparator) throws SystemException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Record[] findByPortletId_PrevAndNext(long recordId, String portletId, OrderByComparator orderByComparator)
-			throws SystemException, io.gatling.liferay.NoSuchRecordException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Record> findAll(int start, int end, OrderByComparator orderByComparator) throws SystemException {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }

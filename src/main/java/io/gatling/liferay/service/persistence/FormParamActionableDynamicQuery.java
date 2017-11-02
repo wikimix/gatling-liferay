@@ -15,7 +15,7 @@
  */
 package io.gatling.liferay.service.persistence;
 
-import com.liferay.portal.kernel.dao.orm.BaseActionableDynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DefaultActionableDynamicQuery;
 import com.liferay.portal.kernel.exception.SystemException;
 
 import io.gatling.liferay.model.FormParam;
@@ -26,7 +26,7 @@ import io.gatling.liferay.service.FormParamLocalServiceUtil;
  * @generated
  */
 public abstract class FormParamActionableDynamicQuery
-    extends BaseActionableDynamicQuery {
+    extends DefaultActionableDynamicQuery {
     public FormParamActionableDynamicQuery() throws SystemException {
         setBaseLocalService(FormParamLocalServiceUtil.getService());
         setClass(FormParam.class);

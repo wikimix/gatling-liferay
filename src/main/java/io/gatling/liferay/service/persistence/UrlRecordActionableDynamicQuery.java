@@ -15,7 +15,7 @@
  */
 package io.gatling.liferay.service.persistence;
 
-import com.liferay.portal.kernel.dao.orm.BaseActionableDynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DefaultActionableDynamicQuery;
 import com.liferay.portal.kernel.exception.SystemException;
 
 import io.gatling.liferay.model.UrlRecord;
@@ -26,7 +26,7 @@ import io.gatling.liferay.service.UrlRecordLocalServiceUtil;
  * @generated
  */
 public abstract class UrlRecordActionableDynamicQuery
-    extends BaseActionableDynamicQuery {
+    extends DefaultActionableDynamicQuery {
     public UrlRecordActionableDynamicQuery() throws SystemException {
         setBaseLocalService(UrlRecordLocalServiceUtil.getService());
         setClass(UrlRecord.class);

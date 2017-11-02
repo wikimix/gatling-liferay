@@ -15,7 +15,7 @@
  */
 package io.gatling.liferay.service.persistence;
 
-import com.liferay.portal.kernel.dao.orm.BaseActionableDynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DefaultActionableDynamicQuery;
 import com.liferay.portal.kernel.exception.SystemException;
 
 import io.gatling.liferay.model.SiteMap;
@@ -26,7 +26,7 @@ import io.gatling.liferay.service.SiteMapLocalServiceUtil;
  * @generated
  */
 public abstract class SiteMapActionableDynamicQuery
-    extends BaseActionableDynamicQuery {
+    extends DefaultActionableDynamicQuery {
     public SiteMapActionableDynamicQuery() throws SystemException {
         setBaseLocalService(SiteMapLocalServiceUtil.getService());
         setClass(SiteMap.class);
