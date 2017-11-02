@@ -25,6 +25,8 @@ import com.liferay.portal.kernel.transaction.Isolation;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
 
+import io.gatling.liferay.exception.NoSuchRecordException;
+
 /**
  * Provides the local service interface for Record. Methods of this
  * service will not have security checks based on the propagated JAAS
@@ -263,7 +265,7 @@ public interface RecordLocalService extends BaseLocalService,
 
     public io.gatling.liferay.model.Record findByName(java.lang.String name)
         throws com.liferay.portal.kernel.exception.SystemException,
-            io.gatling.liferay.NoSuchRecordException;
+            io.gatling.liferay.NoSuchRecordException, NoSuchRecordException;
 
     public int countByPortletId(java.lang.String portletId)
         throws com.liferay.portal.kernel.exception.SystemException;

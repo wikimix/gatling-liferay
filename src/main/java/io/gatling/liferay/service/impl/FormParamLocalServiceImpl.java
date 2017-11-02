@@ -16,7 +16,9 @@
 package io.gatling.liferay.service.impl;
 
 import com.liferay.counter.kernel.service.CounterLocalServiceUtil;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.OrderByComparator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -74,6 +76,37 @@ public class FormParamLocalServiceImpl extends FormParamLocalServiceBaseImpl {
 		if(errors.isEmpty()) {
 			formParam.persist();
 		}
+	}
+
+	@Override
+	public List dynamicQuery(DynamicQuery dynamicQuery) throws SystemException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end) throws SystemException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end, OrderByComparator orderByComparator)
+			throws SystemException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getBeanIdentifier() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setBeanIdentifier(String beanIdentifier) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }

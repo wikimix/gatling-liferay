@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.PropertyFactoryUtil;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.model.Company;
+import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.model.Layout;
 import com.liferay.portal.kernel.service.GroupLocalServiceUtil;
 import com.liferay.portal.kernel.service.LayoutLocalServiceUtil;
@@ -52,7 +53,7 @@ public class LiferayUtil {
 
 		List<Group> listGroups = new ArrayList<Group>();
 		try {
-			listGroups = (List<Group>) GroupLocalServiceUtil.dynamicQuery(dq);
+			listGroups = GroupLocalServiceUtil.dynamicQuery(dq);
 		} catch (SystemException e) {
 			throw new RuntimeException(e.getMessage());
 		}
