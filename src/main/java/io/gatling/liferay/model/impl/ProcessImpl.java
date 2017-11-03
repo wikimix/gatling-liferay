@@ -32,4 +32,16 @@ public class ProcessImpl extends ProcessBaseImpl {
      */
     public ProcessImpl() {
     }
+
+	@Override
+	public long getFeederId() {
+		// TODO Auto-generated method stub
+		return (Long) null;
+	}
+
+	@Override
+	public void setFeederId(Long feederId) {
+		// TODO Auto-generated method stub
+		
+	}
 }

@@ -24,6 +24,7 @@ import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 import java.util.List;
 
+import io.gatling.liferay.exception.NoSuchFormParamException;
 import io.gatling.liferay.model.FormParam;
 
 /**
@@ -124,7 +125,7 @@ public class FormParamUtil {
     public static io.gatling.liferay.model.FormParam findByUrlRecordId(
         long urlRecordId)
         throws com.liferay.portal.kernel.exception.SystemException,
-            io.gatling.liferay.NoSuchFormParamException {
+            io.gatling.liferay.NoSuchFormParamException, NoSuchFormParamException {
         return getPersistence().findByUrlRecordId(urlRecordId);
     }
 
@@ -162,11 +163,12 @@ public class FormParamUtil {
     * @param urlRecordId the url record ID
     * @return the form param that was removed
     * @throws SystemException if a system exception occurred
+     * @throws NoSuchFormParamException 
     */
     public static io.gatling.liferay.model.FormParam removeByUrlRecordId(
         long urlRecordId)
         throws com.liferay.portal.kernel.exception.SystemException,
-            io.gatling.liferay.NoSuchFormParamException {
+            io.gatling.liferay.NoSuchFormParamException, NoSuchFormParamException {
         return getPersistence().removeByUrlRecordId(urlRecordId);
     }
 
@@ -221,7 +223,7 @@ public class FormParamUtil {
     */
     public static io.gatling.liferay.model.FormParam remove(long formParamId)
         throws com.liferay.portal.kernel.exception.SystemException,
-            io.gatling.liferay.NoSuchFormParamException {
+            io.gatling.liferay.NoSuchFormParamException, NoSuchFormParamException {
         return getPersistence().remove(formParamId);
     }
 
@@ -242,7 +244,7 @@ public class FormParamUtil {
     public static io.gatling.liferay.model.FormParam findByPrimaryKey(
         long formParamId)
         throws com.liferay.portal.kernel.exception.SystemException,
-            io.gatling.liferay.NoSuchFormParamException {
+            io.gatling.liferay.NoSuchFormParamException, NoSuchFormParamException {
         return getPersistence().findByPrimaryKey(formParamId);
     }
 

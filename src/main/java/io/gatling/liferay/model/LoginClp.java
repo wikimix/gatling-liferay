@@ -338,4 +338,16 @@ public class LoginClp extends BaseModelImpl<Login> implements Login {
 
         return sb.toString();
     }
+
+	@Override
+	public boolean isEntityCacheEnabled() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isFinderCacheEnabled() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

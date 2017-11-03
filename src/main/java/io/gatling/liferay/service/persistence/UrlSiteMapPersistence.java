@@ -16,7 +16,11 @@
 package io.gatling.liferay.service.persistence;
 
 import com.liferay.portal.kernel.service.persistence.BasePersistence;
+import com.liferay.portal.kernel.util.OrderByComparator;
 
+import java.util.List;
+
+import io.gatling.liferay.exception.NoSuchUrlSiteMapException;
 import io.gatling.liferay.model.UrlSiteMap;
 
 /**
@@ -66,96 +70,6 @@ public interface UrlSiteMapPersistence extends BasePersistence<UrlSiteMap> {
         long siteMapId, int start, int end)
         throws com.liferay.portal.kernel.exception.SystemException;
 
-    /**
-    * Returns an ordered range of all the url site maps where siteMapId = &#63;.
-    *
-    * <p>
-    * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link io.gatling.liferay.model.impl.UrlSiteMapModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-    * </p>
-    *
-    * @param siteMapId the site map ID
-    * @param start the lower bound of the range of url site maps
-    * @param end the upper bound of the range of url site maps (not inclusive)
-    * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-    * @return the ordered range of matching url site maps
-    * @throws SystemException if a system exception occurred
-    */
-    public java.util.List<io.gatling.liferay.model.UrlSiteMap> findBySiteMapId(
-        long siteMapId, int start, int end,
-        com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-        throws com.liferay.portal.kernel.exception.SystemException;
-
-    /**
-    * Returns the first url site map in the ordered set where siteMapId = &#63;.
-    *
-    * @param siteMapId the site map ID
-    * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-    * @return the first matching url site map
-    * @throws io.gatling.liferay.NoSuchUrlSiteMapException if a matching url site map could not be found
-    * @throws SystemException if a system exception occurred
-    */
-    public io.gatling.liferay.model.UrlSiteMap findBySiteMapId_First(
-        long siteMapId,
-        com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-        throws com.liferay.portal.kernel.exception.SystemException,
-            io.gatling.liferay.NoSuchUrlSiteMapException;
-
-    /**
-    * Returns the first url site map in the ordered set where siteMapId = &#63;.
-    *
-    * @param siteMapId the site map ID
-    * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-    * @return the first matching url site map, or <code>null</code> if a matching url site map could not be found
-    * @throws SystemException if a system exception occurred
-    */
-    public io.gatling.liferay.model.UrlSiteMap fetchBySiteMapId_First(
-        long siteMapId,
-        com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-        throws com.liferay.portal.kernel.exception.SystemException;
-
-    /**
-    * Returns the last url site map in the ordered set where siteMapId = &#63;.
-    *
-    * @param siteMapId the site map ID
-    * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-    * @return the last matching url site map
-    * @throws io.gatling.liferay.NoSuchUrlSiteMapException if a matching url site map could not be found
-    * @throws SystemException if a system exception occurred
-    */
-    public io.gatling.liferay.model.UrlSiteMap findBySiteMapId_Last(
-        long siteMapId,
-        com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-        throws com.liferay.portal.kernel.exception.SystemException,
-            io.gatling.liferay.NoSuchUrlSiteMapException;
-
-    /**
-    * Returns the last url site map in the ordered set where siteMapId = &#63;.
-    *
-    * @param siteMapId the site map ID
-    * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-    * @return the last matching url site map, or <code>null</code> if a matching url site map could not be found
-    * @throws SystemException if a system exception occurred
-    */
-    public io.gatling.liferay.model.UrlSiteMap fetchBySiteMapId_Last(
-        long siteMapId,
-        com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-        throws com.liferay.portal.kernel.exception.SystemException;
-
-    /**
-    * Returns the url site maps before and after the current url site map in the ordered set where siteMapId = &#63;.
-    *
-    * @param urlSiteMapId the primary key of the current url site map
-    * @param siteMapId the site map ID
-    * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-    * @return the previous, current, and next url site map
-    * @throws io.gatling.liferay.NoSuchUrlSiteMapException if a url site map with the primary key could not be found
-    * @throws SystemException if a system exception occurred
-    */
-    public io.gatling.liferay.model.UrlSiteMap[] findBySiteMapId_PrevAndNext(
-        long urlSiteMapId, long siteMapId,
-        com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-        throws com.liferay.portal.kernel.exception.SystemException,
-            io.gatling.liferay.NoSuchUrlSiteMapException;
 
     /**
     * Removes all the url site maps where siteMapId = &#63; from the database.
@@ -209,7 +123,7 @@ public interface UrlSiteMapPersistence extends BasePersistence<UrlSiteMap> {
     */
     public io.gatling.liferay.model.UrlSiteMap remove(long urlSiteMapId)
         throws com.liferay.portal.kernel.exception.SystemException,
-            io.gatling.liferay.NoSuchUrlSiteMapException;
+            io.gatling.liferay.NoSuchUrlSiteMapException, NoSuchUrlSiteMapException;
 
     public io.gatling.liferay.model.UrlSiteMap updateImpl(
         io.gatling.liferay.model.UrlSiteMap urlSiteMap)
@@ -226,7 +140,7 @@ public interface UrlSiteMapPersistence extends BasePersistence<UrlSiteMap> {
     public io.gatling.liferay.model.UrlSiteMap findByPrimaryKey(
         long urlSiteMapId)
         throws com.liferay.portal.kernel.exception.SystemException,
-            io.gatling.liferay.NoSuchUrlSiteMapException;
+            io.gatling.liferay.NoSuchUrlSiteMapException, NoSuchUrlSiteMapException;
 
     /**
     * Returns the url site map with the primary key or returns <code>null</code> if it could not be found.
@@ -265,24 +179,6 @@ public interface UrlSiteMapPersistence extends BasePersistence<UrlSiteMap> {
         throws com.liferay.portal.kernel.exception.SystemException;
 
     /**
-    * Returns an ordered range of all the url site maps.
-    *
-    * <p>
-    * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link io.gatling.liferay.model.impl.UrlSiteMapModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-    * </p>
-    *
-    * @param start the lower bound of the range of url site maps
-    * @param end the upper bound of the range of url site maps (not inclusive)
-    * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-    * @return the ordered range of url site maps
-    * @throws SystemException if a system exception occurred
-    */
-    public java.util.List<io.gatling.liferay.model.UrlSiteMap> findAll(
-        int start, int end,
-        com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-        throws com.liferay.portal.kernel.exception.SystemException;
-
-    /**
     * Removes all the url site maps from the database.
     *
     * @throws SystemException if a system exception occurred
@@ -298,4 +194,138 @@ public interface UrlSiteMapPersistence extends BasePersistence<UrlSiteMap> {
     */
     public int countAll()
         throws com.liferay.portal.kernel.exception.SystemException;
+
+    /**
+    * Returns an ordered range of all the url site maps where siteMapId = &#63;.
+    *
+    * <p>
+    * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link io.gatling.liferay.model.impl.UrlSiteMapModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+    * </p>
+    *
+    * @param siteMapId the site map ID
+    * @param start the lower bound of the range of url site maps
+    * @param end the upper bound of the range of url site maps (not inclusive)
+    * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+    * @return the ordered range of matching url site maps
+    * @throws SystemException if a system exception occurred
+    */
+    
+	List<UrlSiteMap> findBySiteMapId(long siteMapId, int start, int end,
+			OrderByComparator<UrlSiteMap> orderByComparator);
+
+	List<UrlSiteMap> findBySiteMapId(long siteMapId, int start, int end,
+			OrderByComparator<UrlSiteMap> orderByComparator, boolean retrieveFromCache);
+
+    /**
+    * Returns the first url site map in the ordered set where siteMapId = &#63;.
+    *
+    * @param siteMapId the site map ID
+    * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+    * @return the first matching url site map
+    * @throws io.gatling.liferay.NoSuchUrlSiteMapException if a matching url site map could not be found
+    * @throws SystemException if a system exception occurred
+    */
+	UrlSiteMap findBySiteMapId_First(long siteMapId, OrderByComparator<UrlSiteMap> orderByComparator)
+			throws NoSuchUrlSiteMapException;
+
+	/**
+	 * Returns the first url site map in the ordered set where siteMapId =
+	 * &#63;.
+	 *
+	 * @param siteMapId
+	 *            the site map ID
+	 * @param orderByComparator
+	 *            the comparator to order the set by (optionally
+	 *            <code>null</code>)
+	 * @return the first matching url site map, or <code>null</code> if a
+	 *         matching url site map could not be found
+	 * @throws SystemException
+	 *             if a system exception occurred
+	 */
+	UrlSiteMap fetchBySiteMapId_First(long siteMapId, OrderByComparator<UrlSiteMap> orderByComparator);
+
+    /**
+    * Returns the last url site map in the ordered set where siteMapId = &#63;.
+    *
+    * @param siteMapId the site map ID
+    * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+    * @return the last matching url site map
+    * @throws io.gatling.liferay.NoSuchUrlSiteMapException if a matching url site map could not be found
+    * @throws SystemException if a system exception occurred
+    */
+	UrlSiteMap findBySiteMapId_Last(long siteMapId, OrderByComparator<UrlSiteMap> orderByComparator)
+			throws NoSuchUrlSiteMapException;
+
+	/**
+	 * Returns the last url site map in the ordered set where siteMapId = &#63;.
+	 *
+	 * @param siteMapId
+	 *            the site map ID
+	 * @param orderByComparator
+	 *            the comparator to order the set by (optionally
+	 *            <code>null</code>)
+	 * @return the last matching url site map, or <code>null</code> if a
+	 *         matching url site map could not be found
+	 * @throws SystemException
+	 *             if a system exception occurred
+	 */
+	UrlSiteMap fetchBySiteMapId_Last(long siteMapId, OrderByComparator<UrlSiteMap> orderByComparator);
+
+	/**
+	 * Returns the url site maps before and after the current url site map in
+	 * the ordered set where siteMapId = &#63;.
+	 *
+	 * @param urlSiteMapId
+	 *            the primary key of the current url site map
+	 * @param siteMapId
+	 *            the site map ID
+	 * @param orderByComparator
+	 *            the comparator to order the set by (optionally
+	 *            <code>null</code>)
+	 * @return the previous, current, and next url site map
+	 * @throws io.gatling.liferay.NoSuchUrlSiteMapException
+	 *             if a url site map with the primary key could not be found
+	 * @throws SystemException
+	 *             if a system exception occurred
+	 */
+	UrlSiteMap[] findBySiteMapId_PrevAndNext(long urlSiteMapId, long siteMapId,
+			OrderByComparator<UrlSiteMap> orderByComparator) throws NoSuchUrlSiteMapException;
+
+	/**
+	 * Returns an ordered range of all the url site maps.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of
+	 * <code>end - start</code> instances. <code>start</code> and
+	 * <code>end</code> are not primary keys, they are indexes in the result
+	 * set. Thus, <code>0</code> refers to the first result in the set. Setting
+	 * both <code>start</code> and <code>end</code> to
+	 * {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return
+	 * the full result set. If <code>orderByComparator</code> is specified, then
+	 * the query will include the given ORDER BY logic. If
+	 * <code>orderByComparator</code> is absent and pagination is required
+	 * (<code>start</code> and <code>end</code> are not
+	 * {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the
+	 * query will include the default ORDER BY logic from
+	 * {@link io.gatling.liferay.model.impl.UrlSiteMapModelImpl}. If both
+	 * <code>orderByComparator</code> and pagination are absent, for performance
+	 * reasons, the query will not have an ORDER BY clause and the returned
+	 * result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param start
+	 *            the lower bound of the range of url site maps
+	 * @param end
+	 *            the upper bound of the range of url site maps (not inclusive)
+	 * @param orderByComparator
+	 *            the comparator to order the results by (optionally
+	 *            <code>null</code>)
+	 * @return the ordered range of url site maps
+	 * @throws SystemException
+	 *             if a system exception occurred
+	 */
+	List<UrlSiteMap> findAll(int start, int end, OrderByComparator<UrlSiteMap> orderByComparator);
+
+	List<UrlSiteMap> findAll(int start, int end, OrderByComparator<UrlSiteMap> orderByComparator,
+			boolean retrieveFromCache);
 }

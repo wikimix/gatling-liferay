@@ -18,11 +18,13 @@ package io.gatling.liferay.service.persistence;
 import com.liferay.portal.kernel.bean.PortletBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 import java.util.List;
 
+import io.gatling.liferay.exception.NoSuchLoginException;
 import io.gatling.liferay.model.Login;
 
 /**
@@ -121,7 +123,7 @@ public class LoginUtil {
     public static io.gatling.liferay.model.Login findByName(
         java.lang.String name)
         throws com.liferay.portal.kernel.exception.SystemException,
-            io.gatling.liferay.NoSuchLoginException {
+            io.gatling.liferay.NoSuchLoginException, NoSuchLoginException {
         return getPersistence().findByName(name);
     }
 
@@ -158,11 +160,12 @@ public class LoginUtil {
     * @param name the name
     * @return the login that was removed
     * @throws SystemException if a system exception occurred
+     * @throws NoSuchLoginException 
     */
     public static io.gatling.liferay.model.Login removeByName(
         java.lang.String name)
         throws com.liferay.portal.kernel.exception.SystemException,
-            io.gatling.liferay.NoSuchLoginException {
+            io.gatling.liferay.NoSuchLoginException, NoSuchLoginException {
         return getPersistence().removeByName(name);
     }
 
@@ -217,7 +220,7 @@ public class LoginUtil {
     */
     public static io.gatling.liferay.model.Login remove(long userId)
         throws com.liferay.portal.kernel.exception.SystemException,
-            io.gatling.liferay.NoSuchLoginException {
+            io.gatling.liferay.NoSuchLoginException, NoSuchLoginException {
         return getPersistence().remove(userId);
     }
 
@@ -237,7 +240,7 @@ public class LoginUtil {
     */
     public static io.gatling.liferay.model.Login findByPrimaryKey(long userId)
         throws com.liferay.portal.kernel.exception.SystemException,
-            io.gatling.liferay.NoSuchLoginException {
+            io.gatling.liferay.NoSuchLoginException, NoSuchLoginException {
         return getPersistence().findByPrimaryKey(userId);
     }
 

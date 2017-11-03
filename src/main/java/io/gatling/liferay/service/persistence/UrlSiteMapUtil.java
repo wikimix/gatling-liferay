@@ -24,6 +24,7 @@ import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 import java.util.List;
 
+import io.gatling.liferay.exception.NoSuchUrlSiteMapException;
 import io.gatling.liferay.model.UrlSiteMap;
 
 /**
@@ -180,7 +181,7 @@ public class UrlSiteMapUtil {
         long siteMapId,
         com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
         throws com.liferay.portal.kernel.exception.SystemException,
-            io.gatling.liferay.NoSuchUrlSiteMapException {
+            io.gatling.liferay.NoSuchUrlSiteMapException, NoSuchUrlSiteMapException {
         return getPersistence()
                    .findBySiteMapId_First(siteMapId, orderByComparator);
     }
@@ -214,7 +215,7 @@ public class UrlSiteMapUtil {
         long siteMapId,
         com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
         throws com.liferay.portal.kernel.exception.SystemException,
-            io.gatling.liferay.NoSuchUrlSiteMapException {
+            io.gatling.liferay.NoSuchUrlSiteMapException, NoSuchUrlSiteMapException {
         return getPersistence()
                    .findBySiteMapId_Last(siteMapId, orderByComparator);
     }
@@ -249,7 +250,7 @@ public class UrlSiteMapUtil {
         long urlSiteMapId, long siteMapId,
         com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
         throws com.liferay.portal.kernel.exception.SystemException,
-            io.gatling.liferay.NoSuchUrlSiteMapException {
+            io.gatling.liferay.NoSuchUrlSiteMapException, NoSuchUrlSiteMapException {
         return getPersistence()
                    .findBySiteMapId_PrevAndNext(urlSiteMapId, siteMapId,
             orderByComparator);
@@ -318,7 +319,7 @@ public class UrlSiteMapUtil {
     */
     public static io.gatling.liferay.model.UrlSiteMap remove(long urlSiteMapId)
         throws com.liferay.portal.kernel.exception.SystemException,
-            io.gatling.liferay.NoSuchUrlSiteMapException {
+            io.gatling.liferay.NoSuchUrlSiteMapException, NoSuchUrlSiteMapException {
         return getPersistence().remove(urlSiteMapId);
     }
 
@@ -339,7 +340,7 @@ public class UrlSiteMapUtil {
     public static io.gatling.liferay.model.UrlSiteMap findByPrimaryKey(
         long urlSiteMapId)
         throws com.liferay.portal.kernel.exception.SystemException,
-            io.gatling.liferay.NoSuchUrlSiteMapException {
+            io.gatling.liferay.NoSuchUrlSiteMapException, NoSuchUrlSiteMapException {
         return getPersistence().findByPrimaryKey(urlSiteMapId);
     }
 

@@ -15,6 +15,8 @@
  */
 package io.gatling.liferay.service;
 
+import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
+import com.liferay.portal.kernel.dao.orm.IndexableActionableDynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.search.IndexableType;
@@ -277,4 +279,8 @@ public interface RecordLocalService extends BaseLocalService,
     public io.gatling.liferay.model.Record save(java.lang.String name,
         java.lang.String portletId, java.lang.String version)
         throws com.liferay.portal.kernel.exception.SystemException;
+
+	ActionableDynamicQuery getActionableDynamicQuery();
+
+	IndexableActionableDynamicQuery getIndexableActionableDynamicQuery();
 }

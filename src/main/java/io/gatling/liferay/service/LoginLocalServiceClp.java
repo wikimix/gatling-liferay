@@ -15,6 +15,8 @@
  */
 package io.gatling.liferay.service;
 
+import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
+import com.liferay.portal.kernel.dao.orm.IndexableActionableDynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.PersistedModel;
 import com.liferay.portal.kernel.service.InvokableLocalService;
@@ -778,6 +780,18 @@ public class LoginLocalServiceClp implements LoginLocalService {
 
 	@Override
 	public PersistedModel deletePersistedModel(PersistedModel persistedModel) throws PortalException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public IndexableActionableDynamicQuery getIndexableActionableDynamicQuery() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ActionableDynamicQuery getActionableDynamicQuery() {
 		// TODO Auto-generated method stub
 		return null;
 	}

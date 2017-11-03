@@ -16,6 +16,9 @@
 package io.gatling.liferay.service.persistence;
 
 import com.liferay.portal.kernel.service.persistence.BasePersistence;
+import com.liferay.portal.kernel.util.OrderByComparator;
+
+import java.util.List;
 
 import io.gatling.liferay.exception.NoSuchRecordException;
 import io.gatling.liferay.model.Record;
@@ -66,97 +69,6 @@ public interface RecordPersistence extends BasePersistence<Record> {
     public java.util.List<io.gatling.liferay.model.Record> findByPortletId(
         java.lang.String portletId, int start, int end)
         throws com.liferay.portal.kernel.exception.SystemException;
-
-    /**
-    * Returns an ordered range of all the records where portletId = &#63;.
-    *
-    * <p>
-    * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link io.gatling.liferay.model.impl.RecordModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-    * </p>
-    *
-    * @param portletId the portlet ID
-    * @param start the lower bound of the range of records
-    * @param end the upper bound of the range of records (not inclusive)
-    * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-    * @return the ordered range of matching records
-    * @throws SystemException if a system exception occurred
-    */
-    public java.util.List<io.gatling.liferay.model.Record> findByPortletId(
-        java.lang.String portletId, int start, int end,
-        com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-        throws com.liferay.portal.kernel.exception.SystemException;
-
-    /**
-    * Returns the first record in the ordered set where portletId = &#63;.
-    *
-    * @param portletId the portlet ID
-    * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-    * @return the first matching record
-    * @throws io.gatling.liferay.NoSuchRecordException if a matching record could not be found
-    * @throws SystemException if a system exception occurred
-    */
-    public io.gatling.liferay.model.Record findByPortletId_First(
-        java.lang.String portletId,
-        com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-        throws com.liferay.portal.kernel.exception.SystemException,
-            io.gatling.liferay.NoSuchRecordException;
-
-    /**
-    * Returns the first record in the ordered set where portletId = &#63;.
-    *
-    * @param portletId the portlet ID
-    * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-    * @return the first matching record, or <code>null</code> if a matching record could not be found
-    * @throws SystemException if a system exception occurred
-    */
-    public io.gatling.liferay.model.Record fetchByPortletId_First(
-        java.lang.String portletId,
-        com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-        throws com.liferay.portal.kernel.exception.SystemException;
-
-    /**
-    * Returns the last record in the ordered set where portletId = &#63;.
-    *
-    * @param portletId the portlet ID
-    * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-    * @return the last matching record
-    * @throws io.gatling.liferay.NoSuchRecordException if a matching record could not be found
-    * @throws SystemException if a system exception occurred
-    */
-    public io.gatling.liferay.model.Record findByPortletId_Last(
-        java.lang.String portletId,
-        com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-        throws com.liferay.portal.kernel.exception.SystemException,
-            io.gatling.liferay.NoSuchRecordException;
-
-    /**
-    * Returns the last record in the ordered set where portletId = &#63;.
-    *
-    * @param portletId the portlet ID
-    * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-    * @return the last matching record, or <code>null</code> if a matching record could not be found
-    * @throws SystemException if a system exception occurred
-    */
-    public io.gatling.liferay.model.Record fetchByPortletId_Last(
-        java.lang.String portletId,
-        com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-        throws com.liferay.portal.kernel.exception.SystemException;
-
-    /**
-    * Returns the records before and after the current record in the ordered set where portletId = &#63;.
-    *
-    * @param recordId the primary key of the current record
-    * @param portletId the portlet ID
-    * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-    * @return the previous, current, and next record
-    * @throws io.gatling.liferay.NoSuchRecordException if a record with the primary key could not be found
-    * @throws SystemException if a system exception occurred
-    */
-    public io.gatling.liferay.model.Record[] findByPortletId_PrevAndNext(
-        long recordId, java.lang.String portletId,
-        com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-        throws com.liferay.portal.kernel.exception.SystemException,
-            io.gatling.liferay.NoSuchRecordException;
 
     /**
     * Removes all the records where portletId = &#63; from the database.
@@ -217,10 +129,11 @@ public interface RecordPersistence extends BasePersistence<Record> {
     * @param name the name
     * @return the record that was removed
     * @throws SystemException if a system exception occurred
+     * @throws NoSuchRecordException 
     */
     public io.gatling.liferay.model.Record removeByName(java.lang.String name)
         throws com.liferay.portal.kernel.exception.SystemException,
-            io.gatling.liferay.NoSuchRecordException;
+            io.gatling.liferay.NoSuchRecordException, NoSuchRecordException;
 
     /**
     * Returns the number of records where name = &#63;.
@@ -265,7 +178,7 @@ public interface RecordPersistence extends BasePersistence<Record> {
     */
     public io.gatling.liferay.model.Record remove(long recordId)
         throws com.liferay.portal.kernel.exception.SystemException,
-            io.gatling.liferay.NoSuchRecordException;
+            io.gatling.liferay.NoSuchRecordException, NoSuchRecordException;
 
     public io.gatling.liferay.model.Record updateImpl(
         io.gatling.liferay.model.Record record)
@@ -281,7 +194,7 @@ public interface RecordPersistence extends BasePersistence<Record> {
     */
     public io.gatling.liferay.model.Record findByPrimaryKey(long recordId)
         throws com.liferay.portal.kernel.exception.SystemException,
-            io.gatling.liferay.NoSuchRecordException;
+            io.gatling.liferay.NoSuchRecordException, NoSuchRecordException;
 
     /**
     * Returns the record with the primary key or returns <code>null</code> if it could not be found.
@@ -318,24 +231,6 @@ public interface RecordPersistence extends BasePersistence<Record> {
         int end) throws com.liferay.portal.kernel.exception.SystemException;
 
     /**
-    * Returns an ordered range of all the records.
-    *
-    * <p>
-    * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link io.gatling.liferay.model.impl.RecordModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-    * </p>
-    *
-    * @param start the lower bound of the range of records
-    * @param end the upper bound of the range of records (not inclusive)
-    * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-    * @return the ordered range of records
-    * @throws SystemException if a system exception occurred
-    */
-    public java.util.List<io.gatling.liferay.model.Record> findAll(int start,
-        int end,
-        com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-        throws com.liferay.portal.kernel.exception.SystemException;
-
-    /**
     * Removes all the records from the database.
     *
     * @throws SystemException if a system exception occurred
@@ -351,4 +246,92 @@ public interface RecordPersistence extends BasePersistence<Record> {
     */
     public int countAll()
         throws com.liferay.portal.kernel.exception.SystemException;
+    /**
+     * Returns an ordered range of all the records where portletId = &#63;.
+     *
+     * <p>
+     * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link io.gatling.liferay.model.impl.RecordModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+     * </p>
+     *
+     * @param portletId the portlet ID
+     * @param start the lower bound of the range of records
+     * @param end the upper bound of the range of records (not inclusive)
+     * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+     * @return the ordered range of matching records
+     * @throws SystemException if a system exception occurred
+     */
+	List<Record> findByPortletId(String portletId, int start, int end, OrderByComparator<Record> orderByComparator);
+
+	List<Record> findByPortletId(String portletId, int start, int end, OrderByComparator<Record> orderByComparator,
+			boolean retrieveFromCache);
+	  /**
+	    * Returns the first record in the ordered set where portletId = &#63;.
+	    *
+	    * @param portletId the portlet ID
+	    * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	    * @return the first matching record
+	    * @throws io.gatling.liferay.NoSuchRecordException if a matching record could not be found
+	    * @throws SystemException if a system exception occurred
+	    */
+	Record findByPortletId_First(String portletId, OrderByComparator<Record> orderByComparator)
+			throws NoSuchRecordException;
+	  /**
+	    * Returns the first record in the ordered set where portletId = &#63;.
+	    *
+	    * @param portletId the portlet ID
+	    * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	    * @return the first matching record, or <code>null</code> if a matching record could not be found
+	    * @throws SystemException if a system exception occurred
+	    */
+	Record fetchByPortletId_First(String portletId, OrderByComparator<Record> orderByComparator);
+	
+	   /**
+	    * Returns the last record in the ordered set where portletId = &#63;.
+	    *
+	    * @param portletId the portlet ID
+	    * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	    * @return the last matching record
+	    * @throws io.gatling.liferay.NoSuchRecordException if a matching record could not be found
+	    * @throws SystemException if a system exception occurred
+	    */
+	Record findByPortletId_Last(String portletId, OrderByComparator<Record> orderByComparator)
+			throws NoSuchRecordException;
+	  /**
+	    * Returns the last record in the ordered set where portletId = &#63;.
+	    *
+	    * @param portletId the portlet ID
+	    * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	    * @return the last matching record, or <code>null</code> if a matching record could not be found
+	    * @throws SystemException if a system exception occurred
+	    */
+	Record fetchByPortletId_Last(String portletId, OrderByComparator<Record> orderByComparator);
+	
+	/**
+	    * Returns the records before and after the current record in the ordered set where portletId = &#63;.
+	    *
+	    * @param recordId the primary key of the current record
+	    * @param portletId the portlet ID
+	    * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	    * @return the previous, current, and next record
+	    * @throws io.gatling.liferay.NoSuchRecordException if a record with the primary key could not be found
+	    * @throws SystemException if a system exception occurred
+	    */
+	Record[] findByPortletId_PrevAndNext(long recordId, String portletId, OrderByComparator<Record> orderByComparator)
+			throws NoSuchRecordException;
+	  /**
+	    * Returns an ordered range of all the records.
+	    *
+	    * <p>
+	    * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link io.gatling.liferay.model.impl.RecordModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	    * </p>
+	    *
+	    * @param start the lower bound of the range of records
+	    * @param end the upper bound of the range of records (not inclusive)
+	    * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	    * @return the ordered range of records
+	    * @throws SystemException if a system exception occurred
+	    */
+	List<Record> findAll(int start, int end, OrderByComparator<Record> orderByComparator);
+
+	List<Record> findAll(int start, int end, OrderByComparator<Record> orderByComparator, boolean retrieveFromCache);
 }

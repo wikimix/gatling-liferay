@@ -17,7 +17,9 @@ package io.gatling.liferay.service.impl;
 
 import com.liferay.counter.kernel.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.model.PersistedModel;
 import com.liferay.portal.kernel.util.OrderByComparator;
 
 import java.util.ArrayList;
@@ -52,9 +54,10 @@ public class FormParamLocalServiceImpl extends FormParamLocalServiceBaseImpl {
 	 * Finds the FormParam by the UrlRecordId field.
 	 * @param urlRecordId The id of the urlRecord
 	 * @return The FormParam contained by the urlRecord of the given id
+	 * @throws io.gatling.liferay.exception.NoSuchFormParamException 
 	 */
 	@Override
-	public FormParam findByUrlRecordId(long urlRecordId) throws SystemException, NoSuchFormParamException {
+	public FormParam findByUrlRecordId(long urlRecordId) throws SystemException, NoSuchFormParamException, io.gatling.liferay.exception.NoSuchFormParamException {
 		return formParamPersistence.findByUrlRecordId(urlRecordId);
 	}
 	
@@ -107,6 +110,12 @@ public class FormParamLocalServiceImpl extends FormParamLocalServiceBaseImpl {
 	public void setBeanIdentifier(String beanIdentifier) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public PersistedModel getPersistedModel(PersistedModel arguments) throws PortalException, SystemException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }

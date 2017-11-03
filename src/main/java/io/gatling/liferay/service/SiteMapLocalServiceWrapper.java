@@ -15,8 +15,13 @@
  */
 package io.gatling.liferay.service;
 
+import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
+import com.liferay.portal.kernel.dao.orm.IndexableActionableDynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.model.PersistedModel;
 import com.liferay.portal.kernel.service.ServiceWrapper;
+
+import io.gatling.liferay.exception.NoSuchSiteMapException;
 
 /**
  * Provides a wrapper for {@link SiteMapLocalService}.
@@ -205,7 +210,7 @@ public class SiteMapLocalServiceWrapper implements SiteMapLocalService,
     }
 
     @Override
-    public com.liferay.portal.model.PersistedModel getPersistedModel(
+    public com.liferay.portal.kernel.model.PersistedModel getPersistedModel(
         java.io.Serializable primaryKeyObj)
         throws com.liferay.portal.kernel.exception.PortalException,
             com.liferay.portal.kernel.exception.SystemException {
@@ -286,9 +291,9 @@ public class SiteMapLocalServiceWrapper implements SiteMapLocalService,
 
     @Override
     public io.gatling.liferay.model.SiteMap siteMapCreation(
-        com.liferay.portal.theme.ThemeDisplay themeDisplay,
+        com.liferay.portal.kernel.theme.ThemeDisplay themeDisplay,
         java.lang.String portalUrl)
-        throws com.liferay.portal.kernel.exception.SystemException {
+        throws com.liferay.portal.kernel.exception.SystemException, NoSuchSiteMapException {
         return _siteMapLocalService.siteMapCreation(themeDisplay, portalUrl);
     }
 
@@ -300,7 +305,7 @@ public class SiteMapLocalServiceWrapper implements SiteMapLocalService,
 
     @Override
     public io.gatling.liferay.model.SiteMap findByProcessId(long processId)
-        throws com.liferay.portal.NoSuchModelException,
+        throws com.liferay.portal.kernel.exception.NoSuchModelException,
             com.liferay.portal.kernel.exception.SystemException,
             io.gatling.liferay.NoSuchProcessException {
         return _siteMapLocalService.findByProcessId(processId);
@@ -310,7 +315,7 @@ public class SiteMapLocalServiceWrapper implements SiteMapLocalService,
     public io.gatling.liferay.model.SiteMap findByName(java.lang.String name)
         throws com.liferay.portal.kernel.exception.SystemException,
             io.gatling.liferay.NoSuchRecordException,
-            io.gatling.liferay.NoSuchSiteMapException {
+            io.gatling.liferay.NoSuchSiteMapException, NoSuchSiteMapException {
         return _siteMapLocalService.findByName(name);
     }
 
@@ -338,4 +343,22 @@ public class SiteMapLocalServiceWrapper implements SiteMapLocalService,
     public void setWrappedService(SiteMapLocalService siteMapLocalService) {
         _siteMapLocalService = siteMapLocalService;
     }
+
+	@Override
+	public PersistedModel deletePersistedModel(PersistedModel persistedModel) throws PortalException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public IndexableActionableDynamicQuery getIndexableActionableDynamicQuery() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ActionableDynamicQuery getActionableDynamicQuery() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

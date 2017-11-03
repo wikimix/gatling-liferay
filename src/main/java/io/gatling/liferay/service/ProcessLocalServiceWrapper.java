@@ -15,9 +15,14 @@
  */
 package io.gatling.liferay.service;
 
+import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
+import com.liferay.portal.kernel.dao.orm.IndexableActionableDynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.PersistedModel;
 import com.liferay.portal.kernel.service.ServiceWrapper;
+
+import io.gatling.liferay.exception.NoSuchProcessException;
+import io.gatling.liferay.exception.NoSuchProcessScenarioLinkException;
 
 /**
  * Provides a wrapper for {@link ProcessLocalService}.
@@ -296,7 +301,7 @@ public class ProcessLocalServiceWrapper implements ProcessLocalService,
     @Override
     public int findPause(long scenarioId, long processesId, int order)
         throws com.liferay.portal.kernel.exception.SystemException,
-            io.gatling.liferay.NoSuchProcessScenarioLinkException {
+            io.gatling.liferay.NoSuchProcessScenarioLinkException, NoSuchProcessScenarioLinkException {
         return _processLocalService.findPause(scenarioId, processesId, order);
     }
 
@@ -311,7 +316,7 @@ public class ProcessLocalServiceWrapper implements ProcessLocalService,
     @Override
     public io.gatling.liferay.model.Process findByName(java.lang.String name)
         throws com.liferay.portal.kernel.exception.SystemException,
-            io.gatling.liferay.NoSuchProcessException {
+            io.gatling.liferay.NoSuchProcessException, NoSuchProcessException {
         return _processLocalService.findByName(name);
     }
 
@@ -320,7 +325,7 @@ public class ProcessLocalServiceWrapper implements ProcessLocalService,
         java.lang.String name, io.gatling.liferay.model.ProcessType type,
         java.lang.Long feederId)
         throws com.liferay.portal.kernel.exception.SystemException,
-            io.gatling.liferay.NoSuchProcessException {
+            io.gatling.liferay.NoSuchProcessException, NoSuchProcessException {
         return _processLocalService.updateProcess(id, name, type, feederId);
     }
 
@@ -351,6 +356,18 @@ public class ProcessLocalServiceWrapper implements ProcessLocalService,
 
 	@Override
 	public PersistedModel deletePersistedModel(PersistedModel persistedModel) throws PortalException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public IndexableActionableDynamicQuery getIndexableActionableDynamicQuery() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ActionableDynamicQuery getActionableDynamicQuery() {
 		// TODO Auto-generated method stub
 		return null;
 	}

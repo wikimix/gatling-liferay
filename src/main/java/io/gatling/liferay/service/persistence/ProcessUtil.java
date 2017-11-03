@@ -24,6 +24,7 @@ import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 import java.util.List;
 
+import io.gatling.liferay.exception.NoSuchProcessException;
 import io.gatling.liferay.model.Process;
 
 /**
@@ -123,7 +124,7 @@ public class ProcessUtil {
     public static io.gatling.liferay.model.Process findByName(
         java.lang.String name)
         throws com.liferay.portal.kernel.exception.SystemException,
-            io.gatling.liferay.NoSuchProcessException {
+            io.gatling.liferay.NoSuchProcessException, NoSuchProcessException {
         return getPersistence().findByName(name);
     }
 
@@ -160,11 +161,12 @@ public class ProcessUtil {
     * @param name the name
     * @return the process that was removed
     * @throws SystemException if a system exception occurred
+     * @throws NoSuchProcessException 
     */
     public static io.gatling.liferay.model.Process removeByName(
         java.lang.String name)
         throws com.liferay.portal.kernel.exception.SystemException,
-            io.gatling.liferay.NoSuchProcessException {
+            io.gatling.liferay.NoSuchProcessException, NoSuchProcessException {
         return getPersistence().removeByName(name);
     }
 
@@ -219,7 +221,7 @@ public class ProcessUtil {
     */
     public static io.gatling.liferay.model.Process remove(long process_id)
         throws com.liferay.portal.kernel.exception.SystemException,
-            io.gatling.liferay.NoSuchProcessException {
+            io.gatling.liferay.NoSuchProcessException, NoSuchProcessException {
         return getPersistence().remove(process_id);
     }
 
@@ -240,7 +242,7 @@ public class ProcessUtil {
     public static io.gatling.liferay.model.Process findByPrimaryKey(
         long process_id)
         throws com.liferay.portal.kernel.exception.SystemException,
-            io.gatling.liferay.NoSuchProcessException {
+            io.gatling.liferay.NoSuchProcessException, NoSuchProcessException {
         return getPersistence().findByPrimaryKey(process_id);
     }
 

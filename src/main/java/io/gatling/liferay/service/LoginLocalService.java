@@ -15,6 +15,9 @@
  */
 package io.gatling.liferay.service;
 
+import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.IndexableActionableDynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.search.IndexableType;
@@ -24,6 +27,10 @@ import com.liferay.portal.kernel.service.PersistedModelLocalService;
 import com.liferay.portal.kernel.transaction.Isolation;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
+
+import java.util.List;
+
+import io.gatling.liferay.exception.NoSuchLoginException;
 
 /**
  * Provides the local service interface for Login. Methods of this
@@ -95,17 +102,6 @@ public interface LoginLocalService extends BaseLocalService,
 
     public com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery();
 
-    /**
-    * Performs a dynamic query on the database and returns the matching rows.
-    *
-    * @param dynamicQuery the dynamic query
-    * @return the matching rows
-    * @throws SystemException if a system exception occurred
-    */
-    @SuppressWarnings("rawtypes")
-    public java.util.List dynamicQuery(
-        com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-        throws com.liferay.portal.kernel.exception.SystemException;
 
     /**
     * Performs a dynamic query on the database and returns a range of the matching rows.
@@ -252,7 +248,7 @@ public interface LoginLocalService extends BaseLocalService,
         throws java.lang.Throwable;
 
     public io.gatling.liferay.model.Login createDefaultLogin()
-        throws com.liferay.portal.kernel.exception.SystemException;
+        throws com.liferay.portal.kernel.exception.SystemException, NoSuchLoginException;
 
     public io.gatling.liferay.model.Login findByProcessId(long processId)
         throws com.liferay.portal.kernel.exception.NoSuchModelException,
@@ -262,5 +258,18 @@ public interface LoginLocalService extends BaseLocalService,
     public io.gatling.liferay.model.Login findByName(java.lang.String name)
         throws com.liferay.portal.kernel.exception.SystemException,
             io.gatling.liferay.NoSuchLoginException,
-            io.gatling.liferay.NoSuchRecordException;
+            io.gatling.liferay.NoSuchRecordException, NoSuchLoginException;
+    /**
+     * Performs a dynamic query on the database and returns the matching rows.
+     * @param <T>
+     *
+     * @param dynamicQuery the dynamic query
+     * @return the matching rows
+     * @throws SystemException if a system exception occurred
+     */
+	<T> List<T> dynamicQuery(DynamicQuery dynamicQuery);
+
+	IndexableActionableDynamicQuery getIndexableActionableDynamicQuery();
+
+	ActionableDynamicQuery getActionableDynamicQuery();
 }

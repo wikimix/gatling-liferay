@@ -18,11 +18,13 @@ package io.gatling.liferay.service.persistence;
 import com.liferay.portal.kernel.bean.PortletBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 import java.util.List;
 
+import io.gatling.liferay.exception.NoSuchProcessScenarioLinkException;
 import io.gatling.liferay.model.ProcessScenarioLink;
 
 /**
@@ -180,7 +182,7 @@ public class ProcessScenarioLinkUtil {
         long process_id,
         com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
         throws com.liferay.portal.kernel.exception.SystemException,
-            io.gatling.liferay.NoSuchProcessScenarioLinkException {
+            io.gatling.liferay.NoSuchProcessScenarioLinkException, NoSuchProcessScenarioLinkException {
         return getPersistence()
                    .findByprocessId_First(process_id, orderByComparator);
     }
@@ -214,7 +216,7 @@ public class ProcessScenarioLinkUtil {
         long process_id,
         com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
         throws com.liferay.portal.kernel.exception.SystemException,
-            io.gatling.liferay.NoSuchProcessScenarioLinkException {
+            io.gatling.liferay.NoSuchProcessScenarioLinkException, NoSuchProcessScenarioLinkException {
         return getPersistence()
                    .findByprocessId_Last(process_id, orderByComparator);
     }
@@ -249,7 +251,7 @@ public class ProcessScenarioLinkUtil {
         long psl_id, long process_id,
         com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
         throws com.liferay.portal.kernel.exception.SystemException,
-            io.gatling.liferay.NoSuchProcessScenarioLinkException {
+            io.gatling.liferay.NoSuchProcessScenarioLinkException, NoSuchProcessScenarioLinkException {
         return getPersistence()
                    .findByprocessId_PrevAndNext(psl_id, process_id,
             orderByComparator);
@@ -345,7 +347,7 @@ public class ProcessScenarioLinkUtil {
         long scenario_id,
         com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
         throws com.liferay.portal.kernel.exception.SystemException,
-            io.gatling.liferay.NoSuchProcessScenarioLinkException {
+            io.gatling.liferay.NoSuchProcessScenarioLinkException, NoSuchProcessScenarioLinkException {
         return getPersistence()
                    .findByscenarioId_First(scenario_id, orderByComparator);
     }
@@ -379,7 +381,7 @@ public class ProcessScenarioLinkUtil {
         long scenario_id,
         com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
         throws com.liferay.portal.kernel.exception.SystemException,
-            io.gatling.liferay.NoSuchProcessScenarioLinkException {
+            io.gatling.liferay.NoSuchProcessScenarioLinkException, NoSuchProcessScenarioLinkException {
         return getPersistence()
                    .findByscenarioId_Last(scenario_id, orderByComparator);
     }
@@ -414,7 +416,7 @@ public class ProcessScenarioLinkUtil {
         long psl_id, long scenario_id,
         com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
         throws com.liferay.portal.kernel.exception.SystemException,
-            io.gatling.liferay.NoSuchProcessScenarioLinkException {
+            io.gatling.liferay.NoSuchProcessScenarioLinkException, NoSuchProcessScenarioLinkException {
         return getPersistence()
                    .findByscenarioId_PrevAndNext(psl_id, scenario_id,
             orderByComparator);
@@ -456,7 +458,7 @@ public class ProcessScenarioLinkUtil {
     public static io.gatling.liferay.model.ProcessScenarioLink findByPause(
         long process_id, long scenario_id, int order)
         throws com.liferay.portal.kernel.exception.SystemException,
-            io.gatling.liferay.NoSuchProcessScenarioLinkException {
+            io.gatling.liferay.NoSuchProcessScenarioLinkException, NoSuchProcessScenarioLinkException {
         return getPersistence().findByPause(process_id, scenario_id, order);
     }
 
@@ -501,11 +503,12 @@ public class ProcessScenarioLinkUtil {
     * @param order the order
     * @return the process scenario link that was removed
     * @throws SystemException if a system exception occurred
+     * @throws NoSuchProcessScenarioLinkException 
     */
     public static io.gatling.liferay.model.ProcessScenarioLink removeByPause(
         long process_id, long scenario_id, int order)
         throws com.liferay.portal.kernel.exception.SystemException,
-            io.gatling.liferay.NoSuchProcessScenarioLinkException {
+            io.gatling.liferay.NoSuchProcessScenarioLinkException, NoSuchProcessScenarioLinkException {
         return getPersistence().removeByPause(process_id, scenario_id, order);
     }
 
@@ -565,7 +568,7 @@ public class ProcessScenarioLinkUtil {
     public static io.gatling.liferay.model.ProcessScenarioLink remove(
         long psl_id)
         throws com.liferay.portal.kernel.exception.SystemException,
-            io.gatling.liferay.NoSuchProcessScenarioLinkException {
+            io.gatling.liferay.NoSuchProcessScenarioLinkException, NoSuchProcessScenarioLinkException {
         return getPersistence().remove(psl_id);
     }
 
@@ -586,7 +589,7 @@ public class ProcessScenarioLinkUtil {
     public static io.gatling.liferay.model.ProcessScenarioLink findByPrimaryKey(
         long psl_id)
         throws com.liferay.portal.kernel.exception.SystemException,
-            io.gatling.liferay.NoSuchProcessScenarioLinkException {
+            io.gatling.liferay.NoSuchProcessScenarioLinkException, NoSuchProcessScenarioLinkException {
         return getPersistence().findByPrimaryKey(psl_id);
     }
 

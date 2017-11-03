@@ -24,6 +24,7 @@ import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 import java.util.List;
 
+import io.gatling.liferay.exception.NoSuchScenarioException;
 import io.gatling.liferay.model.Scenario;
 
 /**
@@ -180,7 +181,7 @@ public class ScenarioUtil {
         long simulation_id,
         com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
         throws com.liferay.portal.kernel.exception.SystemException,
-            io.gatling.liferay.NoSuchScenarioException {
+            io.gatling.liferay.NoSuchScenarioException, NoSuchScenarioException {
         return getPersistence()
                    .findBySimulationId_First(simulation_id, orderByComparator);
     }
@@ -214,7 +215,7 @@ public class ScenarioUtil {
         long simulation_id,
         com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
         throws com.liferay.portal.kernel.exception.SystemException,
-            io.gatling.liferay.NoSuchScenarioException {
+            io.gatling.liferay.NoSuchScenarioException, NoSuchScenarioException {
         return getPersistence()
                    .findBySimulationId_Last(simulation_id, orderByComparator);
     }
@@ -249,7 +250,7 @@ public class ScenarioUtil {
         long scenario_id, long simulation_id,
         com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
         throws com.liferay.portal.kernel.exception.SystemException,
-            io.gatling.liferay.NoSuchScenarioException {
+            io.gatling.liferay.NoSuchScenarioException, NoSuchScenarioException {
         return getPersistence()
                    .findBySimulationId_PrevAndNext(scenario_id, simulation_id,
             orderByComparator);
@@ -289,7 +290,7 @@ public class ScenarioUtil {
     public static io.gatling.liferay.model.Scenario findByName(
         java.lang.String name)
         throws com.liferay.portal.kernel.exception.SystemException,
-            io.gatling.liferay.NoSuchScenarioException {
+            io.gatling.liferay.NoSuchScenarioException, NoSuchScenarioException {
         return getPersistence().findByName(name);
     }
 
@@ -326,11 +327,12 @@ public class ScenarioUtil {
     * @param name the name
     * @return the scenario that was removed
     * @throws SystemException if a system exception occurred
+     * @throws NoSuchScenarioException 
     */
     public static io.gatling.liferay.model.Scenario removeByName(
         java.lang.String name)
         throws com.liferay.portal.kernel.exception.SystemException,
-            io.gatling.liferay.NoSuchScenarioException {
+            io.gatling.liferay.NoSuchScenarioException, NoSuchScenarioException {
         return getPersistence().removeByName(name);
     }
 
@@ -385,7 +387,7 @@ public class ScenarioUtil {
     */
     public static io.gatling.liferay.model.Scenario remove(long scenario_id)
         throws com.liferay.portal.kernel.exception.SystemException,
-            io.gatling.liferay.NoSuchScenarioException {
+            io.gatling.liferay.NoSuchScenarioException, NoSuchScenarioException {
         return getPersistence().remove(scenario_id);
     }
 
@@ -406,7 +408,7 @@ public class ScenarioUtil {
     public static io.gatling.liferay.model.Scenario findByPrimaryKey(
         long scenario_id)
         throws com.liferay.portal.kernel.exception.SystemException,
-            io.gatling.liferay.NoSuchScenarioException {
+            io.gatling.liferay.NoSuchScenarioException, NoSuchScenarioException {
         return getPersistence().findByPrimaryKey(scenario_id);
     }
 

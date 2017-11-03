@@ -146,7 +146,6 @@ public abstract class FormParamLocalServiceBaseImpl extends BaseLocalServiceImpl
 	 * @param dynamicQuery the dynamic query
 	 * @return the matching rows
 	 */
-	@Override
 	public <T> List<T> dynamicQuery(DynamicQuery dynamicQuery) {
 		return formParamPersistence.findWithDynamicQuery(dynamicQuery);
 	}

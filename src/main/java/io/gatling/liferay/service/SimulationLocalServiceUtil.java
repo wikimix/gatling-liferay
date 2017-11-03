@@ -17,6 +17,7 @@ package io.gatling.liferay.service;
 
 import com.liferay.portal.kernel.bean.PortletBeanLocatorUtil;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.model.PersistedModel;
 import com.liferay.portal.kernel.service.InvokableLocalService;
 import com.liferay.portal.kernel.util.ReferenceRegistry;
 
@@ -333,4 +334,24 @@ public class SimulationLocalServiceUtil {
      */
     public void setService(SimulationLocalService service) {
     }
+
+	public static Object getActionableDynamicQuery() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public static Object getIndexableActionableDynamicQuery() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public static Object deletePersistedModel(PersistedModel persistedModel) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public static Object getOSGiServiceIdentifier() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

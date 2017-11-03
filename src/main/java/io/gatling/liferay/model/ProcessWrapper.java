@@ -172,7 +172,7 @@ public class ProcessWrapper implements Process, ModelWrapper<Process> {
     * @return the feeder ID of this process
     */
     @Override
-    public java.lang.Long getFeederId() {
+    public long getFeederId() {
         return _process.getFeederId();
     }
 
@@ -222,25 +222,25 @@ public class ProcessWrapper implements Process, ModelWrapper<Process> {
     }
 
     @Override
-    public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {
+    public com.liferay.expando.kernel.model.ExpandoBridge getExpandoBridge() {
         return _process.getExpandoBridge();
     }
 
     @Override
     public void setExpandoBridgeAttributes(
-        com.liferay.portal.model.BaseModel<?> baseModel) {
+        com.liferay.portal.kernel.model.BaseModel<?> baseModel) {
         _process.setExpandoBridgeAttributes(baseModel);
     }
 
     @Override
     public void setExpandoBridgeAttributes(
-        com.liferay.portlet.expando.model.ExpandoBridge expandoBridge) {
+    	com.liferay.expando.kernel.model.ExpandoBridge expandoBridge) {
         _process.setExpandoBridgeAttributes(expandoBridge);
     }
 
     @Override
     public void setExpandoBridgeAttributes(
-        com.liferay.portal.service.ServiceContext serviceContext) {
+        com.liferay.portal.kernel.service.ServiceContext serviceContext) {
         _process.setExpandoBridgeAttributes(serviceContext);
     }
 
@@ -260,7 +260,7 @@ public class ProcessWrapper implements Process, ModelWrapper<Process> {
     }
 
     @Override
-    public com.liferay.portal.model.CacheModel<io.gatling.liferay.model.Process> toCacheModel() {
+    public com.liferay.portal.kernel.model.CacheModel<io.gatling.liferay.model.Process> toCacheModel() {
         return _process.toCacheModel();
     }
 
@@ -325,4 +325,22 @@ public class ProcessWrapper implements Process, ModelWrapper<Process> {
     public void resetOriginalValues() {
         _process.resetOriginalValues();
     }
+
+	@Override
+	public boolean isEntityCacheEnabled() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isFinderCacheEnabled() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void setFeederId(long feederId) {
+		// TODO Auto-generated method stub
+		
+	}
 }

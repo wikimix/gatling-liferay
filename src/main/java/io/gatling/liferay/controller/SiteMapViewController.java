@@ -58,10 +58,11 @@ public class SiteMapViewController {
 	 * @throws SystemException
 	 * @throws NoSuchRecordException
 	 * @throws NoSuchSiteMapException
+	 * @throws io.gatling.liferay.exception.NoSuchSiteMapException 
 	 */
 	@RenderMapping(params = "render=renderSiteMap")
 	public String renderRequest(final RenderRequest renderRequest,
-			final RenderResponse renderResponse, final Model model) throws SystemException, NoSuchRecordException, NoSuchSiteMapException {
+			final RenderResponse renderResponse, final Model model) throws SystemException, NoSuchRecordException, NoSuchSiteMapException, io.gatling.liferay.exception.NoSuchSiteMapException {
 		
 		long siteMapId = SiteMapLocalServiceUtil.findByName(SiteMapLocalServiceImpl.DEFAULT_NAME).getSiteMapId();
 		List<UrlSiteMap> urldata = UrlSiteMapLocalServiceUtil.findBySiteMapId(siteMapId);
@@ -78,9 +79,10 @@ public class SiteMapViewController {
 	 * @throws SystemException
 	 * @throws NoSuchRecordException
 	 * @throws NoSuchSiteMapException
+	 * @throws io.gatling.liferay.exception.NoSuchSiteMapException 
 	 */
 	@ActionMapping(params = "action=saveSiteMap")
-	public void saveSiteMap(final ActionRequest request, final ActionResponse response, final Model model) throws SystemException, NoSuchRecordException, NoSuchSiteMapException {
+	public void saveSiteMap(final ActionRequest request, final ActionResponse response, final Model model) throws SystemException, NoSuchRecordException, NoSuchSiteMapException, io.gatling.liferay.exception.NoSuchSiteMapException {
 		
 		String name = request.getParameter("name");
 		

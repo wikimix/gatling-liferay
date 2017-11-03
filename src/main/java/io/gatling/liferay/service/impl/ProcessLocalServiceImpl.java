@@ -65,7 +65,7 @@ public class ProcessLocalServiceImpl extends ProcessLocalServiceBaseImpl {
 	}
 	
 	@Override
-	public int findPause(long scenarioId, long processesId, int order) throws NoSuchProcessScenarioLinkException, SystemException{
+	public int findPause(long scenarioId, long processesId, int order) throws NoSuchProcessScenarioLinkException, SystemException, io.gatling.liferay.exception.NoSuchProcessScenarioLinkException{
 		ProcessScenarioLink link = processScenarioLinkPersistence.findByPause(processesId, scenarioId, order);
 		return link.getPause();
 	}
@@ -81,12 +81,12 @@ public class ProcessLocalServiceImpl extends ProcessLocalServiceBaseImpl {
 	}
 	
 	@Override
-	public Process findByName(String name) throws NoSuchProcessException, SystemException{
+	public Process findByName(String name) throws NoSuchProcessException, SystemException, io.gatling.liferay.exception.NoSuchProcessException{
 		return processPersistence.findByName(name);
 	}
 	
 	@Override
-	public Process updateProcess(long id, String name, ProcessType type, Long feederId) throws NoSuchProcessException, SystemException{
+	public Process updateProcess(long id, String name, ProcessType type, Long feederId) throws NoSuchProcessException, SystemException, io.gatling.liferay.exception.NoSuchProcessException{
 		Process process = processPersistence.findByPrimaryKey(id);
 		process.setName(name);
 		process.setType(type.name());

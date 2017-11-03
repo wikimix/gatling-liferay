@@ -15,6 +15,8 @@
  */
 package io.gatling.liferay.service;
 
+import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
+import com.liferay.portal.kernel.dao.orm.IndexableActionableDynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.search.IndexableType;
@@ -262,4 +264,8 @@ public interface ProcessScenarioLinkLocalService extends BaseLocalService,
     public java.util.List<io.gatling.liferay.model.ProcessScenarioLink> findByscenarioId(
         long scenarioId)
         throws com.liferay.portal.kernel.exception.SystemException;
+
+	ActionableDynamicQuery getActionableDynamicQuery();
+
+	IndexableActionableDynamicQuery getIndexableActionableDynamicQuery();
 }

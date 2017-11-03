@@ -74,7 +74,7 @@ public class ScenarioLocalServiceImpl extends ScenarioLocalServiceBaseImpl {
 	public Scenario createDefaultScenario(Simulation simulation) throws SystemException {
 		try {
 			return scenarioPersistence.findByName(DEFAULT_NAME);
-		} catch (NoSuchScenarioException e) {
+		} catch (NoSuchScenarioException | io.gatling.liferay.exception.NoSuchScenarioException e) {
 			return createScenario(DEFAULT_NAME, simulation.getSimulation_id(), "ramp Over", 100, 5);
 		}
 	}

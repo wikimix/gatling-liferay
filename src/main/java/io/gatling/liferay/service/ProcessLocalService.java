@@ -15,6 +15,8 @@
  */
 package io.gatling.liferay.service;
 
+import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
+import com.liferay.portal.kernel.dao.orm.IndexableActionableDynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.search.IndexableType;
@@ -24,6 +26,9 @@ import com.liferay.portal.kernel.service.PersistedModelLocalService;
 import com.liferay.portal.kernel.transaction.Isolation;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
+
+import io.gatling.liferay.exception.NoSuchProcessException;
+import io.gatling.liferay.exception.NoSuchProcessScenarioLinkException;
 
 /**
  * Provides the local service interface for Process. Methods of this
@@ -259,7 +264,7 @@ public interface ProcessLocalService extends BaseLocalService,
 
     public int findPause(long scenarioId, long processesId, int order)
         throws com.liferay.portal.kernel.exception.SystemException,
-            io.gatling.liferay.NoSuchProcessScenarioLinkException;
+            io.gatling.liferay.NoSuchProcessScenarioLinkException, NoSuchProcessScenarioLinkException;
 
     public io.gatling.liferay.model.Process createProcess(
         java.lang.String name, io.gatling.liferay.model.ProcessType type,
@@ -268,11 +273,15 @@ public interface ProcessLocalService extends BaseLocalService,
 
     public io.gatling.liferay.model.Process findByName(java.lang.String name)
         throws com.liferay.portal.kernel.exception.SystemException,
-            io.gatling.liferay.NoSuchProcessException;
+            io.gatling.liferay.NoSuchProcessException, NoSuchProcessException;
 
     public io.gatling.liferay.model.Process updateProcess(long id,
         java.lang.String name, io.gatling.liferay.model.ProcessType type,
         java.lang.Long feederId)
         throws com.liferay.portal.kernel.exception.SystemException,
-            io.gatling.liferay.NoSuchProcessException;
+            io.gatling.liferay.NoSuchProcessException, NoSuchProcessException;
+
+	IndexableActionableDynamicQuery getIndexableActionableDynamicQuery();
+
+	ActionableDynamicQuery getActionableDynamicQuery();
 }

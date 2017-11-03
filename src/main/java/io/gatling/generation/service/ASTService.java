@@ -98,17 +98,17 @@ public class ASTService {
 		return ASTMapper.mapRecordToAST(record);
 	}
 	
-	public static List<RecordDataAST> computesRecordDataAST(long recordId) throws SystemException, NoSuchFormParamException {
+	public static List<RecordDataAST> computesRecordDataAST(long recordId) throws SystemException, NoSuchFormParamException, io.gatling.liferay.exception.NoSuchFormParamException {
 		List<UrlRecord> urlRecords = UrlRecordLocalServiceUtil.findByRecordId(recordId);
 		return ASTMapper.mapUrlRecordsToAST(urlRecords);
 	}
 	
-	public static HttpBodyFileAST computesHttpBodyFileAST(long urlRecordId) throws NoSuchFormParamException, SystemException {
+	public static HttpBodyFileAST computesHttpBodyFileAST(long urlRecordId) throws NoSuchFormParamException, SystemException, io.gatling.liferay.exception.NoSuchFormParamException {
 		FormParam params = FormParamLocalServiceUtil.findByUrlRecordId(urlRecordId);
 		return ASTMapper.mapMultiPartFormParamToAST(params, String.valueOf(urlRecordId));
 	}
 	
-	public static ResourceFileAST computesFormParamFeederFileAST(long urlRecordId) throws NoSuchFormParamException, SystemException {
+	public static ResourceFileAST computesFormParamFeederFileAST(long urlRecordId) throws NoSuchFormParamException, SystemException, io.gatling.liferay.exception.NoSuchFormParamException {
 		FormParam params = FormParamLocalServiceUtil.findByUrlRecordId(urlRecordId);
 		return ASTMapper.mapFormParamToAST(params, String.valueOf(urlRecordId));
 	}

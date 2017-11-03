@@ -60,9 +60,10 @@ public class LoginLocalServiceImpl extends LoginLocalServiceBaseImpl {
 	 * If not found, this function creates it, persist it and returns it
 	 * @return The default Login
 	 * @throws SystemException if an error occurs in services
+	 * @throws io.gatling.liferay.exception.NoSuchLoginException 
 	 */
 	@Override
-	public Login createDefaultLogin() throws SystemException {
+	public Login createDefaultLogin() throws SystemException, io.gatling.liferay.exception.NoSuchLoginException {
 		try {
 			return loginPersistence.findByName(DEFAULT_NAME);
 		} catch (NoSuchLoginException e) {
@@ -99,9 +100,11 @@ public class LoginLocalServiceImpl extends LoginLocalServiceBaseImpl {
 	 * @throws SystemException if an error occurs in services
 	 * @throws NoSuchRecordException if no Record was found
 	 * @throws NoSuchLoginException if no Login was found
+	 * @throws io.gatling.liferay.exception.NoSuchLoginException 
 	 */
 	@Override
-	public Login findByName(String name) throws NoSuchRecordException, SystemException, NoSuchLoginException {
+	public Login findByName(String name) throws NoSuchRecordException, SystemException, NoSuchLoginException, io.gatling.liferay.exception.NoSuchLoginException {
+
 		return loginPersistence.findByName(name);
 	}
 

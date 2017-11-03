@@ -24,6 +24,7 @@ import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 import java.util.List;
 
+import io.gatling.liferay.exception.NoSuchSiteMapException;
 import io.gatling.liferay.model.SiteMap;
 
 /**
@@ -123,7 +124,7 @@ public class SiteMapUtil {
     public static io.gatling.liferay.model.SiteMap findByName(
         java.lang.String name)
         throws com.liferay.portal.kernel.exception.SystemException,
-            io.gatling.liferay.NoSuchSiteMapException {
+            io.gatling.liferay.NoSuchSiteMapException, NoSuchSiteMapException {
         return getPersistence().findByName(name);
     }
 
@@ -160,11 +161,12 @@ public class SiteMapUtil {
     * @param name the name
     * @return the site map that was removed
     * @throws SystemException if a system exception occurred
+     * @throws NoSuchSiteMapException 
     */
     public static io.gatling.liferay.model.SiteMap removeByName(
         java.lang.String name)
         throws com.liferay.portal.kernel.exception.SystemException,
-            io.gatling.liferay.NoSuchSiteMapException {
+            io.gatling.liferay.NoSuchSiteMapException, NoSuchSiteMapException {
         return getPersistence().removeByName(name);
     }
 
@@ -219,7 +221,7 @@ public class SiteMapUtil {
     */
     public static io.gatling.liferay.model.SiteMap remove(long siteMapId)
         throws com.liferay.portal.kernel.exception.SystemException,
-            io.gatling.liferay.NoSuchSiteMapException {
+            io.gatling.liferay.NoSuchSiteMapException, NoSuchSiteMapException {
         return getPersistence().remove(siteMapId);
     }
 
@@ -240,7 +242,7 @@ public class SiteMapUtil {
     public static io.gatling.liferay.model.SiteMap findByPrimaryKey(
         long siteMapId)
         throws com.liferay.portal.kernel.exception.SystemException,
-            io.gatling.liferay.NoSuchSiteMapException {
+            io.gatling.liferay.NoSuchSiteMapException, NoSuchSiteMapException {
         return getPersistence().findByPrimaryKey(siteMapId);
     }
 

@@ -232,25 +232,25 @@ public class SimulationWrapper implements Simulation, ModelWrapper<Simulation> {
     }
 
     @Override
-    public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {
+    public com.liferay.expando.kernel.model.ExpandoBridge getExpandoBridge() {
         return _simulation.getExpandoBridge();
     }
 
     @Override
     public void setExpandoBridgeAttributes(
-        com.liferay.portal.model.BaseModel<?> baseModel) {
+    	com.liferay.portal.kernel.model.BaseModel<?> baseModel) {
         _simulation.setExpandoBridgeAttributes(baseModel);
     }
 
     @Override
     public void setExpandoBridgeAttributes(
-        com.liferay.portlet.expando.model.ExpandoBridge expandoBridge) {
+    	com.liferay.expando.kernel.model.ExpandoBridge expandoBridge) {
         _simulation.setExpandoBridgeAttributes(expandoBridge);
     }
 
     @Override
     public void setExpandoBridgeAttributes(
-        com.liferay.portal.service.ServiceContext serviceContext) {
+        com.liferay.portal.kernel.service.ServiceContext serviceContext) {
         _simulation.setExpandoBridgeAttributes(serviceContext);
     }
 
@@ -270,7 +270,7 @@ public class SimulationWrapper implements Simulation, ModelWrapper<Simulation> {
     }
 
     @Override
-    public com.liferay.portal.model.CacheModel<io.gatling.liferay.model.Simulation> toCacheModel() {
+    public com.liferay.portal.kernel.model.CacheModel<io.gatling.liferay.model.Simulation> toCacheModel() {
         return _simulation.toCacheModel();
     }
 
@@ -340,4 +340,16 @@ public class SimulationWrapper implements Simulation, ModelWrapper<Simulation> {
     public void resetOriginalValues() {
         _simulation.resetOriginalValues();
     }
+
+	@Override
+	public boolean isEntityCacheEnabled() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isFinderCacheEnabled() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

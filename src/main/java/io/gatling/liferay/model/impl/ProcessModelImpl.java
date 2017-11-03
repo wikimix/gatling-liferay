@@ -419,4 +419,10 @@ public class ProcessModelImpl extends BaseModelImpl<Process>
 	private long _feederId;
 	private long _columnBitmask;
 	private Process _escapedModel;
+
+	@Override
+	public void setFeederId(Long feederId) {
+		// TODO Auto-generated method stub
+		
+	}
 }

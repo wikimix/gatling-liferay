@@ -15,6 +15,9 @@
  */
 package io.gatling.liferay.service;
 
+import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.IndexableActionableDynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.search.IndexableType;
@@ -24,6 +27,8 @@ import com.liferay.portal.kernel.service.PersistedModelLocalService;
 import com.liferay.portal.kernel.transaction.Isolation;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
+
+import java.util.List;
 
 /**
  * Provides the local service interface for UrlRecord. Methods of this
@@ -265,4 +270,8 @@ public interface UrlRecordLocalService extends BaseLocalService,
     public long save(java.lang.String url, java.lang.String type, int order,
         long recordId, int pauseTime)
         throws com.liferay.portal.kernel.exception.SystemException;
+
+	ActionableDynamicQuery getActionableDynamicQuery();
+
+	IndexableActionableDynamicQuery getIndexableActionableDynamicQuery();
 }

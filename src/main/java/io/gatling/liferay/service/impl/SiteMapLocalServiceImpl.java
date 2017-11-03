@@ -63,7 +63,7 @@ public class SiteMapLocalServiceImpl extends SiteMapLocalServiceBaseImpl {
 	public static final String DEFAULT_NAME = "_default_sitemap_";
 	
 	@Override
-	public SiteMap siteMapCreation(ThemeDisplay themeDisplay, String portalUrl) throws SystemException {
+	public SiteMap siteMapCreation(ThemeDisplay themeDisplay, String portalUrl) throws SystemException, io.gatling.liferay.exception.NoSuchSiteMapException {
 		//Remove existing siteMap
 		try {
 			SiteMap s = siteMapPersistence.findByName(DEFAULT_NAME);
@@ -73,7 +73,7 @@ public class SiteMapLocalServiceImpl extends SiteMapLocalServiceBaseImpl {
 			}
 			siteMapPersistence.remove(s.getSiteMapId());
 			
-		} catch (NoSuchSiteMapException | NoSuchUrlSiteMapException e) {}
+		} catch (NoSuchSiteMapException | NoSuchUrlSiteMapException | io.gatling.liferay.exception.NoSuchUrlSiteMapException e) {}
 		
 		SiteMap siteMap = createSiteMap(DEFAULT_NAME);
 		
@@ -110,7 +110,7 @@ public class SiteMapLocalServiceImpl extends SiteMapLocalServiceBaseImpl {
 	}
 	
 	@Override
-	public SiteMap findByName(String name) throws NoSuchRecordException, SystemException, NoSuchSiteMapException {
+	public SiteMap findByName(String name) throws NoSuchRecordException, SystemException, NoSuchSiteMapException, io.gatling.liferay.exception.NoSuchSiteMapException {
 		return siteMapPersistence.findByName(name);
 	}
 

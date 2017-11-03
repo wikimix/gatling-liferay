@@ -16,7 +16,11 @@
 package io.gatling.liferay.service.persistence;
 
 import com.liferay.portal.kernel.service.persistence.BasePersistence;
+import com.liferay.portal.kernel.util.OrderByComparator;
 
+import java.util.List;
+
+import io.gatling.liferay.exception.NoSuchProcessScenarioLinkException;
 import io.gatling.liferay.model.ProcessScenarioLink;
 
 /**
@@ -67,97 +71,6 @@ public interface ProcessScenarioLinkPersistence extends BasePersistence<ProcessS
         throws com.liferay.portal.kernel.exception.SystemException;
 
     /**
-    * Returns an ordered range of all the process scenario links where process_id = &#63;.
-    *
-    * <p>
-    * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link io.gatling.liferay.model.impl.ProcessScenarioLinkModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-    * </p>
-    *
-    * @param process_id the process_id
-    * @param start the lower bound of the range of process scenario links
-    * @param end the upper bound of the range of process scenario links (not inclusive)
-    * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-    * @return the ordered range of matching process scenario links
-    * @throws SystemException if a system exception occurred
-    */
-    public java.util.List<io.gatling.liferay.model.ProcessScenarioLink> findByprocessId(
-        long process_id, int start, int end,
-        com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-        throws com.liferay.portal.kernel.exception.SystemException;
-
-    /**
-    * Returns the first process scenario link in the ordered set where process_id = &#63;.
-    *
-    * @param process_id the process_id
-    * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-    * @return the first matching process scenario link
-    * @throws io.gatling.liferay.NoSuchProcessScenarioLinkException if a matching process scenario link could not be found
-    * @throws SystemException if a system exception occurred
-    */
-    public io.gatling.liferay.model.ProcessScenarioLink findByprocessId_First(
-        long process_id,
-        com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-        throws com.liferay.portal.kernel.exception.SystemException,
-            io.gatling.liferay.NoSuchProcessScenarioLinkException;
-
-    /**
-    * Returns the first process scenario link in the ordered set where process_id = &#63;.
-    *
-    * @param process_id the process_id
-    * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-    * @return the first matching process scenario link, or <code>null</code> if a matching process scenario link could not be found
-    * @throws SystemException if a system exception occurred
-    */
-    public io.gatling.liferay.model.ProcessScenarioLink fetchByprocessId_First(
-        long process_id,
-        com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-        throws com.liferay.portal.kernel.exception.SystemException;
-
-    /**
-    * Returns the last process scenario link in the ordered set where process_id = &#63;.
-    *
-    * @param process_id the process_id
-    * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-    * @return the last matching process scenario link
-    * @throws io.gatling.liferay.NoSuchProcessScenarioLinkException if a matching process scenario link could not be found
-    * @throws SystemException if a system exception occurred
-    */
-    public io.gatling.liferay.model.ProcessScenarioLink findByprocessId_Last(
-        long process_id,
-        com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-        throws com.liferay.portal.kernel.exception.SystemException,
-            io.gatling.liferay.NoSuchProcessScenarioLinkException;
-
-    /**
-    * Returns the last process scenario link in the ordered set where process_id = &#63;.
-    *
-    * @param process_id the process_id
-    * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-    * @return the last matching process scenario link, or <code>null</code> if a matching process scenario link could not be found
-    * @throws SystemException if a system exception occurred
-    */
-    public io.gatling.liferay.model.ProcessScenarioLink fetchByprocessId_Last(
-        long process_id,
-        com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-        throws com.liferay.portal.kernel.exception.SystemException;
-
-    /**
-    * Returns the process scenario links before and after the current process scenario link in the ordered set where process_id = &#63;.
-    *
-    * @param psl_id the primary key of the current process scenario link
-    * @param process_id the process_id
-    * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-    * @return the previous, current, and next process scenario link
-    * @throws io.gatling.liferay.NoSuchProcessScenarioLinkException if a process scenario link with the primary key could not be found
-    * @throws SystemException if a system exception occurred
-    */
-    public io.gatling.liferay.model.ProcessScenarioLink[] findByprocessId_PrevAndNext(
-        long psl_id, long process_id,
-        com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-        throws com.liferay.portal.kernel.exception.SystemException,
-            io.gatling.liferay.NoSuchProcessScenarioLinkException;
-
-    /**
     * Removes all the process scenario links where process_id = &#63; from the database.
     *
     * @param process_id the process_id
@@ -205,97 +118,6 @@ public interface ProcessScenarioLinkPersistence extends BasePersistence<ProcessS
         throws com.liferay.portal.kernel.exception.SystemException;
 
     /**
-    * Returns an ordered range of all the process scenario links where scenario_id = &#63;.
-    *
-    * <p>
-    * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link io.gatling.liferay.model.impl.ProcessScenarioLinkModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-    * </p>
-    *
-    * @param scenario_id the scenario_id
-    * @param start the lower bound of the range of process scenario links
-    * @param end the upper bound of the range of process scenario links (not inclusive)
-    * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-    * @return the ordered range of matching process scenario links
-    * @throws SystemException if a system exception occurred
-    */
-    public java.util.List<io.gatling.liferay.model.ProcessScenarioLink> findByscenarioId(
-        long scenario_id, int start, int end,
-        com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-        throws com.liferay.portal.kernel.exception.SystemException;
-
-    /**
-    * Returns the first process scenario link in the ordered set where scenario_id = &#63;.
-    *
-    * @param scenario_id the scenario_id
-    * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-    * @return the first matching process scenario link
-    * @throws io.gatling.liferay.NoSuchProcessScenarioLinkException if a matching process scenario link could not be found
-    * @throws SystemException if a system exception occurred
-    */
-    public io.gatling.liferay.model.ProcessScenarioLink findByscenarioId_First(
-        long scenario_id,
-        com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-        throws com.liferay.portal.kernel.exception.SystemException,
-            io.gatling.liferay.NoSuchProcessScenarioLinkException;
-
-    /**
-    * Returns the first process scenario link in the ordered set where scenario_id = &#63;.
-    *
-    * @param scenario_id the scenario_id
-    * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-    * @return the first matching process scenario link, or <code>null</code> if a matching process scenario link could not be found
-    * @throws SystemException if a system exception occurred
-    */
-    public io.gatling.liferay.model.ProcessScenarioLink fetchByscenarioId_First(
-        long scenario_id,
-        com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-        throws com.liferay.portal.kernel.exception.SystemException;
-
-    /**
-    * Returns the last process scenario link in the ordered set where scenario_id = &#63;.
-    *
-    * @param scenario_id the scenario_id
-    * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-    * @return the last matching process scenario link
-    * @throws io.gatling.liferay.NoSuchProcessScenarioLinkException if a matching process scenario link could not be found
-    * @throws SystemException if a system exception occurred
-    */
-    public io.gatling.liferay.model.ProcessScenarioLink findByscenarioId_Last(
-        long scenario_id,
-        com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-        throws com.liferay.portal.kernel.exception.SystemException,
-            io.gatling.liferay.NoSuchProcessScenarioLinkException;
-
-    /**
-    * Returns the last process scenario link in the ordered set where scenario_id = &#63;.
-    *
-    * @param scenario_id the scenario_id
-    * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-    * @return the last matching process scenario link, or <code>null</code> if a matching process scenario link could not be found
-    * @throws SystemException if a system exception occurred
-    */
-    public io.gatling.liferay.model.ProcessScenarioLink fetchByscenarioId_Last(
-        long scenario_id,
-        com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-        throws com.liferay.portal.kernel.exception.SystemException;
-
-    /**
-    * Returns the process scenario links before and after the current process scenario link in the ordered set where scenario_id = &#63;.
-    *
-    * @param psl_id the primary key of the current process scenario link
-    * @param scenario_id the scenario_id
-    * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-    * @return the previous, current, and next process scenario link
-    * @throws io.gatling.liferay.NoSuchProcessScenarioLinkException if a process scenario link with the primary key could not be found
-    * @throws SystemException if a system exception occurred
-    */
-    public io.gatling.liferay.model.ProcessScenarioLink[] findByscenarioId_PrevAndNext(
-        long psl_id, long scenario_id,
-        com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-        throws com.liferay.portal.kernel.exception.SystemException,
-            io.gatling.liferay.NoSuchProcessScenarioLinkException;
-
-    /**
     * Removes all the process scenario links where scenario_id = &#63; from the database.
     *
     * @param scenario_id the scenario_id
@@ -327,7 +149,7 @@ public interface ProcessScenarioLinkPersistence extends BasePersistence<ProcessS
     public io.gatling.liferay.model.ProcessScenarioLink findByPause(
         long process_id, long scenario_id, int order)
         throws com.liferay.portal.kernel.exception.SystemException,
-            io.gatling.liferay.NoSuchProcessScenarioLinkException;
+            io.gatling.liferay.NoSuchProcessScenarioLinkException, NoSuchProcessScenarioLinkException;
 
     /**
     * Returns the process scenario link where process_id = &#63; and scenario_id = &#63; and order = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
@@ -364,11 +186,12 @@ public interface ProcessScenarioLinkPersistence extends BasePersistence<ProcessS
     * @param order the order
     * @return the process scenario link that was removed
     * @throws SystemException if a system exception occurred
+     * @throws NoSuchProcessScenarioLinkException 
     */
     public io.gatling.liferay.model.ProcessScenarioLink removeByPause(
         long process_id, long scenario_id, int order)
         throws com.liferay.portal.kernel.exception.SystemException,
-            io.gatling.liferay.NoSuchProcessScenarioLinkException;
+            io.gatling.liferay.NoSuchProcessScenarioLinkException, NoSuchProcessScenarioLinkException;
 
     /**
     * Returns the number of process scenario links where process_id = &#63; and scenario_id = &#63; and order = &#63;.
@@ -416,7 +239,7 @@ public interface ProcessScenarioLinkPersistence extends BasePersistence<ProcessS
     */
     public io.gatling.liferay.model.ProcessScenarioLink remove(long psl_id)
         throws com.liferay.portal.kernel.exception.SystemException,
-            io.gatling.liferay.NoSuchProcessScenarioLinkException;
+            io.gatling.liferay.NoSuchProcessScenarioLinkException, NoSuchProcessScenarioLinkException;
 
     public io.gatling.liferay.model.ProcessScenarioLink updateImpl(
         io.gatling.liferay.model.ProcessScenarioLink processScenarioLink)
@@ -433,7 +256,7 @@ public interface ProcessScenarioLinkPersistence extends BasePersistence<ProcessS
     public io.gatling.liferay.model.ProcessScenarioLink findByPrimaryKey(
         long psl_id)
         throws com.liferay.portal.kernel.exception.SystemException,
-            io.gatling.liferay.NoSuchProcessScenarioLinkException;
+            io.gatling.liferay.NoSuchProcessScenarioLinkException, NoSuchProcessScenarioLinkException;
 
     /**
     * Returns the process scenario link with the primary key or returns <code>null</code> if it could not be found.
@@ -470,23 +293,6 @@ public interface ProcessScenarioLinkPersistence extends BasePersistence<ProcessS
         int start, int end)
         throws com.liferay.portal.kernel.exception.SystemException;
 
-    /**
-    * Returns an ordered range of all the process scenario links.
-    *
-    * <p>
-    * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link io.gatling.liferay.model.impl.ProcessScenarioLinkModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-    * </p>
-    *
-    * @param start the lower bound of the range of process scenario links
-    * @param end the upper bound of the range of process scenario links (not inclusive)
-    * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-    * @return the ordered range of process scenario links
-    * @throws SystemException if a system exception occurred
-    */
-    public java.util.List<io.gatling.liferay.model.ProcessScenarioLink> findAll(
-        int start, int end,
-        com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-        throws com.liferay.portal.kernel.exception.SystemException;
 
     /**
     * Removes all the process scenario links from the database.
@@ -504,4 +310,157 @@ public interface ProcessScenarioLinkPersistence extends BasePersistence<ProcessS
     */
     public int countAll()
         throws com.liferay.portal.kernel.exception.SystemException;
+
+	List<ProcessScenarioLink> findByprocessId(long process_id, int start, int end,
+			OrderByComparator<ProcessScenarioLink> orderByComparator) throws com.liferay.portal.kernel.exception.SystemException;
+
+	List<ProcessScenarioLink> findByprocessId(long process_id, int start, int end,
+			OrderByComparator<ProcessScenarioLink> orderByComparator, boolean retrieveFromCache);
+	   /**
+	    * Returns the first process scenario link in the ordered set where process_id = &#63;.
+	    *
+	    * @param process_id the process_id
+	    * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	    * @return the first matching process scenario link
+	    * @throws io.gatling.liferay.NoSuchProcessScenarioLinkException if a matching process scenario link could not be found
+	    * @throws SystemException if a system exception occurred
+	    */
+	ProcessScenarioLink findByprocessId_First(long process_id, OrderByComparator<ProcessScenarioLink> orderByComparator)
+			throws NoSuchProcessScenarioLinkException, io.gatling.liferay.NoSuchProcessScenarioLinkException;
+
+	   /**
+	    * Returns the first process scenario link in the ordered set where process_id = &#63;.
+	    *
+	    * @param process_id the process_id
+	    * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	    * @return the first matching process scenario link, or <code>null</code> if a matching process scenario link could not be found
+	    * @throws SystemException if a system exception occurred
+	    **/
+	ProcessScenarioLink fetchByprocessId_First(long process_id,
+			OrderByComparator<ProcessScenarioLink> orderByComparator)throws com.liferay.portal.kernel.exception.SystemException;
+	
+	 /**
+	    * Returns the last process scenario link in the ordered set where process_id = &#63;.
+	    *
+	    * @param process_id the process_id
+	    * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	    * @return the last matching process scenario link
+	    * @throws io.gatling.liferay.NoSuchProcessScenarioLinkException if a matching process scenario link could not be found
+	    * @throws SystemException if a system exception occurred
+	    */
+	ProcessScenarioLink findByprocessId_Last(long process_id, OrderByComparator<ProcessScenarioLink> orderByComparator)
+			throws NoSuchProcessScenarioLinkException;
+
+    /**
+    * Returns the last process scenario link in the ordered set where process_id = &#63;.
+    *
+    * @param process_id the process_id
+    * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+    * @return the last matching process scenario link, or <code>null</code> if a matching process scenario link could not be found
+    * @throws SystemException if a system exception occurred
+    */
+	ProcessScenarioLink fetchByprocessId_Last(long process_id,
+			OrderByComparator<ProcessScenarioLink> orderByComparator);
+	
+	/**
+	 * Returns the process scenario links before and after the current process scenario link in the ordered set where process_id = &#63;.
+	 *
+	 * @param psl_id the primary key of the current process scenario link
+	 * @param process_id the process_id
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next process scenario link
+	 * @throws NoSuchProcessScenarioLinkException if a process scenario link with the primary key could not be found
+	 */
+	ProcessScenarioLink[] findByprocessId_PrevAndNext(long psl_id, long process_id,
+			OrderByComparator<ProcessScenarioLink> orderByComparator) throws NoSuchProcessScenarioLinkException;
+	 /**
+	    * Returns an ordered range of all the process scenario links where scenario_id = &#63;.
+	    *
+	    * <p>
+	    * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link io.gatling.liferay.model.impl.ProcessScenarioLinkModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	    * </p>
+	    *
+	    * @param scenario_id the scenario_id
+	    * @param start the lower bound of the range of process scenario links
+	    * @param end the upper bound of the range of process scenario links (not inclusive)
+	    * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	    * @return the ordered range of matching process scenario links
+	    * @throws SystemException if a system exception occurred
+	    */
+	List<ProcessScenarioLink> findByscenarioId(long scenario_id, int start, int end,
+			OrderByComparator<ProcessScenarioLink> orderByComparator);
+
+	List<ProcessScenarioLink> findByscenarioId(long scenario_id, int start, int end,
+			OrderByComparator<ProcessScenarioLink> orderByComparator, boolean retrieveFromCache);
+	 /**
+	    * Returns the first process scenario link in the ordered set where scenario_id = &#63;.
+	    *
+	    * @param scenario_id the scenario_id
+	    * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	    * @return the first matching process scenario link
+	    * @throws io.gatling.liferay.NoSuchProcessScenarioLinkException if a matching process scenario link could not be found
+	    * @throws SystemException if a system exception occurred
+	    */
+	ProcessScenarioLink findByscenarioId_First(long scenario_id,
+			OrderByComparator<ProcessScenarioLink> orderByComparator) throws NoSuchProcessScenarioLinkException;
+	 /**
+	    * Returns the first process scenario link in the ordered set where scenario_id = &#63;.
+	    *
+	    * @param scenario_id the scenario_id
+	    * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	    * @return the first matching process scenario link, or <code>null</code> if a matching process scenario link could not be found
+	    * @throws SystemException if a system exception occurred
+	    */
+	ProcessScenarioLink fetchByscenarioId_First(long scenario_id,
+			OrderByComparator<ProcessScenarioLink> orderByComparator);
+	  /**
+	    * Returns the last process scenario link in the ordered set where scenario_id = &#63;.
+	    *
+	    * @param scenario_id the scenario_id
+	    * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	    * @return the last matching process scenario link
+	    * @throws io.gatling.liferay.NoSuchProcessScenarioLinkException if a matching process scenario link could not be found
+	    * @throws SystemException if a system exception occurred
+	    */
+	ProcessScenarioLink findByscenarioId_Last(long scenario_id,
+			OrderByComparator<ProcessScenarioLink> orderByComparator) throws NoSuchProcessScenarioLinkException;
+	 /**
+	    * Returns the last process scenario link in the ordered set where scenario_id = &#63;.
+	    *
+	    * @param scenario_id the scenario_id
+	    * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	    * @return the last matching process scenario link, or <code>null</code> if a matching process scenario link could not be found
+	    * @throws SystemException if a system exception occurred
+	    */
+	ProcessScenarioLink fetchByscenarioId_Last(long scenario_id,
+			OrderByComparator<ProcessScenarioLink> orderByComparator);
+	 /**
+	    * Returns the process scenario links before and after the current process scenario link in the ordered set where scenario_id = &#63;.
+	    *
+	    * @param psl_id the primary key of the current process scenario link
+	    * @param scenario_id the scenario_id
+	    * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	    * @return the previous, current, and next process scenario link
+	    * @throws io.gatling.liferay.NoSuchProcessScenarioLinkException if a process scenario link with the primary key could not be found
+	    * @throws SystemException if a system exception occurred
+	    */
+	ProcessScenarioLink[] findByscenarioId_PrevAndNext(long psl_id, long scenario_id,
+			OrderByComparator<ProcessScenarioLink> orderByComparator) throws NoSuchProcessScenarioLinkException;
+
+	List<ProcessScenarioLink> findAll(int start, int end, OrderByComparator<ProcessScenarioLink> orderByComparator,
+			boolean retrieveFromCache);
+	 /**
+	    * Returns an ordered range of all the process scenario links.
+	    *
+	    * <p>
+	    * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link io.gatling.liferay.model.impl.ProcessScenarioLinkModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	    * </p>
+	    *
+	    * @param start the lower bound of the range of process scenario links
+	    * @param end the upper bound of the range of process scenario links (not inclusive)
+	    * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	    * @return the ordered range of process scenario links
+	    * @throws SystemException if a system exception occurred
+	    */
+	List<ProcessScenarioLink> findAll(int start, int end, OrderByComparator<ProcessScenarioLink> orderByComparator) throws com.liferay.portal.kernel.exception.SystemException;
 }

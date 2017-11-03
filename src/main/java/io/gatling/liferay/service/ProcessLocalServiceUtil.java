@@ -17,8 +17,12 @@ package io.gatling.liferay.service;
 
 import com.liferay.portal.kernel.bean.PortletBeanLocatorUtil;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.model.PersistedModel;
 import com.liferay.portal.kernel.service.InvokableLocalService;
 import com.liferay.portal.kernel.util.ReferenceRegistry;
+
+import io.gatling.liferay.exception.NoSuchProcessException;
+import io.gatling.liferay.exception.NoSuchProcessScenarioLinkException;
 
 /**
  * Provides the local service utility for Process. This utility wraps
@@ -286,7 +290,7 @@ public class ProcessLocalServiceUtil {
 
     public static int findPause(long scenarioId, long processesId, int order)
         throws com.liferay.portal.kernel.exception.SystemException,
-            io.gatling.liferay.NoSuchProcessScenarioLinkException {
+            io.gatling.liferay.NoSuchProcessScenarioLinkException, NoSuchProcessScenarioLinkException {
         return getService().findPause(scenarioId, processesId, order);
     }
 
@@ -300,7 +304,7 @@ public class ProcessLocalServiceUtil {
     public static io.gatling.liferay.model.Process findByName(
         java.lang.String name)
         throws com.liferay.portal.kernel.exception.SystemException,
-            io.gatling.liferay.NoSuchProcessException {
+            io.gatling.liferay.NoSuchProcessException, NoSuchProcessException {
         return getService().findByName(name);
     }
 
@@ -308,7 +312,7 @@ public class ProcessLocalServiceUtil {
         java.lang.String name, io.gatling.liferay.model.ProcessType type,
         java.lang.Long feederId)
         throws com.liferay.portal.kernel.exception.SystemException,
-            io.gatling.liferay.NoSuchProcessException {
+            io.gatling.liferay.NoSuchProcessException, NoSuchProcessException {
         return getService().updateProcess(id, name, type, feederId);
     }
 
@@ -339,4 +343,24 @@ public class ProcessLocalServiceUtil {
      */
     public void setService(ProcessLocalService service) {
     }
+
+	public static Object getOSGiServiceIdentifier() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public static Object deletePersistedModel(PersistedModel persistedModel) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public static Object getIndexableActionableDynamicQuery() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public static Object getActionableDynamicQuery() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

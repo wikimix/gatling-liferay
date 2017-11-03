@@ -16,6 +16,7 @@
 package io.gatling.liferay.service;
 
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.model.PersistedModel;
 import com.liferay.portal.kernel.service.ServiceWrapper;
 
 import io.gatling.liferay.model.Simulation;
@@ -212,7 +213,7 @@ public class SimulationLocalServiceWrapper implements SimulationLocalService,
     }
 
     @Override
-    public com.liferay.portal.model.PersistedModel getPersistedModel(
+    public com.liferay.portal.kernel.model.PersistedModel getPersistedModel(
         java.io.Serializable primaryKeyObj)
         throws com.liferay.portal.kernel.exception.PortalException,
             com.liferay.portal.kernel.exception.SystemException {
@@ -343,4 +344,10 @@ public class SimulationLocalServiceWrapper implements SimulationLocalService,
     public void setWrappedService(SimulationLocalService simulationLocalService) {
         _simulationLocalService = simulationLocalService;
     }
+
+	@Override
+	public PersistedModel deletePersistedModel(PersistedModel persistedModel) throws PortalException {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

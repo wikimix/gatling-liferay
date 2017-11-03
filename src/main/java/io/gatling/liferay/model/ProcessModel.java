@@ -106,7 +106,7 @@ public interface ProcessModel extends BaseModel<Process> {
      *
      * @return the feeder ID of this process
      */
-    public Long getFeederId();
+    public long getFeederId();
 
     /**
      * Sets the feeder ID of this process.
@@ -171,4 +171,6 @@ public interface ProcessModel extends BaseModel<Process> {
 
     @Override
     public String toXmlString();
+
+	void setFeederId(long feederId);
 }

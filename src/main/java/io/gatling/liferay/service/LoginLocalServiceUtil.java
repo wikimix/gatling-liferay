@@ -17,8 +17,11 @@ package io.gatling.liferay.service;
 
 import com.liferay.portal.kernel.bean.PortletBeanLocatorUtil;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.model.PersistedModel;
 import com.liferay.portal.kernel.service.InvokableLocalService;
 import com.liferay.portal.kernel.util.ReferenceRegistry;
+
+import io.gatling.liferay.exception.NoSuchLoginException;
 
 /**
  * Provides the local service utility for Login. This utility wraps
@@ -276,7 +279,7 @@ public class LoginLocalServiceUtil {
     }
 
     public static io.gatling.liferay.model.Login createDefaultLogin()
-        throws com.liferay.portal.kernel.exception.SystemException {
+        throws com.liferay.portal.kernel.exception.SystemException, NoSuchLoginException {
         return getService().createDefaultLogin();
     }
 
@@ -291,7 +294,7 @@ public class LoginLocalServiceUtil {
         java.lang.String name)
         throws com.liferay.portal.kernel.exception.SystemException,
             io.gatling.liferay.NoSuchLoginException,
-            io.gatling.liferay.NoSuchRecordException {
+            io.gatling.liferay.NoSuchRecordException, NoSuchLoginException {
         return getService().findByName(name);
     }
 
@@ -322,4 +325,24 @@ public class LoginLocalServiceUtil {
      */
     public void setService(LoginLocalService service) {
     }
+
+	public static Object getOSGiServiceIdentifier() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public static Object getActionableDynamicQuery() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public static Object getIndexableActionableDynamicQuery() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public static Object deletePersistedModel(PersistedModel persistedModel) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

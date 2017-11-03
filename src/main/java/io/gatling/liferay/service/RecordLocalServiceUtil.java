@@ -17,8 +17,11 @@ package io.gatling.liferay.service;
 
 import com.liferay.portal.kernel.bean.PortletBeanLocatorUtil;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.model.PersistedModel;
 import com.liferay.portal.kernel.service.InvokableLocalService;
 import com.liferay.portal.kernel.util.ReferenceRegistry;
+
+import io.gatling.liferay.exception.NoSuchRecordException;
 
 /**
  * Provides the local service utility for Record. This utility wraps
@@ -292,7 +295,7 @@ public class RecordLocalServiceUtil {
     public static io.gatling.liferay.model.Record findByName(
         java.lang.String name)
         throws com.liferay.portal.kernel.exception.SystemException,
-            io.gatling.liferay.NoSuchRecordException {
+            io.gatling.liferay.NoSuchRecordException, NoSuchRecordException {
         return getService().findByName(name);
     }
 
@@ -340,4 +343,24 @@ public class RecordLocalServiceUtil {
      */
     public void setService(RecordLocalService service) {
     }
+
+	public static Object getActionableDynamicQuery() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public static Object getIndexableActionableDynamicQuery() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public static Object deletePersistedModel(PersistedModel persistedModel) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public static Object getOSGiServiceIdentifier() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

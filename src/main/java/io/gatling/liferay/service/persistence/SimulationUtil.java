@@ -24,6 +24,7 @@ import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 import java.util.List;
 
+import io.gatling.liferay.exception.NoSuchSimulationException;
 import io.gatling.liferay.model.Simulation;
 
 /**
@@ -153,7 +154,7 @@ public class SimulationUtil {
     */
     public static io.gatling.liferay.model.Simulation remove(long simulation_id)
         throws com.liferay.portal.kernel.exception.SystemException,
-            io.gatling.liferay.NoSuchSimulationException {
+            io.gatling.liferay.NoSuchSimulationException, NoSuchSimulationException {
         return getPersistence().remove(simulation_id);
     }
 
@@ -174,7 +175,7 @@ public class SimulationUtil {
     public static io.gatling.liferay.model.Simulation findByPrimaryKey(
         long simulation_id)
         throws com.liferay.portal.kernel.exception.SystemException,
-            io.gatling.liferay.NoSuchSimulationException {
+            io.gatling.liferay.NoSuchSimulationException, NoSuchSimulationException {
         return getPersistence().findByPrimaryKey(simulation_id);
     }
 

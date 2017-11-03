@@ -15,8 +15,13 @@
  */
 package io.gatling.liferay.service;
 
+import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
+import com.liferay.portal.kernel.dao.orm.IndexableActionableDynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.model.PersistedModel;
 import com.liferay.portal.kernel.service.ServiceWrapper;
+
+import io.gatling.liferay.exception.NoSuchRecordException;
 
 /**
  * Provides a wrapper for {@link RecordLocalService}.
@@ -302,7 +307,7 @@ public class RecordLocalServiceWrapper implements RecordLocalService,
     @Override
     public io.gatling.liferay.model.Record findByName(java.lang.String name)
         throws com.liferay.portal.kernel.exception.SystemException,
-            io.gatling.liferay.NoSuchRecordException {
+            io.gatling.liferay.NoSuchRecordException, NoSuchRecordException {
         return _recordLocalService.findByName(name);
     }
 
@@ -350,4 +355,22 @@ public class RecordLocalServiceWrapper implements RecordLocalService,
     public void setWrappedService(RecordLocalService recordLocalService) {
         _recordLocalService = recordLocalService;
     }
+
+	@Override
+	public PersistedModel deletePersistedModel(PersistedModel persistedModel) throws PortalException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ActionableDynamicQuery getActionableDynamicQuery() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public IndexableActionableDynamicQuery getIndexableActionableDynamicQuery() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

@@ -17,8 +17,13 @@ package io.gatling.liferay.service;
 
 import com.liferay.portal.kernel.bean.PortletBeanLocatorUtil;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.model.PersistedModel;
 import com.liferay.portal.kernel.service.InvokableLocalService;
 import com.liferay.portal.kernel.util.ReferenceRegistry;
+
+import java.util.List;
+
+import io.gatling.liferay.exception.NoSuchSiteMapException;
 
 /**
  * Provides the local service utility for SiteMap. This utility wraps
@@ -128,7 +133,7 @@ public class SiteMapLocalServiceUtil {
     public static java.util.List dynamicQuery(
         com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
         int end) throws com.liferay.portal.kernel.exception.SystemException {
-        return getService().dynamicQuery(dynamicQuery, start, end);
+        return (List) getService().dynamicQuery();
     }
 
     /**
@@ -278,7 +283,7 @@ public class SiteMapLocalServiceUtil {
     public static io.gatling.liferay.model.SiteMap siteMapCreation(
         com.liferay.portal.kernel.theme.ThemeDisplay themeDisplay,
         java.lang.String portalUrl)
-        throws com.liferay.portal.kernel.exception.SystemException {
+        throws com.liferay.portal.kernel.exception.SystemException, NoSuchSiteMapException {
         return getService().siteMapCreation(themeDisplay, portalUrl);
     }
 
@@ -300,7 +305,7 @@ public class SiteMapLocalServiceUtil {
         java.lang.String name)
         throws com.liferay.portal.kernel.exception.SystemException,
             io.gatling.liferay.NoSuchRecordException,
-            io.gatling.liferay.NoSuchSiteMapException {
+            io.gatling.liferay.NoSuchSiteMapException, NoSuchSiteMapException {
         return getService().findByName(name);
     }
 
@@ -331,4 +336,24 @@ public class SiteMapLocalServiceUtil {
      */
     public void setService(SiteMapLocalService service) {
     }
+
+	public static Object getActionableDynamicQuery() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public static Object getIndexableActionableDynamicQuery() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public static Object deletePersistedModel(PersistedModel persistedModel) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public static Object getOSGiServiceIdentifier() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

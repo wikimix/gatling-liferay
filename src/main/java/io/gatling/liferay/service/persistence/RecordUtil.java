@@ -18,11 +18,13 @@ package io.gatling.liferay.service.persistence;
 import com.liferay.portal.kernel.bean.PortletBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 import java.util.List;
 
+import io.gatling.liferay.exception.NoSuchRecordException;
 import io.gatling.liferay.model.Record;
 
 /**
@@ -177,7 +179,7 @@ public class RecordUtil {
         java.lang.String portletId,
         com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
         throws com.liferay.portal.kernel.exception.SystemException,
-            io.gatling.liferay.NoSuchRecordException {
+            io.gatling.liferay.NoSuchRecordException, NoSuchRecordException {
         return getPersistence()
                    .findByPortletId_First(portletId, orderByComparator);
     }
@@ -211,7 +213,7 @@ public class RecordUtil {
         java.lang.String portletId,
         com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
         throws com.liferay.portal.kernel.exception.SystemException,
-            io.gatling.liferay.NoSuchRecordException {
+            io.gatling.liferay.NoSuchRecordException, NoSuchRecordException {
         return getPersistence()
                    .findByPortletId_Last(portletId, orderByComparator);
     }
@@ -246,7 +248,7 @@ public class RecordUtil {
         long recordId, java.lang.String portletId,
         com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
         throws com.liferay.portal.kernel.exception.SystemException,
-            io.gatling.liferay.NoSuchRecordException {
+            io.gatling.liferay.NoSuchRecordException, NoSuchRecordException {
         return getPersistence()
                    .findByPortletId_PrevAndNext(recordId, portletId,
             orderByComparator);
@@ -286,7 +288,7 @@ public class RecordUtil {
     public static io.gatling.liferay.model.Record findByName(
         java.lang.String name)
         throws com.liferay.portal.kernel.exception.SystemException,
-            io.gatling.liferay.NoSuchRecordException {
+            io.gatling.liferay.NoSuchRecordException, NoSuchRecordException {
         return getPersistence().findByName(name);
     }
 
@@ -323,11 +325,12 @@ public class RecordUtil {
     * @param name the name
     * @return the record that was removed
     * @throws SystemException if a system exception occurred
+     * @throws NoSuchRecordException 
     */
     public static io.gatling.liferay.model.Record removeByName(
         java.lang.String name)
         throws com.liferay.portal.kernel.exception.SystemException,
-            io.gatling.liferay.NoSuchRecordException {
+            io.gatling.liferay.NoSuchRecordException, NoSuchRecordException {
         return getPersistence().removeByName(name);
     }
 
@@ -382,7 +385,7 @@ public class RecordUtil {
     */
     public static io.gatling.liferay.model.Record remove(long recordId)
         throws com.liferay.portal.kernel.exception.SystemException,
-            io.gatling.liferay.NoSuchRecordException {
+            io.gatling.liferay.NoSuchRecordException, NoSuchRecordException {
         return getPersistence().remove(recordId);
     }
 
@@ -403,7 +406,7 @@ public class RecordUtil {
     public static io.gatling.liferay.model.Record findByPrimaryKey(
         long recordId)
         throws com.liferay.portal.kernel.exception.SystemException,
-            io.gatling.liferay.NoSuchRecordException {
+            io.gatling.liferay.NoSuchRecordException, NoSuchRecordException {
         return getPersistence().findByPrimaryKey(recordId);
     }
 

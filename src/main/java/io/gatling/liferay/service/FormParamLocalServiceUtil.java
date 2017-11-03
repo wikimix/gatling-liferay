@@ -17,8 +17,13 @@ package io.gatling.liferay.service;
 
 import com.liferay.portal.kernel.bean.PortletBeanLocatorUtil;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.model.PersistedModel;
 import com.liferay.portal.kernel.service.InvokableLocalService;
 import com.liferay.portal.kernel.util.ReferenceRegistry;
+
+import java.io.Serializable;
+
+import io.gatling.liferay.exception.NoSuchFormParamException;
 
 /**
  * Provides the local service utility for FormParam. This utility wraps
@@ -206,11 +211,11 @@ public class FormParamLocalServiceUtil {
         return getService().getFormParam(formParamId);
     }
 
-    public static com.liferay.portal.model.PersistedModel getPersistedModel(
-        java.io.Serializable primaryKeyObj)
+    public static com.liferay.portal.kernel.model.PersistedModel getPersistedModel(
+        PersistedModel arguments)
         throws com.liferay.portal.kernel.exception.PortalException,
             com.liferay.portal.kernel.exception.SystemException {
-        return getService().getPersistedModel(primaryKeyObj);
+        return getService().getPersistedModel(arguments);
     }
 
     /**
@@ -282,7 +287,7 @@ public class FormParamLocalServiceUtil {
     public static io.gatling.liferay.model.FormParam findByUrlRecordId(
         long urlRecordId)
         throws com.liferay.portal.kernel.exception.SystemException,
-            io.gatling.liferay.NoSuchFormParamException {
+            io.gatling.liferay.NoSuchFormParamException, NoSuchFormParamException {
         return getService().findByUrlRecordId(urlRecordId);
     }
 
@@ -318,4 +323,19 @@ public class FormParamLocalServiceUtil {
      */
     public void setService(FormParamLocalService service) {
     }
+
+	public static Object getActionableDynamicQuery() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public static Object getPersistedModel(Serializable serializable) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public static Object getOSGiServiceIdentifier() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

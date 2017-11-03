@@ -330,25 +330,25 @@ public class ScenarioWrapper implements Scenario, ModelWrapper<Scenario> {
     }
 
     @Override
-    public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {
+    public com.liferay.expando.kernel.model.ExpandoBridge getExpandoBridge() {
         return _scenario.getExpandoBridge();
     }
 
     @Override
     public void setExpandoBridgeAttributes(
-        com.liferay.portal.model.BaseModel<?> baseModel) {
+    	com.liferay.portal.kernel.model.BaseModel<?> baseModel) {
         _scenario.setExpandoBridgeAttributes(baseModel);
     }
 
     @Override
     public void setExpandoBridgeAttributes(
-        com.liferay.portlet.expando.model.ExpandoBridge expandoBridge) {
+    	com.liferay.expando.kernel.model.ExpandoBridge expandoBridge) {
         _scenario.setExpandoBridgeAttributes(expandoBridge);
     }
 
     @Override
     public void setExpandoBridgeAttributes(
-        com.liferay.portal.service.ServiceContext serviceContext) {
+        com.liferay.portal.kernel.service.ServiceContext serviceContext) {
         _scenario.setExpandoBridgeAttributes(serviceContext);
     }
 
@@ -368,7 +368,7 @@ public class ScenarioWrapper implements Scenario, ModelWrapper<Scenario> {
     }
 
     @Override
-    public com.liferay.portal.model.CacheModel<io.gatling.liferay.model.Scenario> toCacheModel() {
+    public com.liferay.portal.kernel.model.CacheModel<io.gatling.liferay.model.Scenario> toCacheModel() {
         return _scenario.toCacheModel();
     }
 
@@ -438,4 +438,16 @@ public class ScenarioWrapper implements Scenario, ModelWrapper<Scenario> {
     public void resetOriginalValues() {
         _scenario.resetOriginalValues();
     }
+
+	@Override
+	public boolean isEntityCacheEnabled() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isFinderCacheEnabled() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

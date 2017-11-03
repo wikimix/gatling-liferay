@@ -15,9 +15,14 @@
  */
 package io.gatling.liferay.service;
 
+import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
+import com.liferay.portal.kernel.dao.orm.IndexableActionableDynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.model.PersistedModel;
 import com.liferay.portal.kernel.service.ServiceWrapper;
+
+import io.gatling.liferay.exception.NoSuchFormParamException;
 
 /**
  * Provides a wrapper for {@link FormParamLocalService}.
@@ -291,7 +296,7 @@ public class FormParamLocalServiceWrapper implements FormParamLocalService,
     public io.gatling.liferay.model.FormParam findByUrlRecordId(
         long urlRecordId)
         throws com.liferay.portal.kernel.exception.SystemException,
-            io.gatling.liferay.NoSuchFormParamException {
+            io.gatling.liferay.NoSuchFormParamException, NoSuchFormParamException {
         return _formParamLocalService.findByUrlRecordId(urlRecordId);
     }
 
@@ -328,6 +333,24 @@ public class FormParamLocalServiceWrapper implements FormParamLocalService,
 
 	@Override
 	public PersistedModel deletePersistedModel(PersistedModel persistedModel) throws PortalException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public PersistedModel getPersistedModel(PersistedModel arguments) throws PortalException, SystemException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ActionableDynamicQuery getActionableDynamicQuery() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public IndexableActionableDynamicQuery getIndexableActionableDynamicQuery() {
 		// TODO Auto-generated method stub
 		return null;
 	}

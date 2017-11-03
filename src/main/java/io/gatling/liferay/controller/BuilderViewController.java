@@ -58,6 +58,8 @@ import io.gatling.liferay.dto.ProcessDTO;
 import io.gatling.liferay.dto.ScenarioDTO;
 import io.gatling.liferay.dto.mapper.ProcessDTOMapper;
 import io.gatling.liferay.dto.mapper.ScenarioDTOMapper;
+import io.gatling.liferay.exception.NoSuchLoginException;
+import io.gatling.liferay.exception.NoSuchSiteMapException;
 import io.gatling.liferay.model.Login;
 import io.gatling.liferay.model.Process;
 import io.gatling.liferay.model.ProcessScenarioLink;
@@ -169,8 +171,11 @@ public class BuilderViewController {
 	 * @param renderRequest The rendering request
 	 * @return The list of these processes
 	 * @throws SystemException If some services failed to retrieve or create the processes
+	 * @throws io.gatling.liferay.exception.NoSuchProcessException 
+	 * @throws NoSuchLoginException 
+	 * @throws NoSuchSiteMapException 
 	 */
-	private List<Process> createDefaultProcesses(final RenderRequest renderRequest) throws SystemException{
+	private List<Process> createDefaultProcesses(final RenderRequest renderRequest) throws SystemException, NoSuchLoginException, io.gatling.liferay.exception.NoSuchProcessException, NoSuchSiteMapException{
 		List<Process> processes = new ArrayList<>(3);
 		processes.add(getDefaultLogin());
 		processes.add(getDefaultLogout());
@@ -183,8 +188,10 @@ public class BuilderViewController {
 	 * the login process is created and persisted.
 	 * @return The default login process
 	 * @throws SystemException If some services failed to retrieve or create the process
+	 * @throws NoSuchLoginException 
+	 * @throws io.gatling.liferay.exception.NoSuchProcessException 
 	 */
-	private Process getDefaultLogin() throws SystemException{
+	private Process getDefaultLogin() throws SystemException, NoSuchLoginException, io.gatling.liferay.exception.NoSuchProcessException{
 		Login defaultLogin = LoginLocalServiceUtil.createDefaultLogin();
 		try {
 			return ProcessLocalServiceUtil.findByName("Login");
@@ -198,8 +205,9 @@ public class BuilderViewController {
 	 * the logotu process is created and persisted.
 	 * @return The default logout process
 	 * @throws SystemException If some services failed to retrieve or create the process
+	 * @throws io.gatling.liferay.exception.NoSuchProcessException 
 	 */
-	private Process getDefaultLogout() throws SystemException {
+	private Process getDefaultLogout() throws SystemException, io.gatling.liferay.exception.NoSuchProcessException {
 		try {
 			return ProcessLocalServiceUtil.findByName("Logout");
 		} catch (NoSuchProcessException e) {
@@ -212,8 +220,10 @@ public class BuilderViewController {
 	 * the random process is created and persisted.
 	 * @return The default random process
 	 * @throws SystemException If some services failed to retrieve or create the process
+	 * @throws io.gatling.liferay.exception.NoSuchProcessException 
+	 * @throws NoSuchSiteMapException 
 	 */
-	private Process getdefaultRandom(final RenderRequest renderRequest) throws SystemException {
+	private Process getdefaultRandom(final RenderRequest renderRequest) throws SystemException, io.gatling.liferay.exception.NoSuchProcessException, NoSuchSiteMapException {
 		final ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(WebKeys.THEME_DISPLAY);
 		String portalURL = PortalUtil.getPortalURL(renderRequest);
 		SiteMap defaultSiteMap = SiteMapLocalServiceUtil.siteMapCreation(themeDisplay, portalURL);

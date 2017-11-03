@@ -112,13 +112,13 @@ public class ASTMapper {
 		return new UserFileAST(login.getName(), login.getData());
 	}
 	
-	public static RecordFileAST mapRecordToAST(Record record) throws SystemException, NoSuchFormParamException{
+	public static RecordFileAST mapRecordToAST(Record record) throws SystemException, NoSuchFormParamException, io.gatling.liferay.exception.NoSuchFormParamException{
 		String name = record.getName();
 		List<RecordDataAST> data = ASTService.computesRecordDataAST(record.getRecordId());
 		return new RecordFileAST(name, data);
 	}
 
-	public static List<RecordDataAST> mapUrlRecordsToAST(List<UrlRecord> urlRecords) throws NoSuchFormParamException, SystemException {
+	public static List<RecordDataAST> mapUrlRecordsToAST(List<UrlRecord> urlRecords) throws NoSuchFormParamException, SystemException, io.gatling.liferay.exception.NoSuchFormParamException {
 		List<RecordDataAST> dataList = new ArrayList<>();
 		for (UrlRecord urlRecord : urlRecords) {
 			

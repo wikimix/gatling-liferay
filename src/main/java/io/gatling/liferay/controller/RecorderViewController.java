@@ -172,8 +172,10 @@ public class RecorderViewController {
 	 * @throws SystemException If a service failed
 	 * @throws NoSuchRecordException If no record was found in database
 	 * @throws NoSuchFormParamException If no corresponding form param was found in database
+	 * @throws io.gatling.liferay.exception.NoSuchRecordException 
+	 * @throws io.gatling.liferay.exception.NoSuchFormParamException 
 	 */
-	private static SimulationAST createDefaultAST(String name) throws NoSuchRecordException, SystemException, NoSuchFormParamException  {
+	private static SimulationAST createDefaultAST(String name) throws NoSuchRecordException, SystemException, NoSuchFormParamException, io.gatling.liferay.exception.NoSuchRecordException, io.gatling.liferay.exception.NoSuchFormParamException  {
 		
 		Record record = RecordLocalServiceUtil.findByName(name);
 		

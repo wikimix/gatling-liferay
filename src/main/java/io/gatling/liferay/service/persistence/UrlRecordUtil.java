@@ -18,11 +18,13 @@ package io.gatling.liferay.service.persistence;
 import com.liferay.portal.kernel.bean.PortletBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 import java.util.List;
 
+import io.gatling.liferay.exception.NoSuchUrlRecordException;
 import io.gatling.liferay.model.UrlRecord;
 
 /**
@@ -179,7 +181,7 @@ public class UrlRecordUtil {
         long recordId,
         com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
         throws com.liferay.portal.kernel.exception.SystemException,
-            io.gatling.liferay.NoSuchUrlRecordException {
+            io.gatling.liferay.NoSuchUrlRecordException, NoSuchUrlRecordException {
         return getPersistence().findByRecordId_First(recordId, orderByComparator);
     }
 
@@ -212,7 +214,7 @@ public class UrlRecordUtil {
         long recordId,
         com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
         throws com.liferay.portal.kernel.exception.SystemException,
-            io.gatling.liferay.NoSuchUrlRecordException {
+            io.gatling.liferay.NoSuchUrlRecordException, NoSuchUrlRecordException {
         return getPersistence().findByRecordId_Last(recordId, orderByComparator);
     }
 
@@ -245,7 +247,7 @@ public class UrlRecordUtil {
         long urlRecordId, long recordId,
         com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
         throws com.liferay.portal.kernel.exception.SystemException,
-            io.gatling.liferay.NoSuchUrlRecordException {
+            io.gatling.liferay.NoSuchUrlRecordException, NoSuchUrlRecordException {
         return getPersistence()
                    .findByRecordId_PrevAndNext(urlRecordId, recordId,
             orderByComparator);
@@ -313,7 +315,7 @@ public class UrlRecordUtil {
     */
     public static io.gatling.liferay.model.UrlRecord remove(long urlRecordId)
         throws com.liferay.portal.kernel.exception.SystemException,
-            io.gatling.liferay.NoSuchUrlRecordException {
+            io.gatling.liferay.NoSuchUrlRecordException, NoSuchUrlRecordException {
         return getPersistence().remove(urlRecordId);
     }
 
@@ -334,7 +336,7 @@ public class UrlRecordUtil {
     public static io.gatling.liferay.model.UrlRecord findByPrimaryKey(
         long urlRecordId)
         throws com.liferay.portal.kernel.exception.SystemException,
-            io.gatling.liferay.NoSuchUrlRecordException {
+            io.gatling.liferay.NoSuchUrlRecordException, NoSuchUrlRecordException {
         return getPersistence().findByPrimaryKey(urlRecordId);
     }
 
