@@ -322,4 +322,5 @@ public interface ProcessLocalService<T> extends BaseLocalService,
 	 *             if a system exception occurred
 	 */
 	List<T> dynamicQuery(DynamicQuery dynamicQuery, int start, int end, OrderByComparator<T> orderByComparator);
+
 }

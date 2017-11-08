@@ -218,17 +218,6 @@ public interface FormParamLocalService<T> extends BaseLocalService,
     public void save(long urlRecordId, java.lang.String data)
         throws com.liferay.portal.kernel.exception.SystemException;
 
-	/**
-     * Performs a dynamic query on the database and returns the matching rows.
-     * @param <T>
-     *
-     * @param dynamicQuery the dynamic query
-     * @return the matching rows
-     * @throws SystemException if a system exception occurred
-     */
-
-    public List<T> dynamicQuery(DynamicQuery dynamicQuery);
-
 	public ActionableDynamicQuery getActionableDynamicQuery();
 
 	public IndexableActionableDynamicQuery getIndexableActionableDynamicQuery();
@@ -267,5 +256,15 @@ public interface FormParamLocalService<T> extends BaseLocalService,
 	List<?> dynamicQueryee(DynamicQuery dynamicQuery, int start, int end);
 
 	List dynamicQuery(DynamicQuery dynamicQuery, int start, int end, OrderByComparator<T> orderByComparator);
+	
+	/**
+     * Performs a dynamic query on the database and returns the matching rows.
+     * @param <T>
+     *
+     * @param dynamicQuery the dynamic query
+     * @return the matching rows
+     * @throws SystemException if a system exception occurred
+     */
+	<T> List<T> dynamicQuery(DynamicQuery dynamicQuery);
 
 }

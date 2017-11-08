@@ -1,18 +1,17 @@
 /**
- * Copyright 2011-2016 GatlingCorp (http://gatling.io)
+ * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * This library is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU Lesser General Public License as published by the Free
+ * Software Foundation; either version 2.1 of the License, or (at your option)
+ * any later version.
  *
- * 		http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * This library is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
+ * details.
  */
+
 package io.gatling.liferay.service.base;
 
 import aQute.bnd.annotation.ProviderType;
@@ -162,6 +161,18 @@ public class FormParamLocalServiceClpInvoker {
 		_methodName85 = "setBeanIdentifier";
 
 		_methodParameterTypes85 = new String[] { "java.lang.String" };
+
+		_methodName86 = "getPersistedModel";
+
+		_methodParameterTypes86 = new String[] {
+				"com.liferay.portal.kernel.model.PersistedModel"
+			};
+
+		_methodName87 = "dynamicQueryee";
+
+		_methodParameterTypes87 = new String[] {
+				"com.liferay.portal.kernel.dao.orm.DynamicQuery", "int", "int"
+			};
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -318,6 +329,18 @@ public class FormParamLocalServiceClpInvoker {
 			return null;
 		}
 
+		if (_methodName86.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes86, parameterTypes)) {
+			return FormParamLocalServiceUtil.getPersistedModel((com.liferay.portal.kernel.model.PersistedModel)arguments[0]);
+		}
+
+		if (_methodName87.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes87, parameterTypes)) {
+			return FormParamLocalServiceUtil.dynamicQuery((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0],
+				((Integer)arguments[1]).intValue(),
+				((Integer)arguments[2]).intValue());
+		}
+
 		throw new UnsupportedOperationException();
 	}
 
@@ -375,4 +398,8 @@ public class FormParamLocalServiceClpInvoker {
 	private String[] _methodParameterTypes84;
 	private String _methodName85;
 	private String[] _methodParameterTypes85;
+	private String _methodName86;
+	private String[] _methodParameterTypes86;
+	private String _methodName87;
+	private String[] _methodParameterTypes87;
 }

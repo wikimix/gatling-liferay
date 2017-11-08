@@ -80,26 +80,6 @@ public class FormParamLocalServiceImpl extends FormParamLocalServiceBaseImpl {
 			formParam.persist();
 		}
 	}
-
-	@Override
-	public List dynamicQuery(DynamicQuery dynamicQuery) throws SystemException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end) throws SystemException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end, OrderByComparator orderByComparator)
-			throws SystemException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 	@Override
 	public String getBeanIdentifier() {
 		// TODO Auto-generated method stub
@@ -120,6 +100,24 @@ public class FormParamLocalServiceImpl extends FormParamLocalServiceBaseImpl {
 
 	@Override
 	public List<?> dynamicQueryee(DynamicQuery dynamicQuery, int start, int end) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List dynamicQuery(DynamicQuery dynamicQuery) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end, OrderByComparator orderByComparator) {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -239,10 +239,11 @@ public interface SiteMapLocalService<T> extends BaseLocalService,
 	    * @return the matching rows
 	    * @throws SystemException if a system exception occurred
 	    */
-
-	public <T> List<T> dynamicQuery(DynamicQuery dynamicQuery);
+    public <T> List<T> dynamicQuery(DynamicQuery dynamicQuery);
 
 	List<T> dynamicQuery(DynamicQuery dynamicQuery, int start, int end);
 
 	List<T> dynamicQuery(DynamicQuery dynamicQuery, int start, int end, OrderByComparator<T> orderByComparator);
+
+	
 }
