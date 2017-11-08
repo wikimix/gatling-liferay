@@ -219,16 +219,6 @@ public interface UrlSiteMapLocalService<T> extends BaseLocalService,
     public java.util.List<io.gatling.liferay.model.UrlSiteMap> findBySiteMapId(
         long siteMapId)
         throws com.liferay.portal.kernel.exception.SystemException;
-    
-    /**
-     * Performs a dynamic query on the database and returns the matching rows.
-     * @param <T>
-     *
-     * @param dynamicQuery the dynamic query
-     * @return the matching rows
-     * @throws SystemException if a system exception occurred
-     */
-	<T> List<T> dynamicQuery(DynamicQuery dynamicQuery);
 	
     /**
     * Performs a dynamic query on the database and returns a range of the matching rows.
@@ -288,4 +278,17 @@ public interface UrlSiteMapLocalService<T> extends BaseLocalService,
 	ActionableDynamicQuery getActionableDynamicQuery();
 
 	IndexableActionableDynamicQuery getIndexableActionableDynamicQuery();
+	
+    /**
+     * Performs a dynamic query on the database and returns the matching rows.
+     * @param <T>
+     *
+     * @param dynamicQuery the dynamic query
+     * @return the matching rows
+     * @throws SystemException if a system exception occurred
+     */
+
+	List<T> dynamicQuery(DynamicQuery dynamicQuery);
+
+
 }

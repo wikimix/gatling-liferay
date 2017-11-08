@@ -146,7 +146,7 @@ public abstract class ProcessLocalServiceBaseImpl extends BaseLocalServiceImpl
 	 * @return the matching rows
 	 */
 	@Override
-	public <T> List<T> dynamicQuery(DynamicQuery dynamicQuery) {
+	public List dynamicQuery(DynamicQuery dynamicQuery) {
 		return processPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
@@ -163,7 +163,7 @@ public abstract class ProcessLocalServiceBaseImpl extends BaseLocalServiceImpl
 	 * @return the range of matching rows
 	 */
 	@Override
-	public <T> List<T> dynamicQuery(DynamicQuery dynamicQuery, int start,
+	public List dynamicQuery(DynamicQuery dynamicQuery, int start,
 		int end) {
 		return processPersistence.findWithDynamicQuery(dynamicQuery, start, end);
 	}
@@ -182,8 +182,8 @@ public abstract class ProcessLocalServiceBaseImpl extends BaseLocalServiceImpl
 	 * @return the ordered range of matching rows
 	 */
 	@Override
-	public <T> List<T> dynamicQuery(DynamicQuery dynamicQuery, int start,
-		int end, OrderByComparator<T> orderByComparator) {
+	public List dynamicQuery(DynamicQuery dynamicQuery, int start,
+		int end, OrderByComparator orderByComparator) {
 		return processPersistence.findWithDynamicQuery(dynamicQuery, start,
 			end, orderByComparator);
 	}

@@ -148,7 +148,7 @@ public abstract class UrlSiteMapLocalServiceBaseImpl
 	 * @return the matching rows
 	 */
 	@Override
-	public <T> List<T> dynamicQuery(DynamicQuery dynamicQuery) {
+	public List<?> dynamicQuery(DynamicQuery dynamicQuery) {
 		return urlSiteMapPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
@@ -165,7 +165,7 @@ public abstract class UrlSiteMapLocalServiceBaseImpl
 	 * @return the range of matching rows
 	 */
 	@Override
-	public <T> List<T> dynamicQuery(DynamicQuery dynamicQuery, int start,
+	public List<?> dynamicQuery(DynamicQuery dynamicQuery, int start,
 		int end) {
 		return urlSiteMapPersistence.findWithDynamicQuery(dynamicQuery, start,
 			end);
@@ -185,8 +185,8 @@ public abstract class UrlSiteMapLocalServiceBaseImpl
 	 * @return the ordered range of matching rows
 	 */
 	@Override
-	public <T> List<T> dynamicQuery(DynamicQuery dynamicQuery, int start,
-		int end, OrderByComparator<T> orderByComparator) {
+	public List<?> dynamicQuery(DynamicQuery dynamicQuery, int start,
+		int end, OrderByComparator orderByComparator) {
 		return urlSiteMapPersistence.findWithDynamicQuery(dynamicQuery, start,
 			end, orderByComparator);
 	}

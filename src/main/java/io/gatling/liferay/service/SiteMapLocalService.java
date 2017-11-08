@@ -228,15 +228,10 @@ public interface SiteMapLocalService<T> extends BaseLocalService,
             io.gatling.liferay.NoSuchRecordException,
             io.gatling.liferay.NoSuchSiteMapException, NoSuchSiteMapException;
 
+    public IndexableActionableDynamicQuery getIndexableActionableDynamicQuery();
 
-    @SuppressWarnings("rawtypes")    
-	List<T> dynamicQuery(DynamicQuery dynamicQuery, int start, int end, OrderByComparator<T> orderByComparator);
+    public ActionableDynamicQuery getActionableDynamicQuery();
 
-	IndexableActionableDynamicQuery getIndexableActionableDynamicQuery();
-
-	ActionableDynamicQuery getActionableDynamicQuery();
-
-	List<T> dynamicQuery(DynamicQuery dynamicQuery, int start, int end);
 	/**
 	    * Performs a dynamic query on the database and returns the matching rows.
 	    *
@@ -244,5 +239,10 @@ public interface SiteMapLocalService<T> extends BaseLocalService,
 	    * @return the matching rows
 	    * @throws SystemException if a system exception occurred
 	    */
-	List<T> dynamicQuery(DynamicQuery dynamicQuery);
+
+	public <T> List<T> dynamicQuery(DynamicQuery dynamicQuery);
+
+	List<T> dynamicQuery(DynamicQuery dynamicQuery, int start, int end);
+
+	List<T> dynamicQuery(DynamicQuery dynamicQuery, int start, int end, OrderByComparator<T> orderByComparator);
 }

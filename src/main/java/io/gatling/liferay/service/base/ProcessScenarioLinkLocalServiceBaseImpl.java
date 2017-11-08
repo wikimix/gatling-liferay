@@ -150,7 +150,7 @@ public abstract class ProcessScenarioLinkLocalServiceBaseImpl
 	 * @return the matching rows
 	 */
 	@Override
-	public <T> List<T> dynamicQuery(DynamicQuery dynamicQuery) {
+	public List dynamicQuery(DynamicQuery dynamicQuery) {
 		return processScenarioLinkPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
@@ -167,7 +167,7 @@ public abstract class ProcessScenarioLinkLocalServiceBaseImpl
 	 * @return the range of matching rows
 	 */
 	@Override
-	public <T> List<T> dynamicQuery(DynamicQuery dynamicQuery, int start,
+	public List dynamicQuery(DynamicQuery dynamicQuery, int start,
 		int end) {
 		return processScenarioLinkPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end);
@@ -187,8 +187,8 @@ public abstract class ProcessScenarioLinkLocalServiceBaseImpl
 	 * @return the ordered range of matching rows
 	 */
 	@Override
-	public <T> List<T> dynamicQuery(DynamicQuery dynamicQuery, int start,
-		int end, OrderByComparator<T> orderByComparator) {
+	public List dynamicQuery(DynamicQuery dynamicQuery, int start,
+		int end, OrderByComparator orderByComparator) {
 		return processScenarioLinkPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end, orderByComparator);
 	}

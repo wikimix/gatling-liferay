@@ -117,5 +117,11 @@ public class FormParamLocalServiceImpl extends FormParamLocalServiceBaseImpl {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public List<?> dynamicQueryee(DynamicQuery dynamicQuery, int start, int end) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }

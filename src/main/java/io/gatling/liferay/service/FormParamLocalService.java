@@ -227,7 +227,11 @@ public interface FormParamLocalService<T> extends BaseLocalService,
      * @throws SystemException if a system exception occurred
      */
 
-	List<T> dynamicQuery(DynamicQuery dynamicQuery);
+    public List<T> dynamicQuery(DynamicQuery dynamicQuery);
+
+	public ActionableDynamicQuery getActionableDynamicQuery();
+
+	public IndexableActionableDynamicQuery getIndexableActionableDynamicQuery();
 	  /**
 	    * Performs a dynamic query on the database and returns a range of the matching rows.
 	    *
@@ -242,8 +246,10 @@ public interface FormParamLocalService<T> extends BaseLocalService,
 	    * @return the range of matching rows
 	    * @throws SystemException if a system exception occurred
 	    */
-	<T> List<T> dynamicQuery(DynamicQuery dynamicQuery, int start, int end);
-	  /**
+	
+	List<T> dynamicQuery(DynamicQuery dynamicQuery, int start, int end);
+	
+	 /**
 	    * Performs a dynamic query on the database and returns an ordered range of the matching rows.
 	    *
 	    * <p>
@@ -257,10 +263,9 @@ public interface FormParamLocalService<T> extends BaseLocalService,
 	    * @return the ordered range of matching rows
 	    * @throws SystemException if a system exception occurred
 	    */
-	
-	List<T> dynamicQuery(DynamicQuery dynamicQuery, int start, int end, OrderByComparator<T> orderByComparator);
 
-	ActionableDynamicQuery getActionableDynamicQuery();
+	List<?> dynamicQueryee(DynamicQuery dynamicQuery, int start, int end);
 
-	IndexableActionableDynamicQuery getIndexableActionableDynamicQuery();
+	List dynamicQuery(DynamicQuery dynamicQuery, int start, int end, OrderByComparator<T> orderByComparator);
+
 }

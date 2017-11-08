@@ -16,11 +16,14 @@
 package io.gatling.liferay.service;
 
 import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.IndexableActionableDynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.model.PersistedModel;
 import com.liferay.portal.kernel.service.InvokableLocalService;
+
+import java.util.List;
 
 /**
  * @author Brian Wing Shun Chan
@@ -756,6 +759,12 @@ public class FormParamLocalServiceClp implements FormParamLocalService {
 
 	@Override
 	public IndexableActionableDynamicQuery getIndexableActionableDynamicQuery() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<?> dynamicQueryee(DynamicQuery dynamicQuery, int start, int end) {
 		// TODO Auto-generated method stub
 		return null;
 	}
