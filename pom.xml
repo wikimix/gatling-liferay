@@ -37,9 +37,9 @@
 	</licenses>
 
 	<properties>
-		<liferay.version>6.2.5</liferay.version>
-		<liferay.maven.plugin.version>6.2.10.15</liferay.maven.plugin.version>
-		<spring.version>3.0.7.RELEASE</spring.version>
+		<liferay.version>7.0.0</liferay.version>
+		<liferay.maven.plugin.version>7.0.0-m2</liferay.maven.plugin.version>
+		<spring.version>4.1.9.RELEASE</spring.version>
 		<jmustache.version>1.13</jmustache.version>
 		<taglib.version>1.1.2</taglib.version>
 		<jstl.version>1.2</jstl.version>
@@ -152,7 +152,8 @@
 		</dependency>
 	</dependencies>
 
-	<build>
+	<build>  
+		<pluginManagement>
 		<plugins>
 			
 			<plugin>
@@ -160,8 +161,8 @@
 				<version>2.5</version>
 				<configuration>
 					<encoding>UTF-8</encoding>
-					<source>1.7</source>
-					<target>1.7</target>
+					<source>1.8</source>
+					<target>1.8</target>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -253,6 +254,7 @@
 					<sqlFileName>tables.sql</sqlFileName>
 				</configuration>
 			</plugin></plugins>
+			  </pluginManagement>
 	</build>
 
 </project>
